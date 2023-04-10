@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22"
+  },
+  "name": "blooddonation",
+  "version": "1.0.0",
+  "description": "PBL3",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hviiet/PBL3-BloodDono.git"
+  },
+  "author": "hviiet TomNguyen23 tungBKDN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hviiet/PBL3-BloodDono/issues"
+  },
+  "homepage": "https://github.com/hviiet/PBL3-BloodDono#readme"
+}
