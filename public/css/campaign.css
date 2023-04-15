@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(207, 245, 231);
+}
+
+#header .container-fluid {
+    background-color: rgb(207, 245, 231);
+}
+
+#header .logo {
+    height: 46px;
+    margin-bottom: 15px;
+}
+#header .line {
+    display: inline-block;
+}
+
+.logo-pic {
+    width: 46px;
+    height: 46px;
+    padding: 5px 5px;
+}
+
+.logo-name {
+    font-size: 16px;
+    color: black;
+    line-height: 46px;
+    font-weight: 900;
+}
+
+#header .heading {
+    height: 53px;
+}
+
+#header .rectangle {
+    background-color: rgb(83, 127, 231);
+    width: 35%;
+    text-align: center;
+    font-size: 32px;
+    color: white;
+    font-weight: 700;
+}
+
+#header .triangle {
+    width: 0;
+    height: 0;
+    border-top: 27px solid transparent;
+    border-left: 40px solid rgb(83, 127, 231);
+    border-bottom: 27px solid transparent;
+}
+
+#content {
+    background-color: rgb(207, 245, 231);
+    padding-top: 40px;
+    font-weight: 650;
+}
+
+#content .row {
+    margin: 50px 0;
+}
+
+#content .padding-0 {
+    padding-left: 0px;
+    padding-right: 0px; 
+}
+
+#content .timer input[type=text], input[type=datetime-local] {
+    width: 49%;
+}
+
+#content .float-right {
+    float: right;
+}
+
+#content .btn-create-campaign {
+    padding: 10px 50px;
+    background-color: rgb(83, 127, 231);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    transition: background 0.3s;
+}
+
+#content .btn-create-campaign:hover {
+    background-color: white;
+    color: rgb(83, 127, 231);
+}
+

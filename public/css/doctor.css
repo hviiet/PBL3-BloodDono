@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(207, 245, 231);
+}
+
+a {
+    text-decoration: none !important;
+}
+
+#main {
+    background-color: rgb(207, 245, 231);
+}
+
+#header .container-fluid {
+    height: 46px;
+}
+
+#header .line {
+    display: inline-block;
+}
+
+.logo-pic {
+    width: 46px;
+    height: 46px;
+    padding: 5px 5px;
+}
+
+.logo-name {
+    font-size: 16px;
+    color: black;
+    line-height: 46px;
+    font-weight: 900;
+}
+
+.search-bar {
+    height: 37px;
+    background-color: white;
+    border: 1px solid #565353;
+    border-radius: 50px;
+    margin: 10px 0px;
+    padding-right: 0px;
+}
+
+.search-bar .search-logo {
+    padding-right: 5px;
+    color: #565353;
+    cursor: pointer;
+}
+
+.search-bar input {
+    border: 0px solid #ccc;
+    line-height: 35px;
+    width: 400px;
+    padding-left: 5px;
+    border-style: hidden;
+}
+
+.search-bar input:focus {
+    outline: none;
+}
+
+.notify-logOut {
+    text-align: right;
+}
+
+.notify-logOut .fa-solid {
+    font-size: 25px;
+    margin: 10px 0;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: color 0.4s;
+}
+
+.notify-logOut .fa-solid:hover {
+    color: #9b9696;
+}
+
+#content .choose-btn {
+    margin: 70px 0 30px 0;
+}
+
+.choose-btn .col-md-2 {
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    background-color: rgb(83, 127, 231);
+    padding: 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.4s;
+}
+
+.choose-btn .col-md-2:hover {
+    background-color: white;
+    color: rgb(83, 127, 231);
+}
+
+#content .campaign-info {
+    margin-bottom: 30px;
+}
+
+.campaign-info .col-md-2 {
+    margin: 0 13px;
+    padding: 15px 0;
+    max-height: 133px;
+    border-radius: 40px;
+    background-color: rgb(160, 228, 203);
+}
+
+.campaign-info img {
+    width: 50px;
+    height: 50px;
+    margin-left: 35px;
+}
+
+.campaign-info span {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.campaign-info .info {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.nearest-campaign {
+    padding: 20px;
+    background-color: rgb(160, 228, 203);
+    border-radius: 20px;
+}
+
+.nearest-campaign .nearest-title {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.nearest-campaign .row {
+    margin: 30px 30px 30px 70px;
+}
+
+.nearest-campaign img {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+}
+
+.nearest-campaign .cons {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+

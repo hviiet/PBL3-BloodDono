@@ -1,23 +1,21 @@
 require('dotenv').config();
 const mysql = require('mysql');
 
+const BDdata = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '1111',
+  database: 'testdb'
+});
 function connectDB() {
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1111',
-    database: 'testdb'
-  });
-
-  connection.connect(function(err) {
+  BDdata.connect(function(err) {
     if (err) {
       console.error('Error connecting to database: ' + err.stack);
       return;
     }
-    console.log('Connected to database with threadId: ' + connection.threadId);
+    console.log('Connected to database with threadId: ' + BDdata.threadId);
   });
-
-  return connection;
+  return BDdata;
 }
 
-module.exports = connectDB;
+module.exports = { connectDB, BDdata};

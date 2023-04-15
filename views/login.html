@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>Đăng nhập</title>
+</head>
+<body>
+    <div class="container">
+        <form action="" id="login-form">
+            <div id="response"></div>
+            <h1>Đăng nhập</h1>
+            <input type="text" name="" id="username" class="user-name input row" placeholder="Tên đăng nhập" required>
+            <input type="password" name="" id="password" class="password input row" placeholder="Mật khẩu" required>
+            <button type="submit" class="row btn-login">Đăng nhập</button>  
+            
+            <!-- <input type="submit" value="Đăng nhập" class="row btn-login"> -->
+        </form>
+        <img src="/assets/img/login-pic.png" alt="">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const data = {
+            name: username.value,
+            email: password.value
+        }
+
+        axios.post('/api/login', data)
+            .then((response) => {
+                console.log(response.data);
+                window.location.href = '/';
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+
+    </script>
+</body>
+</html>

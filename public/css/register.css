@@ -120,7 +120,7 @@ button.ghost {
 }
 
 input[type="date"]::before {
-	content: attr(data-placeholder) !important;
+	content: attr(placeholder) !important;
 	width: 100%;
 }
 
@@ -128,7 +128,7 @@ input[type="date"]:valid::before {
 	display: none;
 }
 
-input[data-placeholder]::before {
+input[placeholder]::before {
 	font-size: 14px;
 	color: #747373;
 }
