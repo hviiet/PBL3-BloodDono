@@ -6,7 +6,7 @@ exports.cookieJwtAuth = (req, res, next) =>
     if(!token) return next();
     try
     {
-        const verified = jwt.verify(token, process.env.SECRET);
+        const verified = jwt.verify(token, process.env.Access_Token_Secret);
         req.user = verified;
         next();
     } catch (err) 

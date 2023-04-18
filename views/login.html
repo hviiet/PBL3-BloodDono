@@ -31,8 +31,8 @@
         event.preventDefault();
 
         const data = {
-            name: username.value,
-            email: password.value
+            username: username.value,
+            password: password.value
         }
 
         axios.post('/api/login', data)

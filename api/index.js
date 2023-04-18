@@ -4,7 +4,6 @@ const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const connectToDatabase = require('../config/dbConnect');
-const {connectDB} = require('../config/dbConnect');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
@@ -29,12 +28,21 @@ app.use(cookieParser());
 //json
 app.use(express.json());
 //connect to database
-const connection = connectDB();
+// const connection = connectDB();
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
 //Auth Page
 app.use('/api', require('../routes/auth'));
 //Home Page
 app.use('/', require('../routes/home'));
+//user api
+app.use('/api/user', require('../routes/profile'));
+
+//test route
+app.use('/', require('../routes/test'));
+
 
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
+
+
+
