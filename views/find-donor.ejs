@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/find-donor.css">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Người tìm nguồn hiến</title>
+</head>
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#" class="logo">
+                    <div class="logo-pic line"><img src="/assets/img/logo-pic.png" alt=""></div>
+                    <div class="logo-name line">BloodDono <sup><sup>Người cần máu</sup></sup></div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="content">
+        <div class="container-fluid">
+            <section class="needer-resgister">
+
+                <p>Điền vào các thông tin bên dưới để tìm kiếm</p>
+    
+                <form action="">
+                    <!-- Thông tin cá nhân người đăng kí cho người cần máu -->
+                    <fieldset>
+                        <legend>THÔNG TIN CÁ NHÂN NGƯỜI ĐĂNG KÍ</legend>
+                        <div class="box">
+                            <!-- Phần input -->
+                            <div class="representative">
+                                <label for="name">Họ và tên</label> <br>
+                                <input type="text" name="" id="name" class="customize representative-name" required>
+    
+                                <div class="identify box-116">
+                                    <label for="">Số CMND/CCCD</label> <br>
+                                    <input type="file" name="representative-upload" id="upload" accept="image/*" required>
+    
+                                    <!-- label đè lên input:file để làm cái nút upload -->
+                                    <label for="upload" class="btn-upload">Tải lên ảnh <i class="fa-solid fa-circle-up"></i></label>  
+                                </div>
+                            </div>
+                            <!-- ------------------------------- -->
+    
+    
+                            <div class="description">
+                                <p style="font-weight: 500;">MÔ TẢ</p>
+                                <p>Mục này dành cho người đăng ký tìm kiếm người hiến máu.</p>
+                                <p>Hãy điền các thông tin cần thiết bên dưới trước khi sang mục khác.</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- --------------------------------------------- -->
+    
+                    <!-- Thông tin người cần máu -->
+                    <fieldset>
+                        <legend style="width: 340px;">THÔNG TIN NGƯỜI ĐƯỢC HIẾN</legend>
+                        <div class="row">
+                            <!-- Họ tên người cần máu -->
+                            <div class="block-needer-name">
+                                <label for="name">Họ và tên</label> <br>
+                                <input type="text" name="" id="name" class="customize needer-name" required>
+                            </div>
+                            <!-- ------------------------------- -->
+    
+                            <!-- Phần mô tả không cần quan tâm -->
+                            <div class="description">
+                                <p style="font-weight: 500;">MÔ TẢ</p>
+                                <p>Mục này dành cho người cần nguồn hiến. Hãy điền đầy đủ các thông tin dưới.</p>
+                            </div>
+                            <!-- ------------------------------- -->
+                        </div>
+    
+                        <div class="row">
+    
+                            <div class="identify box-116">
+                                <label for="">Số CMND/CCCD</label> <br>
+                                <input type="file" name="needer-upload" id="needer-upload" accept="image/*" required>
+    
+                                <!-- label đè lên input:file để làm cái nút upload -->
+                                <label for="needer-upload" class="btn-upload needer">Tải lên ảnh <i class="fa-solid fa-circle-up"></i></label>
+                            </div>
+    
+                            <div class="date-of-birth box-270">
+                                <label for="">Ngày sinh</label> <br>
+                                <input type="date" name="" id="" class="needer-date-of-birth" required>
+                            </div>
+    
+                            <!-- Nhóm máu -->
+                            <div class="bloodtype">
+                                <label for="">Nhóm máu</label> <br>
+                                <select id="needer-blood-type"name="blood-type" required>
+                                    <option value="" disabled selected></option>
+                                    <optgroup label="Nhóm máu A">
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                      </optgroup>
+                                      <optgroup label="Nhóm máu B">
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                      </optgroup>
+                                      <optgroup label="Nhóm máu AB">
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                      </optgroup>
+                                      <optgroup label="Nhóm máu O">
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                      </optgroup>
+                                </select>
+                            </div>
+                            <!-- ------------------------------- -->
+    
+                        </div>
+    
+                        <!-- Chọn địa điểm -->
+                        <label for="">Chọn nơi hiến</label>
+                        <div class="row hospital-address">
+                            <input type="text" name="" id="" placeholder="Tên bệnh viện" class="hospital-name" required>
+                            <input type="text" name="" id="" placeholder="Xã/phường" required>
+                            <input type="text" name="" id="" placeholder="Quận/huyện" required>
+                            <input type="text" name="" id="" placeholder="Tỉnh/thành phố" required>
+                        </div>
+                        <!-- ------------------------------- -->
+    
+                        <!-- Lời nhắn -->
+                        <div class="row">
+                            <div class="message">
+                                <label for="">Lời nhắn</label> <br>
+                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <!-- ------------------------------- -->
+    
+                    </fieldset>
+                    <!-- --------------------------------------------- -->
+    
+                    <button class="btn-next">Tiếp theo <i class="fa-solid fa-circle-right"></i></button>
+                </form>
+            </section>
+
+            <!-- <section class="search-donor">
+                
+                <form class="filter">
+                    <div class="search-bloodtype">
+                        <label for="">Nhóm máu</label> <br>
+                        <select id="search-blood-type"name="blood-type" required>
+                            <option value="" disabled selected></option>
+                            <optgroup label="Nhóm máu A">
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                              </optgroup>
+                              <optgroup label="Nhóm máu B">
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                              </optgroup>
+                              <optgroup label="Nhóm máu AB">
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                              </optgroup>
+                              <optgroup label="Nhóm máu O">
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                              </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="search-address">
+                        <label for="">Chọn nơi hiến</label> <br>
+                        <input type="text" name="" id="" placeholder="Xã/phường" required>
+                        <input type="text" name="" id="" placeholder="Quận/huyện" required>
+                        <input type="text" name="" id="" placeholder="Tỉnh/thành phố" required>
+                    </div>
+
+                    <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
+                </form>
+
+                <div class="donor-list container">
+                    <div class="row tilte justify-content-between">
+                        <div class="col-3">Họ và tên</div>
+                        <div class="col-2">Nhóm máu</div>
+                        <div class="col-6">Lần hiến máu gần nhất</div>
+                    </div>
+
+                    <ul class="donor-items">
+                        <li class="row item justify-content-between">
+                            <div class="col-3">Nguyễn Văn A</div>
+                            <div class="col-2">A+</div>
+                            <div class="col-3">20/10/2021</div>
+                            <button class="col-2"><i class="fa-solid fa-circle-info"></i> Thông tin</button>
+                        </li>
+
+                        <li class="row item justify-content-between">
+                            <div class="col-3">Nguyễn Văn A</div>
+                            <div class="col-2">A+</div>
+                            <div class="col-3">20/10/2021</div>
+                            <button class="col-2"><i class="fa-solid fa-circle-info"></i> Thông tin</button>
+                        </li>
+
+                        <li class="row item justify-content-between">
+                            <div class="col-3">Nguyễn Văn A</div>
+                            <div class="col-2">A+</div>
+                            <div class="col-3">20/10/2021</div>
+                            <button class="col-2"><i class="fa-solid fa-circle-info"></i> Thông tin</button>
+                        </li>
+                    </ul>
+                </div>
+            </section> -->
+
+        </div>
+    </div>
+
+    <!-- js để khi người dùng upload ảnh thành công thì sẽ hiển thị nút đã tải lên -->
+    <script>
+        const upload = document.getElementById('upload');
+        const btnUploaded = document.querySelector('.btn-upload');
+
+        const neederUpload = document.getElementById('needer-upload');
+        const btnNeederUploaded = document.querySelector('.needer');
+
+        const btnNext = document.querySelector('.btn-next');
+        const neederRegister = document.getElementsByClassName('needer-register');
+        const donorSearch = document.getElementsByClassName('search-donor');
+
+        upload.addEventListener('change', () => {
+            if (upload.value) {
+                btnUploaded.innerHTML = 'Đã tải lên <i class="fa-solid fa-circle-check"></i>';
+            }
+            else {
+                btnUploaded.innerHTML = 'Tải lên ảnh <i class="fa-solid fa-circle-up"></i>';
+            }
+        })
+
+        neederUpload.addEventListener('change', () => {
+            if (neederUpload.value) {
+                btnNeederUploaded.innerHTML = 'Đã tải lên <i class="fa-solid fa-circle-check"></i>';
+            }
+            else {
+                btnNeederUploaded.innerHTML = 'Tải lên ảnh <i class="fa-solid fa-circle-up"></i>';
+            }
+        })
+
+        btnNext.addEventListener('click', () => {
+            
+        })
+        // Chuyển sang trang tìm người hiến máu
+        // btnNext.addEventListener('click', () => {
+        //     neederRegister.style.display = 'none';
+        //     donorSearch.style.display = 'flex';
+        // })
+    </script>
+</body>
+</html>

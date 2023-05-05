@@ -11,6 +11,7 @@ exports.cookieJwtAuth = (req, res, next) =>
         next();
     } catch (err) 
     {
-        res.status(400).json({ message: 'Invalid token' }).redirect('/login');
+        res.clearCookie('accessToken');
+        res.redirect('/');
     }
 }

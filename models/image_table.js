@@ -1,18 +1,18 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('image_table', {
+  return sequelize.define('Image_Table', {
     ImageID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
       primaryKey: true
     },
-    ImageContext: {
-      type: DataTypes.BLOB,
+    ImagePath: {
+      type: DataTypes.CHAR(255),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'image_table',
+    tableName: 'Image_Table',
     timestamps: false,
     indexes: [
       {

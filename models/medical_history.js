@@ -1,11 +1,17 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('medical_history', {
+  return sequelize.define('Medical_History', {
+    RecordID: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
     DonorID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'donor_information',
+        model: 'Donor_Information',
         key: 'DonorID'
       }
     },
@@ -13,19 +19,31 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'illness_reference',
+        model: 'Illness_Reference',
         key: 'IllnessID'
       }
-    },
-    MedicalHistoryStatus: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'medical_history',
+    tableName: 'Medical_History',
     timestamps: false,
     indexes: [
+      {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "RecordID" },
+        ]
+      },
+      {
+        name: "RecordID",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "RecordID" },
+        ]
+      },
       {
         name: "FK_Medical_History_Donor_Information",
         using: "BTREE",

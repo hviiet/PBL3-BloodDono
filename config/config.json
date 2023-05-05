@@ -1,25 +1,25 @@
 {
   "development": {
     "username": "root",
-    "password": "1111",
-    "database": "blooddonodb",
-    "host": "localhost",
+    "password": "tng1523@",
+    "database": "BLOODDONODB",
+    "host": "46.137.230.178",
     "port": 3306,
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "1111",
-    "database": "blooddonodb",
-    "host": "localhost",
+    "password": "tng1523@",
+    "database": "BLOODDONODB",
+    "host": "46.137.230.178",
     "port": 3306,
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "1111",
-    "database": "blooddonodb",
-    "host": "localhost",
+    "password": "tng1523@",
+    "database": "BLOODDONODB",
+    "host": "46.137.230.178",
     "port": 3306,
     "dialect": "mysql"
   }

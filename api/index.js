@@ -3,21 +3,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const connectToDatabase = require('../config/dbConnect');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const session = require('express-session');
-//authorization session
-// app.use(session({
-//     key: 'user_sid',
-//     secret : process.env.SECRET,
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: {
-//         expires: 60*60*24*5
-//     },
-//     store: new session.MemoryStore()
-// }));
 //cors
 app.use(cors());
 //body-parser
@@ -27,22 +14,29 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 //json
 app.use(express.json());
-//connect to database
-// const connection = connectDB();
+//set view engine
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 //set static folder
 app.use(express.static(path.join(__dirname, '../public')));
 //Auth Page
-app.use('/api', require('../routes/auth'));
+app.use('/', require('../routes/auth'));
 //Home Page
 app.use('/', require('../routes/home'));
-//user api
-app.use('/api/user', require('../routes/profile'));
+//Profile Page
+app.use('/user', require('../routes/profile'));
+//Event Page
+app.use('/event', require('../routes/event'));
+//Search 
+app.use('/search', require('../routes/search'));
 
-//test route
+//All api
+app.use('/api', require('../routes/api'))
+
+
+
+//test route - testing only
 app.use('/', require('../routes/test'));
 
 
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
-
-
-

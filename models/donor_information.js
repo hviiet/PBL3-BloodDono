@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('donor_information', {
+  return sequelize.define('Donor_Information', {
     AccountID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'account_information',
+        model: 'Account_Information',
         key: 'AccountID'
       }
     },
@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    DonorWeigth: {
+    DonorWeight: {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'address',
+        model: 'Address',
         key: 'AddressID'
       }
     },
@@ -52,7 +52,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     DonorPhoto: {
       type: DataTypes.CHAR(8),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'Image_Table',
+        key: 'ImageID'
+      }
     },
     DonorEmail: {
       type: DataTypes.CHAR(255),
@@ -60,7 +64,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'donor_information',
+    tableName: 'Donor_Information',
     timestamps: false,
     indexes: [
       {
@@ -83,6 +87,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "DonorAddress" },
+        ]
+      },
+      {
+        name: "FK_Donor_Information_Image_Table",
+        using: "BTREE",
+        fields: [
+          { name: "DonorPhoto" },
         ]
       },
     ]

@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(229, 252, 244);
+}
+
+body {
+    background-color: rgb(229, 252, 244) !important;
+}
+
+.box {
+    display: flex;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+header .container-fluid {
+    background-color: rgba(89, 193, 189, 0.5);
+    border-bottom: 1px solid rgb(89, 92, 94);;
+    height: 46px;
+}
+
+header .row {
+    justify-content: space-between;
+}
+
+header .line {
+    display: inline-block;
+}
+
+.logo-pic img {
+    width: 46px;
+    height: 46px;
+    padding: 5px 5px;
+}
+
+.logo-name {
+    font-size: 16px;
+    color: black;
+    line-height: 46px;
+    font-weight: 900;
+}
+
+.logo-name sup {
+    font-size: 9px;
+    font-weight: 300;
+}
+
+.content .container-fluid{
+    background-color: white;
+    width: 1300px;
+    height: 740px;
+    position: relative;
+}
+
+/* .content .needer-resgister {
+    display: none;
+} */
+
+.disappear {
+    display: none;
+}
+
+.content p {
+    padding: 10px 20px 0 20px;
+    margin-bottom: 0;
+    font-size: 17px;
+
+}
+
+.content fieldset {
+    border: 1px solid rgb(194, 192, 192);
+    border-radius: 10px;
+    margin: 10px 20px;
+    padding: 10px;
+}
+
+.content fieldset legend {
+    width: 410px;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(0, 84, 76, 0.63);
+}
+
+form .customize {
+    width: 640px;
+}
+
+form input {
+    height: 30px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+form .row {
+    margin: 10px 0;
+}
+
+form .box-270 input {
+    width: 270px;
+}
+
+form .row .identify {
+    margin-right: 100px;
+}
+
+form .description p {
+    padding-left: 100px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.bloodtype {
+    margin-left: 100px;
+    
+}
+
+select {
+    width: 80px;
+    height: 30px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.hospital-address input {
+    width: 240px;
+    height: 30px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-right: 20px;
+}
+
+.hospital-address .hospital-name {
+    width: 400px;
+}
+
+.message textarea {
+    width: 1180px;
+    height: 60px;
+    padding: 0 10px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    border-radius: 10px;
+}
+
+.btn-next {
+    width: 120px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    background-color: rgb(0, 103, 93);
+    color: white;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-left: 1130px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-next:hover {
+    background-color: #f6f5f7;
+    color: rgb(0, 103, 93);
+}
+
+form .box-116 input {
+    width: 116px;
+    height: 30px;
+    position: absolute;
+    display: none;
+}
+
+.btn-upload {
+    width: 120px;
+    height: 30px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    background-color: rgb(0, 103, 93);
+    color: white;
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-right: 154px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+/* .search-donor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter {
+    display: flex;
+    justify-content: center;
+    width: 1100px;
+    height: 100px;
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 15px;
+    background-color: #ECF9F4;
+}
+
+#search-blood-type {
+    margin: 5px 40px 5px 0;
+}
+
+.filter input {
+    width: 240px;
+    height: 30px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    border-radius: 20px;
+    padding: 0 10px;
+    margin: 5px;
+}
+
+.filter .btn-search {
+    width: 120px;
+    height: 30px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    background-color: rgb(0, 84, 76);
+    color: white;
+    border-radius: 20px;
+    padding: 0 10px;
+    margin: 35px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter .btn-search:hover {
+    background-color: #f6f5f7;
+    color: rgb(0, 84, 76);
+}
+
+.donor-list .row.tilte {
+    margin: 20px 0 0 0;
+    padding: 7px 10px;
+    border-radius: 10px;
+    background-color: #ECF9F4;
+}
+
+.donor-list .donor-items {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.donor-list .donor-items::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+.donor-list .donor-items::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ECF9F4;
+}
+
+.donor-list .row.item {
+    width: 1100px;
+    border-radius: 10px;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    padding: 5px 0;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.donor-list .row.item:hover {
+    background-color: #f6f5f7;
+}
+
+.donor-list .row.item button.col-2 {
+    width: 100px;
+    height: 30px;
+    border: 1px solid rgba(83, 127, 231, 0.81);
+    background-color: #537FE7;
+    color: white;
+    border-radius: 20px;
+    padding: 0 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.donor-list .row.item button.col-2:hover {
+    background-color: #f6f5f7;
+    color: #537FE7;
+} */
+

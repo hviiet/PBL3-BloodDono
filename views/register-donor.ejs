@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <title>Đăng kí trở thành người hiến máu</title>
+</head>
+<body>
+    <div class="contain" id="container">
+        <form action="#" class="big-form">
+            <!-- Phần thông tin cá nhân -->
+            <div class="form-container persional-info small-form">
+                <h1>Thông tin cá nhân</h1>
+                <input type="text" class="customize name" placeholder="Họ và tên" required/>
+
+                <!-- Giới tính -->
+                <div class="inline" id="choose-gender">
+                    <div class="customize gender">
+                        <input type="radio" name="gender" id="male" value="Nam">
+                        <label for="male">Nam</label>
+                    </div>
+                    <div class="customize gender">
+                        <input type="radio" name="gender" id="female" value="Nữ">
+                        <label for="female">Nữ</label>
+                    </div>
+                </div>
+                <!-- ----------------- -->
+
+                <input type="email" class="customize mail" placeholder="Email" required/>
+                <input type="tel" class="customize phone-number" placeholder="Số điện thoại" required/>
+                <input type="date" class="customize date-of-birth" placeholder="Ngày sinh" required>
+                <input type="text" class="customize donor-street" placeholder="Số nhà/Tên đường"/>
+                <!-- Địa chỉ -->
+                <div class="inline" id="Address">
+                    <!-- <input type="text" class="customize ward" placeholder="Xã/phường" required/>
+                    <input type="text" class="customize district" placeholder="Quận/huyện" required/>
+                    <input type="text" class="customize province" placeholder="Tỉnh/Thành phố" required/> -->
+                    <select class="customize donor-ward" name="ward" required>
+                        <option value="default" selected disabled hidden>Chọn xã</option>
+                    </select>
+                    <select class="customize donor-district" name="district" required>
+                        <option value="default" selected disabled hidden>Chọn huyện/phường</option>
+                    </select>
+                    <select class="customize donor-province" name="province" required>
+                        <option value="default" selected disabled hidden>Chọn tỉnh</option>
+                    </select>
+                </div>
+                <!-- ----------------- -->
+
+                <!-- Cân nặng, chiều cao -->
+                <div class="inline" id="Weight-Height">
+                    <input type="text" class="customize weight" placeholder="Cân nặng (kg)" required/>
+                    <input type="text" class="customize height" placeholder="Chiều cao (cm)" required/>
+                </div>
+                <!-- ----------------- -->
+
+                <!-- Nhóm máu -->
+                <select id="blood-type" class="customize blood-type" name="blood-type" required>
+                    <option value="" selected disabled hidden>Chọn nhóm máu</option>
+                    <optgroup label="Nhóm máu A">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                      </optgroup>
+                      <optgroup label="Nhóm máu B">
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                      </optgroup>
+                      <optgroup label="Nhóm máu AB">
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                      </optgroup>
+                      <optgroup label="Nhóm máu O">
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                      </optgroup>
+                </select>
+                <!-- ----------------- -->
+                <select class="customize med-history" id="illness" placeholder="Tiền sử bệnh án">
+
+                </select>
+                <div id = "medical"></div>
+                <button type="submit">Đăng kí</button>
+            </div>
+            <!-- -------------------------------------- -->
+
+            <!-- Phần thông tin tài khoản -->
+            <div class="form-container account-info small-form">
+                <h1>Thông tin tài khoản</h1>
+                <input type="text" class="customize username" placeholder="Tên đăng nhập" required/>
+                <input type="password" class="customize password" placeholder="Mật khẩu" required/>
+                <!-- sửa -->
+                <input type="password" class="customize confirm-password" placeholder="Xác nhận mật khẩu" required/>
+            </div>
+            <!-- -------------------------------------- -->
+        </form>
+
+        <!-- Phần chuyển đổi giữa 2 form -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Quay lại thông tin tài khoản</h1>
+                    <p>Bạn muốn thay đổi lại thông tin tài khoản của mình?</p>
+                    <button class="ghost" id="Back">Quay lại</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Đi đến thông tin cá nhân</h1>
+                    <p>Thông tin của bạn sẽ được bệnh viện kiểm tra và xác nhận bạn có đủ điều kiện hiến máu hay không</p>
+                    <button class="ghost" id="Next">Tiếp tục</button>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------------------- -->
+    </div>
+    <script src="/js/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- get address -->
+    <script>
+        const province = document.querySelector('.donor-province');
+        const district = document.querySelector('.donor-district');
+        const ward = document.querySelector('.donor-ward');
+        axios.get('http://localhost:3000/api/address/province')
+        .then((response)=> {
+            // handle success
+            const data = response.data;
+            data.forEach(element => {
+                province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
+            });
+        })
+        .catch((error)=> {
+            // handle error
+            console.log(error);
+        });
+        province.addEventListener('change', (e) => {
+            const province_id = e.target.value;
+            axios.get(`http://localhost:3000/api/address/district/${province_id}`)
+            .then((response)=> {
+                // handle success
+                const data = response.data;
+                district.innerHTML = `<option value="default" selected disabled hidden>Chọn huyện/phường</option>`;
+                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                data.forEach(element => {
+                    district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error)=> {
+                // handle error
+                console.log(error);
+            });
+        });
+        district.addEventListener('change', (e) => {
+            const district_id = e.target.value;
+            axios.get(`http://localhost:3000/api//address/ward/${district_id}`)
+            .then((response)=> {
+                // handle success
+                const data = response.data;
+                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                data.forEach(element => {
+                    ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error)=> {
+                // handle error
+                console.log(error);
+            });
+        });
+    </script>
+    <!-- send post request -->
+    <script>
+        //add illness
+        const medical = document.getElementById("medical");
+        const illnessList = document.getElementById("illness");
+        let selectedIllnessList = [];
+        axios.get("http://localhost:3000/api/illness")
+        .then((response)=> {
+            // handle success
+            let data = response.data.data;
+            let optionList = '<option value="" selected disabled hidden>Chọn bệnh án</option>'
+            data.forEach(element => {
+                optionList += `<option value="${element.IllnessID}">${element.IllnessName}</option>`
+            });
+            illnessList.innerHTML = optionList;
+        })
+        .catch((error)=> {
+            // handle error
+            console.log(error);
+        });
+        illnessList.addEventListener("change", (event)=>{
+            const illnessName = event.target.options[event.target.selectedIndex].text
+            const illnessID = event.target.value;
+            medical.innerHTML += `<input type="text" title="${illnessName}" class="sick-tag med-history" value="${illnessName}" readonly required/>`;
+            selectedIllnessList.push(illnessID);
+        });
+        //form submit
+        const form = document.querySelector('.big-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.querySelector('.username').value;
+            const password = document.querySelector('.password').value;
+            const confirm_password = document.querySelector('.confirm-password').value;
+            const role = 1;
+            const name = document.querySelector('.name').value;
+            const male = document.getElementById('male');
+            let gender = 0;
+            if(male.checked)
+                gender = 1;
+            const birth = document.querySelector('.date-of-birth').value;
+            const height = parseInt(document.querySelector('.height').value);
+            const weight = parseFloat   (document.querySelector('.weight').value);
+            const bloodType = document.querySelector('.blood-type').value;
+            const phoneNumber = document.querySelector('.phone-number').value;
+            const email = document.querySelector('.mail').value;
+            const province = parseInt(document.querySelector('.donor-province').value);
+            const district = parseInt(document.querySelector('.donor-district').value);
+            const ward = parseInt(document.querySelector('.donor-ward').value);
+            const street = document.querySelector('.donor-street').value;
+            const medical_history = document.querySelector('.med-history').value;
+            const address = {                
+                street,
+                ward,
+                district,
+                province
+            }
+            const data = {
+                username,
+                password,
+                role,
+                name,
+                gender,
+                birth,
+                height,
+                weight,
+                bloodType,
+                address,
+                phoneNumber,
+                email,
+                selectedIllnessList
+            }
+
+            axios.post('/register', data)
+            .then((response)=> {
+                // handle success
+                alert('Đăng kí thành công');
+                window.location.href = '/login';
+            })
+            .catch((error)=> {
+                // handle error
+                console.log(error);
+                alert('Đăng kí thất bại');
+            });
+        });
+    </script>
+</body>
+</html>

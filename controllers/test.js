@@ -1,28 +1,29 @@
-const db = require('../models');
 const asyncHandler = require('express-async-handler');
-const json = require('express');
-const { get } = require('../routes/auth');
-const AccountInfo = db.account_information;
-const {getUser} = require('../utils/address');
+const db = require('../models');
+const bcrypt = require('bcrypt');
+const { uploadImage, deleteLocalImage } = require('../utils/uploadImage');
 
-const getNextAccountID = asyncHandler(async (req,res) => {
-    const lastAccountInfo = await AccountInfo.findOne({
-      order: [['AccountID', 'DESC']]
-    });
-  
-    let nextAccountID = "00000001";
-    if (lastAccountInfo) {
-      // Convert the last AccountID to a number and add 1
-      const lastAccountIDNumber = parseInt(lastAccountInfo.AccountID, 10);
-      nextAccountID = (lastAccountIDNumber + 1).toString().padStart(8, "0");
-    }    
-    // Return the next AccountID
-    return { AccountID: nextAccountID };
-  });
+// const  {getAllIllness} = require('../controllers/userAPI');
 
-const testF = asyncHandler(async (req, res) => {
-    const data = await getUser('hvietS');  
-    res.status(200).json({status:'success', data: data});
+const updatePassword = asyncHandler(async (req, res) => {
+    const AccountInfo = db.Account_Information;
+    const account = await AccountInfo.findAll({});
+    //update all password to hashed
+    for(let i = 0; i < account.length; i++)
+    {
+        const _salt = bcrypt.genSaltSync(10);
+        const _hashedPassword = bcrypt.hashSync(account[i].Password, _salt);
+        await AccountInfo.update({Password: _hashedPassword}, {where: {AccountID: account[i].AccountID}});
+    }
+    res.end('updated');
 });
 
-module.exports = {testF};
+const testF = asyncHandler(async (req, res) => {
+    //upload image to imgur
+    const _pathToImage = req.file.path;
+    const _imageLink = await uploadImage(_pathToImage);
+    deleteLocalImage(_pathToImage);
+    res.status(200).json({imageLink: _imageLink});    
+});
+
+module.exports = {testF,updatePassword};

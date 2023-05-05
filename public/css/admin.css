@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-weight: bold !important;
+    padding: 30px 0 !important;
+}
+
+ul li {
+    list-style: none;
+}
+
+/* Header */
+header .container-fluid {
+    background-color: rgba(89, 193, 189, 0.5);
+    border-bottom: 1px solid rgb(89, 92, 94);;
+    height: 46px;
+}
+
+header .row {
+    justify-content: space-between;
+}
+
+header .line {
+    display: inline-block;
+}
+
+.logo-pic img {
+    width: 46px;
+    height: 46px;
+    padding: 5px 5px;
+}
+
+.logo-name {
+    font-size: 16px;
+    color: black;
+    line-height: 46px;
+    font-weight: 900;
+}
+
+.logo-name sup {
+    font-size: 9px;
+    font-weight: 300;
+}
+
+.log-in-out .fa-solid {
+    font-size:25px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.log-in-out .fa-solid:hover {
+    color: rgb(113, 114, 114);
+}
+/* -------------------------------------- */
+
+/* Content */
+#content .container-fluid {
+    height: 740px;
+    padding: 0 50px;
+}
+
+#content .container-fluid .table-header {
+    width: 1448px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 700;
+    border-radius: 10px;
+    background-color: rgb(233, 233, 233);
+}
+
+#content .waiting-list {
+    height: 300px;
+    overflow-y: auto;
+}
+
+#content .waiting-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+#content .waiting-list::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#content .waiting-list .row {
+    width: 1427px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+#content .waiting-list .row:hover {
+    background-color: rgb(249, 249, 249);
+}
+
+#content .waiting-list .row button {
+    border: none;
+    background-color: rgba(89, 193, 189, 0.85);
+    color: white;
+    border-radius: 10px;
+    height: 33px;
+    margin-top: 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#content .waiting-list .row button:hover {
+    background-color: rgba(89, 193, 189, 1);
+}
+
+#content .tag {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    border-radius: 30px;
+    padding: 0 10px;
+    margin-right: 30px;
+}
+
+.sum-account {
+    background-color: rgb(227, 202, 111);
+}
+
+.accept-account {
+    background-color: rgb(29, 218, 105);
+}
+
+.waiting-account {
+    background-color: rgb(255, 100, 90);
+}
+
+.heading-waiting-list {
+    display: flex;
+}
+
+.radios {
+    display: flex;
+    flex-direction: column;
+}
+
+.wait-number {
+    height: 14px;
+}
+
+.wait-radios {
+    height: 14px;
+    font-size: 13px;
+}
+
+.acp-number {
+    height: 14px;
+}
+
+.acp-radios {
+    height: 14px;
+    font-size: 13px;
+}

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('account_information', {
+  return sequelize.define('Account_Information', {
     AccountID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'account_information',
+    tableName: 'Account_Information',
     timestamps: false,
     indexes: [
       {

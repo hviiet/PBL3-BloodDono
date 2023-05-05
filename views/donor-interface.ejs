@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/donor.css">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Người hiến máu</title>
+</head>
+<body>
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#" class="logo">
+                    <div class="logo-pic line"><img src="/assets/img/logo-pic.png" alt=""></div>
+                    <div class="logo-name line">BloodDono</div>
+                </a>
+                <div class="log-in-out">
+                    <i class="fa-solid fa-bell"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container d-flex justify-content-center">
+            <div class="row donor-box d-flex justify-content-around">
+                
+                <div class="col-3">
+                    <!-- Hình ảnh và tên user -->
+                    <div class="user-interface">
+                        <img src="/assets/img/user_avt.png" alt="" class="user-avt">
+                        <div class="user-name">Fujiguro Toji</div>
+                    </div>
+                    <!-- ------------------------------------- -->
+
+                    <!-- Các chức năng -->
+                    <div class="func-btn">
+                        <button class="btn change-password">Đổi mật khẩu</button>
+                        <button class="btn change-info">Thay đổi thông tin</button>
+                        <button class="btn history-exam">Lịch sử khám bệnh</button>
+                    </div>
+                    <!-- ------------------------------------- -->
+                </div>
+
+                <div class="col-8">
+                    <!-- Thông tin cá nhân -->
+                    <div class="basic info">
+                        <div class="row">
+                            <div class="frame">
+                                <label for="">Họ và tên</label> <br>
+                                <input type="text" name="name" id="name">
+                            </div>
+                            <div class="frame">
+                                <label for="">Ngày sinh</label> <br>
+                                <input type="text" name="" id="birth" onfocus="(this.type='date')">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="frame">
+                                <label for="">Số điện thoại</label> <br>
+                                <input type="tel" name="" id="phoneNumber">
+                            </div>
+                            <div class="frame">
+                                <label for="">Email cá nhân</label> <br>
+                                <input type="email" name="" id="email">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="frame">
+                                <label for="">Địa chỉ</label>
+                                <input type="text" name="" id="address" class="input-adr record">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ---------------------------------------- -->
+
+                    <!-- Thông tin sức khỏe -->
+
+                    <div class="health info">
+                        <div class="row">
+                            <div class="frame">
+                                <label for="">Chiều cao</label> <br>
+                                <input type="text" name="" id="height">
+                            </div>
+                            <div class="frame">
+                                <label for="">Cân nặng</label> <br>
+                                <input type="text" name="" id="weight">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="frame">
+                                <label for="">Giới tính</label> <br>
+                                <input type="text" name="" id="gender">
+                            </div>
+                            <div class="frame">
+                                <label for="">Nhóm máu</label> <br>
+                                <input type="text" name="" id="bloodType">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="frame">
+                                <label for="">Lịch sử bệnh án</label> <br>
+                                <input type="text" name="" id="" class="input-med record">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ---------------------------------------- -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //get user name
+        const url = window.location.href; // get the current URL
+        const segments = url.split('/'); // split the URL by '/'
+        const userName = segments.pop() || segments.pop(); // remove the trailing slash and get the last segment   
+        axios.get(`http://localhost:3000/api/user/${userName}`)
+            .then(function (response) {
+                // handle success
+                const userData = response.data.data;           
+                console.log(userData);     
+                const name = document.getElementById('name');
+                name.value = userData.name;
+                const birth = document.getElementById('birth');
+                birth.value = userData.birth;
+                const phoneNumber = document.getElementById('phoneNumber');
+                phoneNumber.value = userData.phoneNumber;
+                const email = document.getElementById('email');
+                email.value = userData.email;
+                const address = document.getElementById('address');
+                const fullAddress = `${userData.address.street!=null?`${userData.address.street}, `:''}${userData.address.ward}, ${userData.address.district}, ${userData.address.province}`;
+                address.value = fullAddress;
+                const height = document.getElementById('height');
+                height.value = userData.height;
+                const weight = document.getElementById('weight');
+                weight.value = userData.weight;  
+                const gender = document.getElementById('gender');
+                gender.value = userData.gender? 'Nam' : 'Nữ';
+                const bloodType = document.getElementById('bloodType');
+                bloodType.value = userData.bloodType;
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    </script>
+</body>
+</html>

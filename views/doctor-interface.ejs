@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/doctor.css">
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Bệnh viện</title>
+    
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="logo col-md-4">
+                        <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
+                        <div class="logo-name line">BloodDono</div>
+                    </div>
+                    <div class="search-bar col-md-4">
+                        <label for="search" class="search-logo"><i class="fa-solid fa-magnifying-glass"></i></label>
+                        <input type="text" name="search" id="search" placeholder="Tìm kiếm">
+                    </div>
+                    <div class="notify-logOut col-md-2">
+                        <i class="fa-solid fa-bell"></i>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                <div class="row choose-btn d-flex justify-content-between">
+                    <a href="/view/new-campaign.html" class="col-md-2">Tạo chiến dịch mới</a>
+                    <div class="col-md-2">Xem chiến dịch</div>
+                    <div class="col-md-2">Chỉnh sửa chiến dịch</div>
+                </div>
+
+                <div class="row campaign-info d-flex justify-content-between">
+                    <!-- Số người đăng kí trung bình -->
+                    <div class="col-md-2" id="donor-number">
+                        <img src="/assets/img/user_avt.png" alt="">
+                        <span>587</span>
+                        <div class="info">Số người đăng kí trung bình</div>
+                    </div>
+                    <!-- ---------------------------------------------- -->
+
+                    <!-- Số người tiếp cận -->
+                    <div class="col-md-2" id="visitor">
+                        <img src="/assets/img/networking.png" alt="">
+                        <span>748</span>
+                        <div class="info">Số người tiếp cận</div>
+                    </div>
+                    <!-- ---------------------------------------------- -->
+
+                    <!-- Số chiến dịch đã thực hiện -->
+                    <div class="col-md-2" id="sum-campaigns">
+                        <img src="/assets/img/campaign.png" alt="">
+                        <span>12</span>
+                        <div class="info">Tổng số chiến dịch</div>
+                    </div>
+                    <!-- ---------------------------------------------- -->
+                </div>
+
+                <div class="nearest-campaign">
+                    <div class="nearest-title">Chiến dịch gần nhất: "Mùa hè đỏ"</div>
+                    <div class="row">
+                        <img src="/assets/img/number donors.png" alt="">
+                        <div class="cons">Số lượng người đã đăng kí: 482</div>
+                    </div>
+                    <div class="row">
+                        <img src="/assets/img/blood.png" alt="">
+                        <div class="cons">Nhóm máu cần thiết: A, B, AB</div>
+                    </div>
+                    <div class="row">
+                        <img src="/assets/img/schedule.png" alt="">
+                        <div class="cons">7h-17h ngày 30/2/2023</div>
+                    </div>
+                    <div class="row">
+                        <img src="/assets/img/destination.png" alt="">
+                        <div class="cons">Hoàng Trung Thông, Hoà Minh, Liên Chiểu, Đà Nẵng</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

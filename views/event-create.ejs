@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/campaign.css">
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Thêm chiến dịch mới</title>
+</head>
+<body>
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row logo">
+                <div class="logo col-md-4">
+                    <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
+                    <div class="logo-name line">BloodDono</div>
+                </div>
+            </div>
+
+            <div class="row heading">
+                <div class="rectangle">Tạo chiến dịch hiến máu mới</div>
+                <div class="triangle"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <form action="" class="container">
+            <!-- Tên chiến dịch -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">Tên chiến dịch</div>
+                <input type="text" name="" id="" class="col-5 padding-0" required>
+            </div>
+            <!-- ---------------------- -->
+
+            <!-- Nội dung chiến dịch -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">Nội dung chiến dịch</div>
+                <input type="text" name="" id="" class="col-5 padding-0" required>
+            </div>
+            <!-- ---------------------- -->
+
+            <!-- Thời gian -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">Thời gian</div>
+                <div class="col-5 padding-0 timer">
+                    <input type="text" name="" id="" placeholder="Bắt đầu" onfocus="(this.type='datetime-local')" required>
+                    <input type="text" name="" id="" placeholder="Kết thúc" onfocus="(this.type='datetime-local')" class="float-right" required>
+                </div>
+            </div>
+            <!-- ---------------------- -->
+
+            <!-- Nhóm máu cần và số lượng -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">Nhóm máu cần thiết</div>
+                <div class="col-5 padding-0">
+                    <input type="text" name="" id="">
+                    <!-- Số lượng -->
+                    <span>Số lượng</span>
+                    <input type="number" name="" id="" class="float-right">
+                    <!-- --------------- -->
+                </div>
+            </div>
+            <!-- ---------------------- -->
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-2"></div>
+                <div class="col-5 padding-0">Chiến dịch khi tạo sẽ được hiển thị trên trang chủ
+                    và sẽ được gửi thông báo tới các người dùng.</div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <button class="btn-create-campaign">Tạo chiến dịch</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

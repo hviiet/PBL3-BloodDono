@@ -1,32 +1,36 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('joined_donor', {
+  return sequelize.define('Joined_Donor', {
     EventID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'event_information',
+        model: 'Event_Information',
         key: 'EventID'
       }
     },
     DonorID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
+      primaryKey: true,
       references: {
-        model: 'donor_information',
+        model: 'Donor_Information',
         key: 'DonorID'
       }
     }
   }, {
     sequelize,
-    tableName: 'joined_donor',
+    tableName: 'Joined_Donor',
     timestamps: false,
     indexes: [
       {
-        name: "FK_Joined_Donor_Event_Information",
+        name: "PRIMARY",
+        unique: true,
         using: "BTREE",
         fields: [
           { name: "EventID" },
+          { name: "DonorID" },
         ]
       },
       {

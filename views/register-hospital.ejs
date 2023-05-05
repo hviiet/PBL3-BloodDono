@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/hospital-register.css">
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <title>Đăng kí bệnh viện</title>
+</head>
+<body>
+    <div class="contain" id="container">
+        <form action="#" class="big-form">
+            <!-- Phần thông tin bệnh viện -->
+            <div class="form-container persional-info small-form">
+                <h1>Thông tin bệnh viện</h1>
+                <input type="text" class="customize hospital-name" placeholder="Tên bệnh viện" required/>
+                <input type="email" class="customize hospital-mail" placeholder="Email" required/>
+                <input type="tel" class="customize hospital-phone-number" placeholder="Số điện thoại" required/>
+                <input type="text" class="customize hospital-street" placeholder="Số nhà/Tên đường"/>
+
+                <!-- Địa chỉ bệnh viện -->
+                <div class="inline" id="Address">
+                    <!-- <input type="text" class="customize hospital-ward" placeholder="Xã/phường" required/>
+                    <input type="text" class="customize hospital-district" placeholder="Quận/huyện" required/>
+                    <input type="text" class="customize hospital-province" placeholder="Tỉnh/Thành phố" required/> -->
+                    <select class="customize hospital-ward" name="ward" required>
+                        <option value="default" selected disabled hidden>Chọn xã</option>
+                    </select>
+                    <select class="customize hospital-district" name="district" required>
+                        <option value="default" selected disabled hidden>Chọn huyện/phường</option>
+                    </select>
+                    <select class="customize hospital-province" name="province" required>
+                        <option value="default" selected disabled hidden>Chọn tỉnh</option>
+                    </select>
+                </div>
+                <!-- ----------------- -->
+
+                <button type="submit">Đăng kí</button>
+            </div>
+            <!-- -------------------------------------- -->
+
+            <!-- Phần thông tin tài khoản bệnh viện -->
+            <div class="form-container account-info small-form">
+                <h1>Thông tin tài khoản</h1>
+                <input type="text" class="customize username" placeholder="Tên đăng nhập" required/>
+                <input type="password" class="customize password" placeholder="Mật khẩu" required/>
+                <!-- sửa -->
+                <input type="password" class="customize confirm-password" placeholder="Xác nhận mật khẩu" required/>
+            </div>
+            <!-- -------------------------------------- -->
+        </form>
+
+        <!-- Phần chuyển đổi giữa 2 form -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Quay lại thông tin tài khoản</h1>
+                    <p>Bạn muốn thay đổi lại thông tin tài khoản của mình?</p>
+                    <button class="ghost" id="Back">Quay lại</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Đi đến thông tin bệnh viện</h1>
+                    <p>Thông tin bệnh viện của bạn sẽ được người hiến và người cần máu quan tâm và tiếp cận</p>
+                    <button class="ghost" id="Next">Tiếp tục</button>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------------------- -->
+    </div>
+    <script src="/js/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- get data for address -->
+    <script>
+        const province = document.querySelector('.hospital-province');
+        const district = document.querySelector('.hospital-district');
+        const ward = document.querySelector('.hospital-ward');
+        axios.get('http://localhost:3000/api//address/province')
+        .then((response)=> {
+            // handle success
+            const data = response.data;
+            data.forEach(element => {
+                province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
+            });
+        })
+        .catch((error)=> {
+            // handle error
+            console.log(error);
+        });
+        province.addEventListener('change', (e) => {
+            const province_id = e.target.value;
+            axios.get(`http://localhost:3000/api/address/district/${province_id}`)
+            .then((response)=> {
+                // handle success
+                const data = response.data;
+                district.innerHTML = `<option value="default" selected disabled hidden>Chọn huyện/phường</option>`;
+                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                data.forEach(element => {
+                    district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error)=> {
+                // handle error
+                console.log(error);
+            });
+        });
+        district.addEventListener('change', (e) => {
+            const district_id = e.target.value;
+            axios.get(`http://localhost:3000/api/address/ward/${district_id}`)
+            .then((response)=> {
+                // handle success
+                const data = response.data;
+                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                data.forEach(element => {
+                    ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error)=> {
+                // handle error
+                console.log(error);
+            });
+        });
+    </script>
+    <!-- send post request -->
+    <script>
+        const form = document.querySelector('.big-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.querySelector('.hospital-name').value;
+            const email = document.querySelector('.hospital-mail').value;
+            const phoneNumber = document.querySelector('.hospital-phone-number').value;
+            const street = document.querySelector('.hospital-street').value;
+            const ward = parseInt(document.querySelector('.hospital-ward').value);
+            const district = parseInt(document.querySelector('.hospital-district').value);
+            const province = parseInt(document.querySelector('.hospital-province').value);
+            const username = document.querySelector('.username').value;
+            const password = document.querySelector('.password').value;
+            const confirm_password = document.querySelector('.confirm-password').value;
+            const role = 2;
+            if (password !== confirm_password) {
+                alert('Mật khẩu không khớp');
+                return;
+            }
+            const address = {                
+                street,
+                ward,
+                district,
+                province
+            }
+            const data = {
+                username,
+                password,
+                role,
+                name,
+                email,
+                phoneNumber,
+                address
+            }
+            axios.post('/register', data)
+            .then((response)=> {
+                // handle success
+                alert('Đăng kí thành công');
+                window.location.href = '/login';
+            })
+            .catch((error)=> {
+                // handle error
+                console.log(error);
+                alert('Đăng kí thất bại');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('affected_blood_type', {
+  return sequelize.define('Affected_Blood_Type', {
     EventID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'event_information',
+        model: 'Event_Information',
         key: 'EventID'
       }
     },
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'affected_blood_type',
+    tableName: 'Affected_Blood_Type',
     timestamps: false,
     indexes: [
       {

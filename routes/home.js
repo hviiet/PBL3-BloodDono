@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 const { cookieJwtAuth } = require('../middleware/cookieJwtAuth');
 
 router.get('/', cookieJwtAuth, (req, res) => {
     if(req.user)
     {
-        res.sendFile(path.join(__dirname, '..','views','index.html'));
+        // res.sendFile(path.join(__dirname, '..','views','index-login.html'));
+        res.render('index-login',{
+            username: req.user.username,
+            link: `/user/${req.user.username}`
+        });
     }
     else
     {
-        res.sendFile(path.join(__dirname, '..','views','index.html'));
+        res.render('index');
     }
 });
 module.exports = router;

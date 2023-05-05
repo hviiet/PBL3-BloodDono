@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imgur API Image Uploader</title>
+</head>
+
+<body>
+    <form id="imageForm" method="post" enctype="multipart/form-data">
+        <input type="file" id="myImage" name="myImage">
+        <button type="submit">Upload Image</button>
+    </form>
+    <img id="myImg" src="" alt="Image preview...">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const form = document.getElementById('imageForm');
+        const fileInput = document.getElementById('myImage');
+        const img = document.getElementById('myImg');
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("myImage", file);
+            axios.post('/test', formData)
+            .then((response) => {
+                img.src = response.data.imageLink;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    </script>
+</body>
+</html>

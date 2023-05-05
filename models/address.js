@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('address', {
+  return sequelize.define('Address', {
     AddressID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'ward_information',
+        model: 'Ward_Information',
         key: 'Wards_id'
       }
     },
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'district_information',
+        model: 'District_Information',
         key: 'District_id'
       }
     },
@@ -30,13 +30,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'province_information',
+        model: 'Province_Information',
         key: 'Province_id'
       }
     }
   }, {
     sequelize,
-    tableName: 'address',
+    tableName: 'Address',
     timestamps: false,
     indexes: [
       {

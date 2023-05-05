@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('hospital_information', {
+  return sequelize.define('Hospital_Information', {
     AccountID: {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'account_information',
+        model: 'Account_Information',
         key: 'AccountID'
       }
     },
@@ -26,17 +26,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.CHAR(8),
       allowNull: false,
       references: {
-        model: 'address',
+        model: 'Address',
         key: 'AddressID'
       }
     },
     HospitalEmail: {
       type: DataTypes.CHAR(255),
       allowNull: true
+    },
+    HospitalIsVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'hospital_information',
+    tableName: 'Hospital_Information',
     timestamps: false,
     indexes: [
       {
