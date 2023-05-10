@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Donation_Records', {
     DonationID: {
-      type: DataTypes.CHAR(8),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
@@ -16,10 +17,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     DonationDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    DonationStatus: {
-      type: DataTypes.BOOLEAN,
       allowNull: false
     },
     DonationVolume: {

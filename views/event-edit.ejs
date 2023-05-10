@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
     <title>BloodDono-Chỉnh sửa chiến dịch</title>
 </head>
+
 <body>
     <div id="header">
         <div class="container-fluid">
@@ -32,37 +34,41 @@
             <!-- Tên chiến dịch -->
             <div class="row d-flex justify-content-center">
                 <div class="col-2">Tên chiến dịch</div>
-                <input type="text" name="" id="" class="col-5 padding-0" required>
+                <input type="text" name="" id="name" class="col-5 padding-0" required>
             </div>
             <!-- ---------------------- -->
-
-            <!-- Nội dung chiến dịch -->
+            <!-- Số lượng -->
             <div class="row d-flex justify-content-center">
-                <div class="col-2">Nội dung chiến dịch</div>
-                <input type="text" name="" id="" class="col-5 padding-0" required>
+                <div class="col-5 padding-0">
+                    <!-- Số lượng -->
+                    <span>Số lượng</span>
+                    <input type="number" name="" id="quantity" class="float-right">
+                    <!-- --------------- -->
+                </div>
             </div>
-            <!-- ---------------------- -->
-
             <!-- Thời gian -->
             <div class="row d-flex justify-content-center">
                 <div class="col-2">Thời gian</div>
                 <div class="col-5 padding-0 timer">
-                    <input type="text" name="" id="" placeholder="Bắt đầu" onfocus="(this.type='datetime-local')" required>
-                    <input type="text" name="" id="" placeholder="Kết thúc" onfocus="(this.type='datetime-local')" class="float-right" required>
+                    <input type="text" name="" id="start" placeholder="Bắt đầu" onfocus="(this.type='datetime-local')"
+                        required>
+                    <input type="text" name="" id="end" placeholder="Kết thúc" onfocus="(this.type='datetime-local')"
+                        class="float-right" required>
                 </div>
             </div>
-            <!-- ---------------------- -->
 
-            <!-- Nhóm máu cần và số lượng -->
-            <div class="row d-flex justify-content-center">
-                <div class="col-2">Nhóm máu cần thiết</div>
-                <div class="col-5 padding-0">
-                    <input type="text" name="" id="">
-                    <!-- Số lượng -->
-                    <span>Số lượng</span>
-                    <input type="number" name="" id="" class="float-right">
-                    <!-- ----------------- -->
-                </div>
+            <!-- ---------------------- -->
+            <div class="inline" id="Address">
+                <input type="text" class="customize street" placeholder="Số nhà/Tên đường" />
+                <select class="customize ward" name="ward" required>
+                    <option value="default" selected disabled hidden>Chọn xã</option>
+                </select>
+                <select class="customize district" name="district" required>
+                    <option value="default" selected disabled hidden>Chọn huyện/phường</option>
+                </select>
+                <select class="customize province" name="province" required>
+                    <option value="default" selected disabled hidden>Chọn tỉnh</option>
+                </select>
             </div>
             <!-- ---------------------- -->
 
@@ -78,4 +84,156 @@
         </form>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const province = document.querySelector('.province');
+    const district = document.querySelector('.district');
+    const ward = document.querySelector('.ward');
+    province.addEventListener('change', (e) => {
+        const province_id = e.target.value;
+        axios.get(`http://localhost:3000/api/address/district/${province_id}`)
+            .then((response) => {
+                // handle success
+                const data = response.data;
+                district.innerHTML = `<option value="default" selected disabled hidden>Chọn huyện/phường</option>`;
+                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                data.forEach(element => {
+                    district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    });
+    district.addEventListener('change', (e) => {
+        const district_id = e.target.value;
+        axios.get(`http://localhost:3000/api/address/ward/${district_id}`)
+            .then((response) => {
+                // handle success
+                const data = response.data;
+                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                data.forEach(element => {
+                    ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    });
+</script>
+<!-- get info -->
+<script>
+    const eventName = document.getElementById('name');
+    const eventQuantity = document.getElementById('quantity');
+    const eventStartTime = document.getElementById('start');
+    const eventEndTime = document.getElementById('end');
+    const street = document.querySelector('.street');
+    const url = window.location.href;
+    const eventID = url.split('/')[5];
+    axios.get(`http://localhost:3000/api/event/${eventID}`)
+        .then((response) => {
+            // handle success
+            const userData = response.data.data;
+            eventName.value = userData.name;
+            eventQuantity.value = userData.quantity;
+            eventStartTime.value = userData.startTime;
+            eventEndTime.value = userData.endTime;
+            street.value = userData.address.street;
+            axios.get('http://localhost:3000/api/address/province')
+                .then((response) => {
+                    // handle success
+                    const data = response.data;
+                    data.forEach(element => {
+                        province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
+                    });
+                    let province_id;
+                    for (let i = 0; i < province.options.length; i++) {
+                        if (province.options[i].text == userData.address.province) {
+                            province_id = province.options[i].value;
+                            province.selectedIndex = i;
+                            break;
+                        }
+                    }
+                    axios
+                        .get(`http://localhost:3000/api/address/district/${province_id}`)
+                        .then((response) => {
+                            // handle success
+                            const data = response.data;
+                            data.forEach((element) => {
+                                district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                            });
+                            let district_id;
+                            for (let i = 0; i < district.options.length; i++) {
+                                if (district.options[i].text == userData.address.district) {
+                                    district_id = district.options[i].value;
+                                    district.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                            axios
+                                .get(`http://localhost:3000/api/address/ward/${district_id}`)
+                                .then((response) => {
+                                    // handle success
+                                    const data = response.data;
+                                    data.forEach((element) => {
+                                        ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
+                                    });
+                                    for (let i = 0; i < ward.options.length; i++) {
+                                        if (ward.options[i].text == userData.address.ward) {
+                                            ward.selectedIndex = i;
+                                            break;
+                                        }
+                                    }
+                                })
+                                .catch((error) => {
+                                    // handle error
+                                    console.log(error);
+                                });
+                        })
+                        .catch((error) => {
+                            // handle error
+                            console.log(error);
+                        });
+
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        })
+        .catch((error) => {
+            // handle error
+            console.log(error);
+        });
+    const form = document.querySelector('.container');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = {
+            eventName: eventName.value,
+            eventQuantity: eventQuantity.value,
+            eventStartTime: eventStartTime.value,
+            eventEndTime: eventEndTime.value,
+            eventAddress: {
+                street: street.value,
+                ward: ward.options[ward.selectedIndex].text,
+                district: district.options[district.selectedIndex].text,
+                province: province.options[province.selectedIndex].text,
+            }
+        };
+        axios.post(`http://localhost:3000/event/update-event/${eventID}`, data)
+            .then((response) => {
+                // handle success
+                alert('Chỉnh sửa thành công');
+                window.location.href = `http://localhost:3000/event/view/${eventID}`;
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    })
+</script>
+
+
 </html>

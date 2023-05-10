@@ -29,11 +29,12 @@ app.use('/user', require('../routes/profile'));
 app.use('/event', require('../routes/event'));
 //Search 
 app.use('/search', require('../routes/search'));
-
 //All api
 app.use('/api', require('../routes/api'))
-
-
+// Error 404
+app.use('/404',(req, res) => {
+    res.status(404).render('error404');
+});
 
 //test route - testing only
 app.use('/', require('../routes/test'));

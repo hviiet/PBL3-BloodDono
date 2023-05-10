@@ -9,6 +9,9 @@ html {
     background-color: rgb(229, 252, 244);
 }
 
+h1 {
+    text-align: center;
+}
 body {
     background: rgb(2,0,36);
     background: linear-gradient(155deg, rgba(2,0,36,1) 0%, rgba(185,249,225,1) 0%, rgba(130,202,217,1) 100%);

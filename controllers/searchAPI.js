@@ -2,18 +2,17 @@ const asyncHandler = require('express-async-handler');
 const url = require('url');
 const { QueryTypes } = require('sequelize');
 const sequelize = require('../models').sequelize;
+const { getFullAddress } = require('../utils/util');
 const db = require('../models');
 
 const searchByBloodTypeAndAddress = asyncHandler(async (req,res)=>
 {
     const stringQuery = url.parse(req.url,true);
-    console.log(stringQuery);
     const _bloodType = stringQuery.query.bloodType;
     const _ward = stringQuery.query.ward;
     const _district = stringQuery.query.district;
     const _province = stringQuery.query.province;
-    console.log(_bloodType,_ward,_district,_province);
-    let query = 'SELECT DonorName, DonorBloodType, DonorPhoneNumber, DonorAddress, DonorEmail, AddressID, DonorID  FROM Donor_Information INNER JOIN Address ON Donor_Information.DonorAddress = Address.AddressID';
+    let query = 'SELECT DonorName, DonorBloodType, DonorBirth, DonorPhoneNumber, DonorAddress, DonorEmail, AddressID, DonorID  FROM Donor_Information INNER JOIN Address ON Donor_Information.DonorAddress = Address.AddressID';
     if(_bloodType != undefined || _ward != undefined || _district != undefined || _province != undefined)
     {
       query += ' WHERE ';
@@ -42,6 +41,16 @@ const searchByBloodTypeAndAddress = asyncHandler(async (req,res)=>
         if(_donationRecord != null)
         {
           _result[i].DonationDate = _donationRecord.DonationDate;
+        }
+        //get full address
+        const address = await getFullAddress(_result[i].DonorAddress);
+        if(address.status == 'fail')
+        {
+            _result[i].DonorAddress = '';
+        }
+        else
+        {
+            _result[i].DonorAddress = `${address.ward}, ${address.district}, ${address.province}`;
         }
     }
     res.json({result: _result});

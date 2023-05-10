@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
     <title>BloodDono-Chiến dịch mới</title>
 </head>
+
 <body>
     <header>
         <div class="container-fluid">
@@ -23,29 +25,29 @@
     </header>
 
     <section class="container">
-        <h1 class="row campaign-name">Mùa hè đỏ</h1>
+        <h1 class="row campaign-name">Hiến máu nhân đạo</h1>
         <p class="row" style="font-size: 20px;">Thời gian đăng kí còn lại</p>
 
         <div class="row remain-time">
             <div class="day row">
-                <div class="time-element">1</div>
-                <div class="time-element">2</div>
+                <div class="time-element" id="day-1"></div>
+                <div class="time-element" id="day-2"></div>
             </div>
 
             <div class="hour row">
-                <div class="time-element">2</div>
-                <div class="time-element">3</div>
+                <div class="time-element" id="hour-1"></div>
+                <div class="time-element" id="hour-2"></div>
             </div>
 
             <div class="minute row">
-                <div class="time-element">5</div>
-                <div class="time-element">4</div>
-             </div>
+                <div class="time-element" id="minute-1"></div>
+                <div class="time-element" id="minute-2"></div>
+            </div>
 
-             <div class="second row">
-                <div class="time-element">3</div>
-                <div class="time-element">4</div>
-             </div>
+            <div class="second row">
+                <div class="time-element" id="second-1"></div>
+                <div class="time-element" id="second-2"></div>
+            </div>
         </div>
 
         <div class="row remain-time desc">
@@ -57,16 +59,74 @@
 
         <!-- Thanh tiến độ -->
         <div class="progress">
-            <div class="progress-bar" role="progressbar" style="--percent: calc(482/1000 * 100%);" aria-valuemin="0" aria-valuemax="100">482/1000</div>
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <!-- ----------------------- -->
-        
+
         <p class="essay">
-            Việc hiến máu không chỉ giúp cứu người mà còn có tác dụng tích cực đối với sức khỏe của chính bạn. Hãy tham gia chiến dịch hiến máu
-             của chúng tôi và trở thành người hùng trong mắt những bệnh nhân đang cần đến sự cứu giúp. 
+            Việc hiến máu không chỉ giúp cứu người mà còn có tác dụng tích cực đối với sức khỏe của chính bạn. Hãy tham
+            gia chiến dịch hiến máu
+            của chúng tôi và trở thành người hùng trong mắt những bệnh nhân đang cần đến sự cứu giúp.
         </p>
 
         <button class="btn-regist">Đăng kí ngay</button>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const eventID = '<%= eventID %>';
+        let targetDate;
+        //get event info
+        axios.get(`http://localhost:3000/api/event/${eventID}`)
+            .then((response) => {
+                // handle success
+                const data = response.data.data;
+                targetDate = new Date(data.startTime);
+                document.querySelector('.campaign-name').innerHTML = data.name;
+                const progress = document.querySelector('.progress-bar');
+                progress.style.setProperty('--percent', `${data.numberOfDonor / data.quantity * 100}%`);
+                progress.innerHTML = `${data.numberOfDonor}/${data.quantity}`;
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+        //make the clock countdown 
+        setInterval(() => {
+            const currentDate = new Date();
+            if (targetDate < currentDate) {
+                document.getElementById('day-1').innerHTML = 0;
+                document.getElementById('day-2').innerHTML = 0;
+                document.getElementById('hour-1').innerHTML = 0;
+                document.getElementById('hour-2').innerHTML = 0;
+                document.getElementById('minute-1').innerHTML = 0;
+                document.getElementById('minute-2').innerHTML = 0;
+                document.getElementById('second-1').innerHTML = 0;
+                document.getElementById('second-2').innerHTML = 0
+                return;
+            }
+            let diff = targetDate - currentDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * (1000 * 60 * 60 * 24);
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+
+            const minutes = Math.floor(diff / (1000 * 60));
+            diff -= minutes * (1000 * 60);
+
+            const seconds = Math.floor(diff / 1000);
+
+            document.getElementById('day-1').innerHTML = Math.floor(days / 10);
+            document.getElementById('day-2').innerHTML = days % 10;
+            document.getElementById('hour-1').innerHTML = Math.floor(hours / 10);
+            document.getElementById('hour-2').innerHTML = hours % 10;
+            document.getElementById('minute-1').innerHTML = Math.floor(minutes / 10);
+            document.getElementById('minute-2').innerHTML = minutes % 10;
+            document.getElementById('second-1').innerHTML = Math.floor(seconds / 10);
+            document.getElementById('second-2').innerHTML = seconds % 10;
+        }, 1000);
+    </script>
 </body>
+
 </html>

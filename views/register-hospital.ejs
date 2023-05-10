@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,17 +10,17 @@
     <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
     <title>Đăng kí bệnh viện</title>
 </head>
+
 <body>
     <div class="contain" id="container">
         <form action="#" class="big-form">
             <!-- Phần thông tin bệnh viện -->
             <div class="form-container persional-info small-form">
                 <h1>Thông tin bệnh viện</h1>
-                <input type="text" class="customize hospital-name" placeholder="Tên bệnh viện" required/>
-                <input type="email" class="customize hospital-mail" placeholder="Email" required/>
-                <input type="tel" class="customize hospital-phone-number" placeholder="Số điện thoại" required/>
-                <input type="text" class="customize hospital-street" placeholder="Số nhà/Tên đường"/>
-
+                <input type="text" class="customize hospital-name" placeholder="Tên bệnh viện" required />
+                <input type="email" class="customize hospital-mail" placeholder="Email" required />
+                <input type="tel" class="customize hospital-phone-number" placeholder="Số điện thoại" required />
+                <input type="text" class="customize hospital-street" placeholder="Số nhà/Tên đường" />
                 <!-- Địa chỉ bệnh viện -->
                 <div class="inline" id="Address">
                     <!-- <input type="text" class="customize hospital-ward" placeholder="Xã/phường" required/>
@@ -44,10 +45,10 @@
             <!-- Phần thông tin tài khoản bệnh viện -->
             <div class="form-container account-info small-form">
                 <h1>Thông tin tài khoản</h1>
-                <input type="text" class="customize username" placeholder="Tên đăng nhập" required/>
-                <input type="password" class="customize password" placeholder="Mật khẩu" required/>
+                <input type="text" class="customize username" placeholder="Tên đăng nhập" required />
+                <input type="password" class="customize password" placeholder="Mật khẩu" required />
                 <!-- sửa -->
-                <input type="password" class="customize confirm-password" placeholder="Xác nhận mật khẩu" required/>
+                <input type="password" class="customize confirm-password" placeholder="Xác nhận mật khẩu" required />
             </div>
             <!-- -------------------------------------- -->
         </form>
@@ -77,49 +78,49 @@
         const district = document.querySelector('.hospital-district');
         const ward = document.querySelector('.hospital-ward');
         axios.get('http://localhost:3000/api//address/province')
-        .then((response)=> {
-            // handle success
-            const data = response.data;
-            data.forEach(element => {
-                province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
-            });
-        })
-        .catch((error)=> {
-            // handle error
-            console.log(error);
-        });
-        province.addEventListener('change', (e) => {
-            const province_id = e.target.value;
-            axios.get(`http://localhost:3000/api/address/district/${province_id}`)
-            .then((response)=> {
+            .then((response) => {
                 // handle success
                 const data = response.data;
-                district.innerHTML = `<option value="default" selected disabled hidden>Chọn huyện/phường</option>`;
-                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
                 data.forEach(element => {
-                    district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                    province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
                 });
             })
-            .catch((error)=> {
+            .catch((error) => {
                 // handle error
                 console.log(error);
             });
+        province.addEventListener('change', (e) => {
+            const province_id = e.target.value;
+            axios.get(`http://localhost:3000/api/address/district/${province_id}`)
+                .then((response) => {
+                    // handle success
+                    const data = response.data;
+                    district.innerHTML = `<option value="default" selected disabled hidden>Chọn huyện/phường</option>`;
+                    ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                    data.forEach(element => {
+                        district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                    });
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
         });
         district.addEventListener('change', (e) => {
             const district_id = e.target.value;
             axios.get(`http://localhost:3000/api/address/ward/${district_id}`)
-            .then((response)=> {
-                // handle success
-                const data = response.data;
-                ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
-                data.forEach(element => {
-                    ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
+                .then((response) => {
+                    // handle success
+                    const data = response.data;
+                    ward.innerHTML = `<option value="default" selected disabled hidden>Chọn xã</option>`;
+                    data.forEach(element => {
+                        ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
+                    });
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
                 });
-            })
-            .catch((error)=> {
-                // handle error
-                console.log(error);
-            });
         });
     </script>
     <!-- send post request -->
@@ -142,7 +143,7 @@
                 alert('Mật khẩu không khớp');
                 return;
             }
-            const address = {                
+            const address = {
                 street,
                 ward,
                 district,
@@ -158,17 +159,18 @@
                 address
             }
             axios.post('/register', data)
-            .then((response)=> {
-                // handle success
-                alert('Đăng kí thành công');
-                window.location.href = '/login';
-            })
-            .catch((error)=> {
-                // handle error
-                console.log(error);
-                alert('Đăng kí thất bại');
-            });
+                .then((response) => {
+                    // handle success
+                    alert('Đăng kí thành công');
+                    window.location.href = '/login';
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                    alert('Đăng kí thất bại');
+                });
         });
     </script>
 </body>
+
 </html>

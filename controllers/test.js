@@ -9,11 +9,16 @@ const updatePassword = asyncHandler(async (req, res) => {
     const AccountInfo = db.Account_Information;
     const account = await AccountInfo.findAll({});
     //update all password to hashed
+    const newPass = '1111';
     for(let i = 0; i < account.length; i++)
     {
         const _salt = bcrypt.genSaltSync(10);
-        const _hashedPassword = bcrypt.hashSync(account[i].Password, _salt);
-        await AccountInfo.update({Password: _hashedPassword}, {where: {AccountID: account[i].AccountID}});
+        // const _hashedPassword = bcrypt.hashSync(account[i].Password, _salt);
+        const _hashedPassword = bcrypt.hashSync(newPass, _salt);
+        await AccountInfo.update({Password: _hashedPassword}, {where: {
+            AccountID: account[i].AccountID,
+            Role : 2
+        }});
     }
     res.end('updated');
 });

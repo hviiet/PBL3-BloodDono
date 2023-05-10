@@ -13,19 +13,39 @@ const login = asyncHandler(async (req, res) =>
     const userExists = await AccountInfo.findOne({ where: { Username: username } });
     if(!userExists) return res.status(400).json({status:'fail', message: 'User not found' });
     //check if password is correct
+    console.log(username);
+    console.log(password);
     const validPassword = await bcrypt.compare(password, userExists.Password);
+    console.log(validPassword);
     if(!validPassword) return res.status(400).json({status:'fail', message: 'Invalid password' });
     //create and assign a token
-    const DonoInfo = db.Donor_Information;
-    const _donor = await DonoInfo.findOne({ 
+    let user;
+    if(userExists.Role === 1)
+    {
+        const DonoInfo = db.Donor_Information;
+        const _donor = await DonoInfo.findOne({ 
         where: { AccountID: userExists.AccountID },
         attributes: ['DonorID'],
     });
-    const user = {
+    user = {
         username : userExists.Username,
         donorID : _donor.DonorID,
         role : userExists.Role
     };
+    }
+    else if(userExists.Role === 2)
+    {
+        const HospitalInfo = db.Hospital_Information;
+        const _doctor = await HospitalInfo.findOne({
+        where: { AccountID: userExists.AccountID },
+        attributes: ['HospitalID'],
+        });
+        user = {
+            username : userExists.Username,
+            hospitalID : _doctor.HospitalID,
+            role : userExists.Role
+        }
+    }
     const accessToken = jwt.sign( user, process.env.Access_Token_Secret, { expiresIn: '1h' });
     res.cookie('accessToken', accessToken, { httpOnly: true });
     res.redirect('/');

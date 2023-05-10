@@ -1,108 +1,123 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/search.css">
-        <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
-        <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
-        <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
-        <title>BloodDono-Người tìm nguồn hiến</title>
-    </head>
-    <body>
-        <header>
-            <div class="container-fluid">
-                <div class="row">
-                    <a href="#" class="logo">
-                        <div class="logo-pic line"><img src="/assets/img/logo-pic.png" alt=""></div>
-                        <div class="logo-name line">BloodDono <sup><sup>Người cần máu</sup></sup></div>
-                    </a>
-                </div>
-            </div>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="content">
-            <div class="container-fluid">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Người tìm nguồn hiến</title>
+</head>
 
-                <section class="search-donor">
-                            
-                    <form class="filter">
-                        <div class="search-bloodtype">
-                            <label for="">Nhóm máu</label> <br>
-                            <select id="search-blood-type"name="blood-type">
-                                <option value="default" selected hidden>Chọn nhóm máu</option>
-                                <optgroup label="Nhóm máu A">
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                </optgroup>
-                                <optgroup label="Nhóm máu B">
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                </optgroup>
-                                <optgroup label="Nhóm máu AB">
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                </optgroup>
-                                <optgroup label="Nhóm máu O">
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                </optgroup>
-                            </select>
-                        </div>
-            
-                        <div class="search-address">
-                            <label for="">Chọn nơi hiến</label> <br>
-                            <!-- <input type="text" name="" id="" placeholder="Xã/phường" required>
-                            <input type="text" name="" id="" placeholder="Quận/huyện" required>
-                            <input type="text" name="" id="" placeholder="Tỉnh/thành phố" required> -->
-                            <select class="customize search-ward" id="ward"  name="ward">
-                                <option value="default" selected hidden>Tất cả</option>
-                            </select>
-                            <select class="customize search-district" id="district" name="district">
-                                <option value="default" selected  >Tất cả</option>
-                            </select>
-                            <select class="customize search-province" id="province" name="province">
-                                <option value="default" selected  >Tất cả</option>
-                            </select>
-                        </div>
-            
-                        <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
-                    </form>        
-                    <div class="donor-list container">
-                        <div class="row tilte justify-content-between">
-                            <div class="col-3">Họ và tên</div>
-                            <div class="col-2">Nhóm máu</div>
-                            <div class="col-6">Lần hiến máu gần nhất</div>
-                        </div>
-            
-                        <ul class="donor-items">
-                        </ul>
-                    </div>
-                </section>
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#" class="logo">
+                    <div class="logo-pic line"><img src="/assets/img/logo-pic.png" alt=""></div>
+                    <div class="logo-name line">BloodDono <sup><sup>Người cần máu</sup></sup></div>
+                </a>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-            const province = document.getElementById('province');
-            const district = document.getElementById('district');
-            const ward = document.getElementById('ward');
-            axios.get('http://localhost:3000/api/address/province')
-            .then((response)=> {
+    </header>
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <section class="search-donor">
+
+                <form class="filter">
+                    <div class="search-bloodtype">
+                        <label for="">Nhóm máu</label> <br>
+                        <select id="search-blood-type" name="blood-type">
+                            <option value="default" selected hidden>Chọn nhóm máu</option>
+                            <optgroup label="Nhóm máu A">
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                            </optgroup>
+                            <optgroup label="Nhóm máu B">
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                            </optgroup>
+                            <optgroup label="Nhóm máu AB">
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </optgroup>
+                            <optgroup label="Nhóm máu O">
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="search-address">
+                        <label for="">Chọn nơi hiến</label> <br>
+                        <!-- <input type="text" name="" id="" placeholder="Xã/phường" required>
+                            <input type="text" name="" id="" placeholder="Quận/huyện" required>
+                            <input type="text" name="" id="" placeholder="Tỉnh/thành phố" required> -->
+                        <select class="customize search-ward" id="ward" name="ward">
+                            <option value="default" selected hidden>Tất cả</option>
+                        </select>
+                        <select class="customize search-district" id="district" name="district">
+                            <option value="default" selected>Tất cả</option>
+                        </select>
+                        <select class="customize search-province" id="province" name="province">
+                            <option value="default" selected>Tất cả</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Tìm
+                        kiếm</button>
+                </form>
+                <div class="donor-list container">
+                    <div class="row tilte justify-content-between">
+                        <div class="col-3">Họ và tên</div>
+                        <div class="col-2">Nhóm máu</div>
+                        <div class="col-6">Lần hiến máu gần nhất</div>
+                    </div>
+
+                    <ul class="donor-items">
+                    </ul>
+                </div>
+                <div class="Modal js-Modal">
+                    <div class="Modal-container">
+                        <div class="Modal-header flex">
+                            <div class="close"><i class="fa-solid fa-circle-right fa-rotate-180"></i> Về trang trước
+                            </div>
+                            <div class="name-avatar">
+                            </div>
+                            <div class="other-info">
+                            </div>
+
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const province = document.getElementById('province');
+        const district = document.getElementById('district');
+        const ward = document.getElementById('ward');
+        axios.get('http://localhost:3000/api/address/province')
+            .then((response) => {
                 // handle success
                 const data = response.data;
                 data.forEach(element => {
                     province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
                 });
             })
-            .catch((error)=> {
+            .catch((error) => {
                 // handle error
                 console.log(error);
             });
-            province.addEventListener('change', (e) => {
-                const province_id = e.target.value;
-                axios.get(`http://localhost:3000/api/address/district/${province_id}`)
-                .then((response)=> {
+        province.addEventListener('change', (e) => {
+            const province_id = e.target.value;
+            axios.get(`http://localhost:3000/api/address/district/${province_id}`)
+                .then((response) => {
                     // handle success
                     const data = response.data;
                     district.innerHTML = `<option value="default" selected disabled hidden>Tất cả</option>`;
@@ -111,15 +126,15 @@
                         district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
                     });
                 })
-                .catch((error)=> {
+                .catch((error) => {
                     // handle error
                     console.log(error);
                 });
-            });
-            district.addEventListener('change', (e) => {
-                const district_id = e.target.value;
-                axios.get(`http://localhost:3000/api//address/ward/${district_id}`)
-                .then((response)=> {
+        });
+        district.addEventListener('change', (e) => {
+            const district_id = e.target.value;
+            axios.get(`http://localhost:3000/api//address/ward/${district_id}`)
+                .then((response) => {
                     // handle success
                     const data = response.data;
                     ward.innerHTML = `<option value="default" selected disabled hidden>Tất cả</option>`;
@@ -127,59 +142,150 @@
                         ward.innerHTML += `<option value="${element.Wards_id}">${element.Name}</option>`;
                     });
                 })
-                .catch((error)=> {
+                .catch((error) => {
                     // handle error
                     console.log(error);
                 });
-            });
-            const form = document.querySelector('.filter');
-            const donorList = document.querySelector('.donor-items');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const bloodType = document.getElementById('search-blood-type').value;
-                const ward = document.getElementById('ward').value;
-                const district = document.getElementById('district').value;
-                const province = document.getElementById('province').value;
-                let url = `http://localhost:3000/api/search`;
-                if(bloodType || ward || district || province) {
-                    url += '?';
-                }
-                if(bloodType!='default') {
-                    url += `bloodType=${encodeURIComponent(bloodType)}&`;
-                }
-                if(ward!='default'&&ward!='Tất cả') {
-                    url += `ward=${ward}&`;
-                }
-                if(district!='default'&&district!='Tất cả') {
-                    url += `district=${district}&`;
-                }
-                if(province!='default'&&province!='Tất cả') {
-                    url += `province=${province}&`;
-                }
-                url = url.slice(0, -1);
-                axios.get(url)
-                .then((response)=> {
+        });
+        const form = document.querySelector('.filter');
+        const donorList = document.querySelector('.donor-items');
+        const modal = document.querySelector('.Modal');
+        const modalClose = document.querySelector('.close');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const bloodType = document.getElementById('search-blood-type').value;
+            const ward = document.getElementById('ward').value;
+            const district = document.getElementById('district').value;
+            const province = document.getElementById('province').value;
+            let url = `http://localhost:3000/api/search`;
+            if (bloodType || ward || district || province) {
+                url += '?';
+            }
+            if (bloodType != 'default') {
+                url += `bloodType=${encodeURIComponent(bloodType)}&`;
+            }
+            if (ward != 'default' && ward != 'Tất cả') {
+                url += `ward=${ward}&`;
+            }
+            if (district != 'default' && district != 'Tất cả') {
+                url += `district=${district}&`;
+            }
+            if (province != 'default' && province != 'Tất cả') {
+                url += `province=${province}&`;
+            }
+            url = url.slice(0, -1);
+            axios.get(url)
+                .then((response) => {
                     // handle success
                     const data = response.data.result;
                     console.log(data);
                     donorList.innerHTML = '';
                     data.forEach(element => {
+                        //calc age
+                        const birth = new Date(element.DonorBirth);
+                        const today = new Date();
+                        let age = today.getFullYear() - birth.getFullYear();
+                        const m = today.getMonth() - birth.getMonth();
+                        if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+                            age--;
+                        }
                         donorList.innerHTML += `
                         <li class="row item justify-content-between">
                             <div class="col-3">${element.DonorName}</div>
                             <div class="col-2">${element.DonorBloodType}</div>
-                            <div class="col-3">${element.DonationDate?element.DonationDate:'Chưa từng hiến máu'}</div>
-                            <button class="col-2"><i class="fa-solid fa-circle-info"></i> Thông tin</button>
+                            <div class="col-3">${element.DonationDate ? element.DonationDate : 'Chưa từng hiến máu'}</div>
+                            <button class="col-2 btn-detail"                                
+                                data-name="${element.DonorName}"
+                                data-address="${element.DonorAddress}"
+                                data-age="${age}"
+                                data-phone="${element.DonorPhoneNumber}"
+                                data-email="${element.DonorEmail}"
+                                data-blood-type="${element.DonorBloodType}"
+                                data-last-donation="${element.DonationDate ? element.DonationDate : 'Chưa từng hiến máu'}"                                
+                            ><i class="fa-solid fa-circle-info"></i> Thông tin</button>
                         </li>
                         `;
                     });
+                    const modalDetail = document.querySelectorAll('.btn-detail');
+                    const modalContainer = document.querySelector('.Modal-container');
+                    const nameAndAvatar = document.querySelector('.name-avatar');
+                    const otherInfo = document.querySelector('.other-info');
+                    modalDetail.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            nameAndAvatar.innerHTML = `
+                            <!-- Thông tin tổng quát người hiến máu -->
+                            <div class="donor-general-info">
+                                <h1 class="donor-name">${e.target.getAttribute('data-name')}</h1>
+                                <div class="donor-age flex">
+                                    <div class="label">Tuổi:</div>
+                                    <div class="age">${e.target.getAttribute('data-age')}</div>
+                                </div>
+                                <div class="donation flex">
+                                    <div class="label">Số lần hiến máu:</div>
+                                    <div class="donation-number">5</div>
+                                </div>
+                            </div>
+                            <!-- ---------------------------------------- -->
 
+                            <!-- Hình đại diện -->
+                            <img src="/assets/img/help.png" alt="" class="donor-avatar">
+                            <!-- ---------------------------------------- -->
+                            `;
+                            otherInfo.innerHTML = `
+                            <div class="Modal-detail">
+                            <!-- Nhóm máu -->
+                            <div class="blood-type flex">
+                                <div class="label">Nhóm máu:</div>
+                                <div class="blood-type-detail">${e.target.getAttribute('data-blood-type')}</div>
+                            </div>
+                            <!-- ------------------- -->
+
+                            <!-- Địa chỉ -->
+                            <div class="address flex">
+                                <div class="label">Địa chỉ:</div>
+                                <div class="address-detail">${e.target.getAttribute('data-address')}</div>
+                            </div>
+                            <!-- ------------------- -->
+
+                            <!-- Số điện thoại -->
+                            <div class="phone-number flex">
+                                <div class="label">Số điện thoại:</div>
+                                <div class="phone-number-detail">${e.target.getAttribute('data-phone')}</div>
+                            </div>
+                            <!-- ------------------- -->
+
+                            <!-- Email -->
+                            <div class="email flex">
+                                <div class="label">Email:</div>
+                                <div class="email-detail">${e.target.getAttribute('data-email')}</div>
+                            </div>
+                            <!-- ------------------- -->
+
+                            <!-- Lần hiến máu gần nhất -->
+                            <div class="lastest-donate flex">
+                                <div class="label">Lần hiến máu gần nhất:</div>
+                                <div class="lastest-donate-detail">${e.target.getAttribute('data-last-donation')}</div>
+                            </div>
+                            <!-- ------------------- -->
+                        </div>
+                            `;
+                            modal.classList.add('open');
+                        })
+                    });
+                    modalClose.addEventListener('click', (e) => {
+                        modal.classList.remove('open');
+                    });
                 })
-                .catch((error)=> {
+                .catch((error) => {
                     // handle error
                     console.log(error);
                 });
-            });
-        </script>
-    </body>
-    </html>
+        });
+    </script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

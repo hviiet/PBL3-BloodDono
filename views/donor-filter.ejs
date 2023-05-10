@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Người tìm nguồn hiến</title>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#" class="logo">
+                    <div class="logo-pic line"><img src="/assets/img/logo-pic.png" alt=""></div>
+                    <div class="logo-name line">BloodDono <sup><sup>Người cần máu</sup></sup></div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <section class="search-donor">
+
+                <form class="filter">
+                    <div class="search-bloodtype">
+                        <label for="">Nhóm máu</label> <br>
+                        <select id="search-blood-type" name="blood-type" required>
+                            <option value="" disabled selected></option>
+                            <optgroup label="Nhóm máu A">
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                            </optgroup>
+                            <optgroup label="Nhóm máu B">
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                            </optgroup>
+                            <optgroup label="Nhóm máu AB">
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </optgroup>
+                            <optgroup label="Nhóm máu O">
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="search-address">
+                        <label for="">Chọn nơi hiến</label> <br>
+                        <input type="text" name="" id="" placeholder="Xã/phường" required>
+                        <input type="text" name="" id="" placeholder="Quận/huyện" required>
+                        <input type="text" name="" id="" placeholder="Tỉnh/thành phố" required>
+                    </div>
+
+
+                    <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Tìm
+                        kiếm</button>
+                </form>
+            </section>
+
+            <div class="donor-list container">
+                <div class="row tilte justify-content-between">
+                    <div class="col-3">Họ và tên</div>
+                    <div class="col-2">Nhóm máu</div>
+                    <div class="col-6">Lần hiến máu gần nhất</div>
+                </div>
+
+                <ul class="donor-items">
+                    <li class="row item justify-content-between">
+                        <div class="col-3">Nguyễn Văn A</div>
+                        <div class="col-2">A+</div>
+                        <div class="col-3">20/10/2021</div>
+                        <button class="col-2 btn-detail"><i class="fa-solid fa-circle-info"></i> Thông tin</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="Modal js-Modal">
+        <div class="Modal-container">
+            <div class="Modal-header flex">
+                <div class="close"><i class="fa-solid fa-circle-right fa-rotate-180"></i> Về trang trước</div>
+
+                <!-- Thông tin tổng quát người hiến máu -->
+                <div class="donor-general-info">
+                    <h1 class="donor-name">Lê Trí Công</h1>
+                    <div class="donor-age flex">
+                        <div class="label">Tuổi:</div>
+                        <div class="age">20</div>
+                    </div>
+                    <div class="donation flex">
+                        <div class="label">Số lần hiến máu:</div>
+                        <div class="donation-number">5</div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------- -->
+
+                <!-- Hình đại diện -->
+                <img src="/assets/img/help.png" alt="" class="donor-avatar">
+                <!-- ---------------------------------------- -->
+            </div>
+
+            <div class="Modal-detail">
+                <!-- Nhóm máu -->
+                <div class="blood-type flex">
+                    <div class="label">Nhóm máu:</div>
+                    <div class="blood-type-detail">O-</div>
+                </div>
+                <!-- ------------------- -->
+
+                <!-- Địa chỉ -->
+                <div class="address flex">
+                    <div class="label">Địa chỉ:</div>
+                    <div class="address-detail">Thôn 1, xã Hòa Phú, huyện Hòa Vang, thành phố Đà Nẵng</div>
+                </div>
+                <!-- ------------------- -->
+
+                <!-- Số điện thoại -->
+                <div class="phone-number flex">
+                    <div class="label">Số điện thoại:</div>
+                    <div class="phone-number-detail">0123456789</div>
+                </div>
+                <!-- ------------------- -->
+
+                <!-- Email -->
+                <div class="email flex">
+                    <div class="label">Email:</div>
+                    <div class="email-detail">lchcng@example.com</div>
+                </div>
+                <!-- ------------------- -->
+
+                <!-- Lần hiến máu gần nhất -->
+                <div class="lastest-donate flex">
+                    <div class="label">Lần hiến máu gần nhất:</div>
+                    <div class="lastest-donate-detail">20/10/2021</div>
+                </div>
+                <!-- ------------------- -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const modal = document.querySelector('.Modal');
+    const modalClose = document.querySelector('.close');
+    const modalDetail = document.querySelectorAll('.btn-detail');
+    modalDetail.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('open');
+        })
+    })
+
+    modalClose.addEventListener('click', () => {
+        modal.classList.remove('open');
+    });
+</script>
+
+</html>

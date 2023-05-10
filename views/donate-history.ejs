@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/donate-history.css">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Lịch sử hiến máu</title>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#" class="logo">
+                    <div class="logo-pic line"><img src="/assets/img/logo-pic.png" alt=""></div>
+                    <div class="logo-name line">BloodDono</div>
+                </a>
+
+                <div class="log-in-out">
+                    <i class="fa-solid fa-bell"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="content">
+        <div class="panel">
+            <div class="panel-header flex">
+                <!-- Thông tin tổng quát người hiến máu -->
+                <div class="name-tilte">
+                    <h2 class="donor-name">Lê Trí Công</h2>
+                    <p>Lịch sử hiến máu</p>
+                </div>
+                <!-- ---------------------------------------- -->
+
+                <!-- Hình đại diện -->
+                <img src="/assets/img/help.png" alt="" class="donor-avatar">
+                <!-- ---------------------------------------- -->
+            </div>
+
+            <div class="statistics-thanks">
+                <div class="statistics">
+                    <div class="label">Tổng số lượng máu đã hiến</div>
+                    <h1 class="sum-donate">0 ml</h1>
+                </div>
+
+                <div class="thanks">
+                    <p>“Trân trọng cảm ơn BẠN!</p>
+                    <p>Chính những người hiến máu như bạn là người thắp sáng cuộc sống của những bệnh nhân đang cần máu
+                        cấp cứu điều trị”</p>
+                </div>
+                <div class="confirm-btn">
+                    <button class="btn back">Trở về</button>
+                </div>
+            </div>
+
+            <div class="donate-history-list container">
+                <div class="row tilte justify-content-between">
+                    <div class="col-1">Lần</div>
+                    <div class="col-2">Ngày hiến</div>
+                    <div class="col-2">Lượng máu hiến</div>
+                </div>
+
+                <ul class="items">
+                </ul>
+            </div>
+        </div>
+
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const username = '<%= username %>';
+    const donateList = document.querySelector('.items');
+    const totalBlood = document.querySelector('.sum-donate');
+    axios.get(`http://localhost:3000/api/donation/${username}`)
+        .then(res => {
+            const data = res.data;
+            let i = 1;
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.classList.add('row', 'item', 'justify-content-between');
+                li.innerHTML = `
+                    <div class="col-1">${i}</div>
+                    <div class="col-2">${item.DonationDate}</div>
+                    <div class="col-2">${item.DonationVolume}</div>
+                `;
+                donateList.appendChild(li);
+                i++;
+            })
+            totalBlood.innerHTML = data.reduce((sum, item) => sum + item.DonationVolume, 0) + ' ml';
+        })
+        .catch((error) => {
+            // handle error
+            console.log(error);
+        });
+    const backBtn = document.querySelector('.back');
+    backBtn.addEventListener('click', () => {
+        window.location.href = `http://localhost:3000/user/${username}}`;
+    })
+</script>
+<script>
+    const Status = document.querySelectorAll('.status');
+
+    Status.forEach(status => {
+        if (status.innerHTML == 'Thành công') {
+            status.style.backgroundColor = '#39AB59';
+        } else {
+            status.style.backgroundColor = '#A82424';
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth;
+    background-color: rgb(229, 252, 244);
+}
+
+body {
+    background-color: rgb(207, 245, 231);
+}
+
+.flex {
+    display: flex !important;
+}
+
+.label {
+    margin-right: 5px !important;
+}
+
+/* -------------------Header------------------- */
+header .container-fluid {
+    background-color: rgba(89, 193, 189, 0.5);
+    border-bottom: 1px solid rgb(89, 92, 94);
+    ;
+    height: 46px;
+}
+
+header .row {
+    justify-content: space-between;
+}
+
+header .line {
+    display: inline-block;
+}
+
+.logo-pic img {
+    width: 46px;
+    height: 46px;
+    padding: 5px 5px;
+}
+
+.logo-name {
+    font-size: 16px;
+    color: black;
+    line-height: 46px;
+    font-weight: 900;
+}
+
+.log-in-out .fa-solid {
+    font-size: 25px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.log-in-out .fa-solid:hover {
+    color: rgb(113, 114, 114);
+}
+
+/* -------------------------------------- */
+
+/* ----------------Content--------------- */
+
+.content {
+    background-color: rgb(229, 252, 244);
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+}
+
+.content .panel {
+    width: 1300px;
+    height: 600px;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 70px;
+    display: flex;
+}
+
+.panel-header .donor-avatar {
+    position: absolute;
+    top: -9%;
+    left: 2%;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.panel-header .name-tilte {
+    position: absolute;
+    top: -6%;
+    left: 13%;
+}
+
+.statistics-thanks {
+    width: 40%;
+}
+
+.statistics {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.statistics h1 {
+    font-size: 55px;
+    font-weight: 700;
+    color: red;
+    font-style: italic;
+}
+
+.statistics-thanks .thanks {
+    font-size: 20px;
+    color: #A45C5C;
+    font-style: italic;
+    padding: 35px 35px 0 35px;
+    margin-top: 90px;
+}
+
+.thanks p {
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+.donate-history-list {
+    text-align: center;
+}
+
+.donate-history-list .tilte {
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.donate-history-list .items {
+    height: 530px;
+    overflow: auto;
+}
+
+.donate-history-list .items::-webkit-scrollbar {
+    width: 5px;
+}
+
+.donate-history-list .items::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #dddede;
+}
+
+.donate-history-list .row.item {
+    width: 890px;
+    text-align: center;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    margin: 5px 10px;
+    padding: 3px 0;
+}
+
+.donate-history-list .row.item .status {
+    color: white;
+    font-weight: 500;
+    padding: 2px 0;
+    border-radius: 5px;
+}

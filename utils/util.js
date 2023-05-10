@@ -93,7 +93,7 @@ async function getOneEvent(eventID)
     const event = await Event.findOne({
         where: {EventID: eventID}
     });
-    if(!event)
+    if(event == null)
     {
         return {status: 'fail', message: 'Event not found'};
     }
@@ -108,7 +108,7 @@ async function getOneEvent(eventID)
         timeTag: event.EventTimetag,
         startTime: event.EventStartTime,
         endTime: event.EventEndTime,
-        volume: event.EventVolume,
+        quantity: event.EventQuantity,
         address: {
             street: addressData.street,
             ward: addressData.ward,
@@ -116,7 +116,7 @@ async function getOneEvent(eventID)
             province: addressData.province
         }
     };
-    return {status : 'success', data : data}
+    return {data}
 }
 async function getNextID(tableName, columnName)
 {
@@ -195,6 +195,41 @@ async function getFullAddress(addressID)
     }
     return data;
 }
+
+//user
+async function getDonorIDByUserName(username)
+{
+    const AccountInfo = db.Account_Information;
+    const account = await AccountInfo.findOne({ where: { Username: username } });
+    if(!account)
+    {
+        return {status: 'fail', message: 'Account not found'};
+    }
+    const DonoInfo = db.Donor_Information;
+    const donor = await DonoInfo.findOne({ where: { AccountID: account.AccountID } });
+    if(!donor)
+    {
+        return {status: 'fail', message: 'Donor not found'};
+    }
+    return donor.DonorID;
+}
+async function getHospitalIDByUserName(username)
+{
+    const AccountInfo = db.Account_Information;
+    const account = await AccountInfo.findOne({ where: { Username: username } });
+    if(!account)
+    {
+        return {status: 'fail', message: 'Account not found'};
+    }
+    const HospitalInfo = db.Hospital_Information;
+    const hospital = await HospitalInfo.findOne({ where: { AccountID: account.AccountID } });
+    if(!hospital)
+    {
+        return {status: 'fail', message: 'Hospital not found'};
+    }
+    return hospital.HospitalID;
+}
+
 module.exports = {
     getOneUser, 
     getOneEvent, 
@@ -203,4 +238,6 @@ module.exports = {
     createNewAddress, 
     getAllProvince, 
     getDistrictByProvinceID, 
-    getWardByDistrictID}
+    getWardByDistrictID,
+    getDonorIDByUserName,
+    getHospitalIDByUserName}
