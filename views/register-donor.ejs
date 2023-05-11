@@ -34,13 +34,10 @@
 
                 <input type="email" class="customize mail" placeholder="Email" required />
                 <input type="tel" class="customize phone-number" placeholder="Số điện thoại" required />
-                <input type="date" class="customize date-of-birth" placeholder="Ngày sinh" required>
+                <input type="text" class="customize date-of-birth" name="" id="" placeholder="Ngày sinh" onfocus="(this.type='date')"  required>
                 <input type="text" class="customize donor-street" placeholder="Số nhà/Tên đường" />
                 <!-- Địa chỉ -->
                 <div class="inline" id="Address">
-                    <!-- <input type="text" class="customize ward" placeholder="Xã/phường" required/>
-                    <input type="text" class="customize district" placeholder="Quận/huyện" required/>
-                    <input type="text" class="customize province" placeholder="Tỉnh/Thành phố" required/> -->
                     <select class="customize donor-ward" name="ward" required>
                         <option value="default" selected disabled hidden>Chọn xã</option>
                     </select>

@@ -9,6 +9,18 @@ html {
     scroll-behavior: smooth;
 }
 
+.flex {
+    display: flex !important;
+}
+
+.label {
+    margin-right: 5px;
+}
+
+li {
+    list-style-type: none;
+}
+
 #header .container-fluid {
     background-color: rgba(89, 193, 189, 0.5);
     border-bottom: 1px solid rgb(89, 92, 94);;
@@ -36,7 +48,11 @@ html {
     font-weight: 900;
 }
 
-.log-in-out .line {
+.userInfo .username {
+    padding: 10px 0;
+}
+
+.userInfo .line {
     padding: 10px 20px;
     font-weight: 500;
     text-decoration: none;
@@ -44,7 +60,7 @@ html {
     transition: background 0.3s;
 }
 
-.log-in-out .line:hover {
+.userInfo .line:hover {
     background-color: white;
     color: rgb(89, 193, 189);
 }
@@ -106,6 +122,27 @@ html {
 
 .box .blood-need {
     margin-left: 40px;
+}
+
+#event-panel {
+    background-color: rgb(207, 245, 231);
+    padding: 70px 0;
+    display: flex;
+    align-items: center;
+}
+
+#event-panel .lastest-events h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin: 40px 80px;
+}
+
+#event-panel .lastest-events .event {
+    background-color: rgba(0, 84, 76, 0.14);
+    width: 1350px;
+    padding: 20px;
+    margin: 20px 20px 20px 90px;
+    border-radius: 20px;
 }
 
 .grey-background {

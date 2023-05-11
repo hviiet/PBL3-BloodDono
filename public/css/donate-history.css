@@ -7,7 +7,7 @@
 html {
     font-family: Helvetica, Arial, sans-serif;
     scroll-behavior: smooth;
-    background-color: rgb(229, 252, 244);
+    background-color: #CFF5E7;
 }
 
 body {
@@ -67,7 +67,7 @@ header .line {
 /* ----------------Content--------------- */
 
 .content {
-    background-color: rgb(229, 252, 244);
+    background-color: #CFF5E7;
     display: flex;
     justify-content: center;
     height: 90vh;
@@ -159,9 +159,20 @@ header .line {
     padding: 3px 0;
 }
 
-.donate-history-list .row.item .status {
+.statistics-thanks .btn {
+    margin: 40px 0 0 35px;
+    width: 170px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(83, 137, 231);
     color: white;
-    font-weight: 500;
-    padding: 2px 0;
-    border-radius: 5px;
+    font-size: 17px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.statistics-thanks .btn:hover {
+    color: rgb(83, 137, 231, 0.8);
+    background-color: rgb(230, 229, 229);
 }
