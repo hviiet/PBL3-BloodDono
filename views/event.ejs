@@ -127,6 +127,28 @@
             document.getElementById('second-2').innerHTML = seconds % 10;
         }, 1000);
     </script>
+    <script>
+        const registerBtn = document.querySelector('.btn-regist');
+        const role = '<%= role %>';
+        registerBtn.addEventListener('click', (e) => {
+            if (role == '1') {
+                axios.post(`http://localhost:3000/api/event/${eventID}/register`)
+                    .then((response) => {
+                        // handle success
+                        alert('Đăng kí thành công');
+                    })
+                    .catch((error) => {
+                        // handle error
+                        console.log(error);
+                    });
+            }
+            else {
+                alert('Bạn cần đăng nhập với tư cách người hiến máu để thực hiện chức năng này');
+            }
+        });
+
+
+    </script>
 </body>
 
 </html>
