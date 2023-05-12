@@ -15,7 +15,7 @@ a {
 
 #main {
     background: rgb(2,0,36);
-    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(185,249,225,1) 0%, rgba(130,202,217,1) 100%);
+    background: rgb(207, 245, 231);
     height: 100vh;
 }
 

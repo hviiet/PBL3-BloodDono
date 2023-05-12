@@ -143,7 +143,7 @@ body {
     margin: 10px 30px;
 }
 
-.col-8 .info .frame input {
+.col-8 .info .frame input,.blood-type {
     width: 250px;
     height: 27px;
     border: 1px solid rgba(0, 84, 76, 0.63);
@@ -167,7 +167,7 @@ select {
     width: 560px;
 }
 
-.col-8 .info .frame label {
+.col-8 .info label {
     font-size: 16px;
     font-weight: 600;
 }

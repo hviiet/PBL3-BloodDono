@@ -68,7 +68,7 @@ body {
     padding-top: 100px;
     padding-bottom: 110px;
     background: rgb(2,0,36);
-    background: linear-gradient(155deg, rgba(2,0,36,1) 0%, rgba(185,249,225,1) 0%, rgba(130,202,217,1) 100%);
+    background: rgb(160, 228, 203);
 }
 
 
@@ -90,11 +90,11 @@ body {
 }
 
 .donor-box .col-3 .func-btn {
-    margin-top: 30px;
+    margin-top: 60px;
     text-align: center;
 }
 
-.donor-box .col-3 .func-btn .btn {
+.donor-box .col-3 .btn {
     margin-bottom: 40px;
     width: 170px;
     height: 50px;
@@ -107,9 +107,18 @@ body {
     transition: background 0.3s;
 }
 
-.donor-box .col-3 .func-btn .btn:hover {
+.donor-box .col-3 .btn:hover {
     color: rgb(83, 137, 231, 0.8);
     background-color: white;
+}
+
+.confirm-btn .cancel {
+    background-color: rgb(124, 124, 124) !important;
+}
+
+.confirm-btn .cancel:hover {
+    background-color: rgb(175, 174, 174) !important;
+    color: white !important;
 }
 
 .donor-box .col-8 {
@@ -131,28 +140,48 @@ body {
 }
 
 .col-8 .info .frame input {
-    width: 210px;
+    width: 250px;
+    height: 27px;
+    border: 1px solid rgba(0, 84, 76, 0.63);
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.combobox{
+    margin-left: 18px !important;
+}
+
+select {
+    margin-right: 8px !important;
+    width: 180px;
     height: 27px;
     border: 1px solid rgba(0, 84, 76, 0.63);
     border-radius: 5px;
 }
 
 .col-8 .info .frame .record {
-    width: 480px;
+    width: 560px;
 }
 
 .col-8 .info .frame label {
     font-size: 16px;
     font-weight: 600;
 }
+
 .sick-tag {
 	background-color: #f6f5f7;
 	border-radius: 20px;
 	border: none;
-	color: #000000;
+	color: #747373;
 	font-size: 14px;
 	font-weight: 100;
 	margin: 10px 10px 10px 0;
 	padding: 5px;
 	width: 30%;
+}
+
+.flex-around {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
 }

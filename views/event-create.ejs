@@ -16,10 +16,10 @@
     <div id="header">
         <div class="container-fluid">
             <div class="row logo">
-                <div class="logo col-md-4">
+                <a href="/" class="logo col-md-4">
                     <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
                     <div class="logo-name line">BloodDono</div>
-                </div>
+                </a>
             </div>
 
             <div class="row heading">
@@ -37,15 +37,7 @@
                 <input type="text" name="" id="name" class="col-5 padding-0" required>
             </div>
             <!-- ---------------------- -->
-            <!-- Số lượng -->
-            <div class="row d-flex justify-content-center">
-                <div class="col-5 padding-0">
-                    <!-- Số lượng -->
-                    <span>Số lượng</span>
-                    <input type="number" name="" id="quantity" class="float-right">
-                    <!-- --------------- -->
-                </div>
-            </div>
+            
             <!-- Thời gian -->
             <div class="row d-flex justify-content-center">
                 <div class="col-2">Thời gian</div>
@@ -56,18 +48,31 @@
                         class="float-right" required>
                 </div>
             </div>
+
+            <!-- Số lượng -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">Số lượng</div>
+                <input type="text" name="" id="quantity" class="col-5 padding-0">
+            </div>
             <!-- ---------------------- -->
-            <div class="inline" id="Address">
-                <input type="text" class="customize street" placeholder="Số nhà/Tên đường" />
-                <select class="customize ward" name="ward" required>
-                    <option value="default" selected disabled hidden>Chọn xã</option>
-                </select>
-                <select class="customize district" name="district" required>
-                    <option value="default" selected disabled hidden>Chọn huyện/phường</option>
-                </select>
-                <select class="customize province" name="province" required>
-                    <option value="default" selected disabled hidden>Chọn tỉnh</option>
-                </select>
+
+            <div class="row d-flex justify-content-center" id="Address">
+                <div class="col-2">Địa điểm</div>
+                <div class="col-5 padding-0">
+                    <input type="text" class="street" placeholder="Số nhà/Tên đường" />
+                    <div class="row padding-0 combobox">
+                        <select class="ward" name="ward" required>
+                            <option value="default" selected disabled hidden>Chọn xã</option>
+                        </select>
+                        <select class="district" name="district" required>
+                            <option value="default" selected disabled hidden>Chọn huyện/phường</option>
+                        </select>
+                        <select class="province" name="province" required>
+                            <option value="default" selected disabled hidden>Chọn tỉnh</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
             <!-- ---------------------- -->
 
@@ -170,5 +175,6 @@
                 });
         });
     </script>
-
+    
+</body>
 </html>
