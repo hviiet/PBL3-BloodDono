@@ -3,8 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Joined_Donor', {
     EventID: {
       type: DataTypes.CHAR(8),
-      allowNull: false,
-      primaryKey: true,
+      allowNull: true,
       references: {
         model: 'Event_Information',
         key: 'EventID'
@@ -12,12 +11,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     DonorID: {
       type: DataTypes.CHAR(8),
-      allowNull: false,
-      primaryKey: true,
+      allowNull: true,
       references: {
         model: 'Donor_Information',
         key: 'DonorID'
       }
+    },
+    JoinedID: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
@@ -29,8 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "EventID" },
-          { name: "DonorID" },
+          { name: "JoinedID" },
         ]
       },
       {
@@ -38,6 +41,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "DonorID" },
+        ]
+      },
+      {
+        name: "FK_Joined_Donor_Event_Information",
+        using: "BTREE",
+        fields: [
+          { name: "EventID" },
         ]
       },
     ]

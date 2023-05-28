@@ -36,8 +36,6 @@ function initModels(sequelize) {
   var Ward_Information = _Ward_Information(sequelize, DataTypes);
   var sysdiagrams = _sysdiagrams(sequelize, DataTypes);
 
-  Donor_Information.belongsToMany(Event_Information, { as: 'EventID_Event_Informations', through: Joined_Donor, foreignKey: "DonorID", otherKey: "EventID" });
-  Event_Information.belongsToMany(Donor_Information, { as: 'DonorID_Donor_Informations', through: Joined_Donor, foreignKey: "EventID", otherKey: "DonorID" });
   Donor_Information.belongsTo(Account_Information, { as: "Account", foreignKey: "AccountID"});
   Account_Information.hasMany(Donor_Information, { as: "Donor_Informations", foreignKey: "AccountID"});
   Hospital_Information.belongsTo(Account_Information, { as: "Account", foreignKey: "AccountID"});
