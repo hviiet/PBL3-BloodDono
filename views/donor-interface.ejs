@@ -37,9 +37,13 @@
                     <div class="user-interface">
                         <img src="/assets/img/user_avt.png" alt="" class="user-avt">
                         <div class="user-name">Fujiguro Toji</div>
+                        <!-- <input type="file" id="uploadImage" name="myImage"> -->
+                        <div class="file-input">
+                            <input type="file" id="uploadImage" name="myImage" hidden>
+                            <label for="uploadImage" class="btnUpload">Chọn ảnh</label>
+                        </div>
                     </div>
                     <!-- ------------------------------------- -->
-
                     <!-- Các chức năng -->
                     <div class="func-btn">
                         <button class="btn change-password">Đổi mật khẩu</button>
@@ -124,6 +128,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const userName = '<%= username %>';
+        const img = document.querySelector('.user-avt');
         axios.get(`http://localhost:3000/api/user/${userName}`)
             .then(function (response) {
                 // handle success
@@ -147,6 +152,7 @@
                 gender.value = userData.gender ? 'Nam' : 'Nữ';
                 const bloodType = document.getElementById('bloodType');
                 bloodType.value = userData.bloodType;
+                img.src = userData.photo != null ? userData.photo : "/assets/img/user_avt.png";
             })
             .catch(function (error) {
                 // handle error
@@ -161,6 +167,23 @@
                     medical.innerHTML += `<input type="text" title="${illness.IllnessID}" class="sick-tag med-history" value="${illness.IllnessName}" readonly required/>`
                 });
             })
+    </script>
+    <!-- upload image -->
+    <script>
+        const fileInput = document.getElementById('uploadImage');
+        fileInput.addEventListener('change', (e) => {
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("myImage", file);
+            axios.post(`http://localhost:3000/user/${userName}/upload-image`, formData)
+                .then((response) => {
+                    img.src = response.data.imageLink;
+                    console.log(response.data.imageLink);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        });
     </script>
     <!-- button -->
     <script>

@@ -10,7 +10,7 @@
 <body>
     <form id="imageForm" method="post" enctype="multipart/form-data">
         <input type="file" id="myImage" name="myImage">
-        <button type="submit">Upload Image</button>
+        <!-- <button type="submit">Upload Image</button> -->
     </form>
     <img id="myImg" src="" alt="Image preview...">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -18,19 +18,33 @@
         const form = document.getElementById('imageForm');
         const fileInput = document.getElementById('myImage');
         const img = document.getElementById('myImg');
-        form.addEventListener("submit", e => {
-            e.preventDefault();
+        fileInput.addEventListener('change', (e) => {
             const file = fileInput.files[0];
             const formData = new FormData();
             formData.append("myImage", file);
             axios.post('/test', formData)
-            .then((response) => {
-                img.src = response.data.imageLink;
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+                .then((response) => {
+                    img.src = response.data.imageLink;
+                    console.log(response.data.imageLink);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         });
+        // form.addEventListener("submit", e => {
+        //     e.preventDefault();
+        //     const file = fileInput.files[0];
+        //     const formData = new FormData();
+        //     formData.append("myImage", file);
+        //     axios.post('/test', formData)
+        //     .then((response) => {
+        //         img.src = response.data.imageLink;
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+        // });
     </script>
 </body>
+
 </html>

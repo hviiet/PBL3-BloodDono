@@ -16,10 +16,10 @@
     <div id="header">
         <div class="container-fluid">
             <div class="row logo">
-                <div class="logo col-md-4">
+                <a href="/" class="logo col-md-4">
                     <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
                     <div class="logo-name line">BloodDono</div>
-                </div>
+                </a>
             </div>
 
             <div class="row heading">
@@ -37,15 +37,14 @@
                 <input type="text" name="" id="name" class="col-5 padding-0" required>
             </div>
             <!-- ---------------------- -->
-            
+
             <!-- Thời gian -->
             <div class="row d-flex justify-content-center">
                 <div class="col-2">Thời gian</div>
                 <div class="col-5 padding-0 timer">
-                    <input type="text" name="" id="start" placeholder="Bắt đầu" onfocus="(this.type='datetime-local')"
-                        required>
-                    <input type="text" name="" id="end" placeholder="Kết thúc" onfocus="(this.type='datetime-local')"
-                        class="float-right" required>
+                    <input type="datetime-local" name="start" id="start" placeholder="Bắt đầu" required>
+                    <input type="datetime-local" name="end" id="end" placeholder="Kết thúc" required>
+
                 </div>
             </div>
 
@@ -78,12 +77,11 @@
 
             <div class="row d-flex justify-content-center">
                 <div class="col-2"></div>
-                <div class="col-5 padding-0">Chiến dịch khi tạo sẽ được hiển thị trên trang chủ
-                    và sẽ được gửi thông báo tới các người dùng.</div>
+                <div class="col-5 padding-0">Chiến dịch sẽ được hiển thị trên trang chủ.</div>
             </div>
 
             <div class="row d-flex justify-content-center">
-                <button class="btn-create-campaign">Tạo chiến dịch</button>
+                <button class="btn-create-campaign">Chỉnh sửa chiến dịch</button>
             </div>
         </form>
     </div>
@@ -140,10 +138,12 @@
         .then((response) => {
             // handle success
             const userData = response.data.data;
+            const [startDate, startTime] = userData.startTime.split('T');
+            const [endDate, endTime] = userData.endTime.split('T');
             eventName.value = userData.name;
             eventQuantity.value = userData.quantity;
-            eventStartTime.value = userData.startTime;
-            eventEndTime.value = userData.endTime;
+            eventStartTime.value = new Date(`${startDate} ${startTime}`).toISOString().slice(0, 16);
+            eventEndTime.value = new Date(`${endDate} ${endTime}`).toISOString().slice(0, 16);
             street.value = userData.address.street;
             axios.get('http://localhost:3000/api/address/province')
                 .then((response) => {

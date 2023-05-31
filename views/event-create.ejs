@@ -37,15 +37,13 @@
                 <input type="text" name="" id="name" class="col-5 padding-0" required>
             </div>
             <!-- ---------------------- -->
-            
+
             <!-- Thời gian -->
             <div class="row d-flex justify-content-center">
                 <div class="col-2">Thời gian</div>
                 <div class="col-5 padding-0 timer">
-                    <input type="text" name="" id="start" placeholder="Bắt đầu" onfocus="(this.type='datetime-local')"
-                        required>
-                    <input type="text" name="" id="end" placeholder="Kết thúc" onfocus="(this.type='datetime-local')"
-                        class="float-right" required>
+                    <input type="datetime-local" name="start" id="start" placeholder="Bắt đầu" required>
+                    <input type="datetime-local" name="end" id="end" placeholder="Kết thúc" required>
                 </div>
             </div>
 
@@ -78,8 +76,7 @@
 
             <div class="row d-flex justify-content-center">
                 <div class="col-2"></div>
-                <div class="col-5 padding-0">Chiến dịch khi tạo sẽ được hiển thị trên trang chủ
-                    và sẽ được gửi thông báo tới các người dùng.</div>
+                <div class="col-5 padding-0">Chiến dịch khi tạo sẽ được hiển thị trên trang chủ.</div>
             </div>
 
             <div class="row d-flex justify-content-center">
@@ -175,6 +172,7 @@
                 });
         });
     </script>
-    
+
 </body>
+
 </html>

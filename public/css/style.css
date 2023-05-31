@@ -23,7 +23,8 @@ li {
 
 #header .container-fluid {
     background-color: rgba(89, 193, 189, 0.5);
-    border-bottom: 1px solid rgb(89, 92, 94);;
+    border-bottom: 1px solid rgb(89, 92, 94);
+    ;
     height: 46px;
 }
 
@@ -63,7 +64,7 @@ li {
 
 #slider .row {
     padding-top: 50%;
-    background:  url(/assets/img/mainBackground.png) top center/cover no-repeat;
+    background: url(/assets/img/mainBackground.png) top center/cover no-repeat;
     justify-content: center;
     align-items: center;
 }
@@ -220,7 +221,7 @@ li {
     margin: 40px 0;
 }
 
-#footer .line{
+#footer .line {
     display: inline;
 }
 
@@ -254,14 +255,14 @@ li {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    display: none;  
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
 .Modal.open {
     display: flex;
-}   
+}
 
 .Modal .Modal-container {
     background-color: white;
@@ -327,6 +328,7 @@ li {
         transform: translateY(200px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;

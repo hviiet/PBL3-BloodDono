@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { doctorCheck } = require("../middleware/doctorCheck");
 const { cookieJwtAuth } = require("../middleware/cookieJwtAuth");
-const { createNewEvent, updateEvent, registerEvent } = require("../controllers/event");
+const { createNewEvent, updateEvent, registerEvent, deleteEvent } = require("../controllers/event");
 
 router.route("/view/:eventID").get(cookieJwtAuth, (req, res) => {
     res.render("event", {
@@ -19,6 +19,12 @@ router
             username: req.user.username,
         });
     });
+router.route("/manage").get([cookieJwtAuth, doctorCheck], (req, res) => {
+    res.render("event-manage", {
+        username: req.user.username,
+    });
+});
+router.route("/delete-event/:eventID").post(deleteEvent);
 router
     .route("/update-event/:eventID")
     .post([cookieJwtAuth, doctorCheck], updateEvent)

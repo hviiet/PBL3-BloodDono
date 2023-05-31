@@ -51,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     DonorPhoto: {
-      type: DataTypes.CHAR(8),
+      type: DataTypes.CHAR(50),
       allowNull: true,
       references: {
         model: 'Image_Table',

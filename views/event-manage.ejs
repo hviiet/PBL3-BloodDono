@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/manage-campaign.css">
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Quản lý chiến dịch</title>
+</head>
+
+<body>
+    <main>
+        <header class="container-fluid">
+            <div class="row">
+                <a href="/" class="logo col-md-4">
+                    <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
+                    <div class="logo-name line">BloodDono</div>
+                </a>
+                <div class="search-bar col-md-4">
+                    <label for="search" class="search-logo"><i class="fa-solid fa-magnifying-glass"></i></label>
+                    <input type="text" name="search" id="search" placeholder="Tìm kiếm">
+                </div>
+                <div class="notify-logOut col-md-3">
+                    <i class="fa-solid fa-bell"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </div>
+        </header>
+
+        <section class="content container-fluid">
+            <h1>Danh sách các chiến dịch đã tạo</h1>
+
+            <div class="row table-header">
+                <div class="col-1">STT</div>
+                <div class="col-3">Tên chiến dịch</div>
+                <div class="col-3">Thời gian</div>
+                <div class="col-2">Trạng thái</div>
+                <div class="col-2">Tác vụ</div>
+            </div>
+
+            <ul class="waiting-list">
+            </ul>
+        </section>
+    </main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const username = '<%= username %>';
+    const waitingList = document.querySelector('.waiting-list');
+    axios.get(`http://localhost:3000/api/allEvent/${username}`)
+        .then(res => {
+            const data = res.data.data;
+            let stt = 1;
+            data.forEach(element => {
+                const [startDate, startTime] = element.eventStartTime.split('T');
+                const [endDate, endTime] = element.eventEndTime.split('T');
+                const newDate = new Date(endDate);
+                let status;
+                if (new Date(endDate) < Date.now()) {
+                    status = 'Đã hoàn thành';
+                }
+                else if (new Date(startDate) > Date.now()) {
+                    status = 'Đang mở đăng kí';
+                }
+                else if (new Date(startDate) <= Date.now() && new Date(endDate) >= Date.now()) {
+                    status = 'Đang chạy';
+                }
+
+                waitingList.innerHTML += `
+                    <li class="row waiting-item">
+                        <div class="col-1">${stt}</div>
+                        <div class="col-3">${element.eventName}</div>
+                        <div class="col-3">${startDate} → ${endDate}</div>
+                        <div class="col-2 status">${status}</div>
+                        <button class="col-1 btn-edit"><a class="btn-edit-link" href="http://localhost:3000/event/update-event/${element.eventID}">Chỉnh sửa</a></button>
+                        <button class="col-1 btn-delete" data-eventID="${element.eventID}">Xóa</button>
+                    </li>
+                `;
+                stt++;
+            });
+            const Status = document.querySelectorAll('.status');
+            const btnEdit = document.querySelectorAll('.btn-edit');
+            Status.forEach(status => {
+                if (status.innerHTML == 'Đang chạy') {
+                    status.style.background = '#39AB59';
+                } else if (status.innerHTML == 'Đã hoàn thành') {
+                    status.style.background = '#59C1BD';
+                } else if (status.innerHTML == 'Đang mở đăng kí') {
+                    status.style.background = '#F2C94C';
+                }
+            });
+            const btnDelete = document.querySelectorAll('.btn-delete');
+            btnDelete.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const eventID = e.target.getAttribute('data-eventID');
+                    axios.post(`http://localhost:3000/event/delete-event/${eventID}`)
+                        .then(res => {
+                            alert('Xóa thành công');
+                            window.location.reload();
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                })
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+</script>
+
+</html>

@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-weight: bold !important;
+    padding: 30px 0 !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+ul li {
+    list-style: none !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+main {
+    background: rgb(2, 0, 36);
+    background: rgb(207, 245, 231);
+    height: 100vh;
+}
+
+header .container-fluid {
+    height: 46px;
+}
+
+header .line {
+    display: inline-block;
+}
+
+.logo-pic {
+    width: 46px;
+    height: 46px;
+    padding: 5px 5px;
+}
+
+.logo-name {
+    font-size: 16px;
+    color: black;
+    line-height: 46px;
+    font-weight: 900;
+}
+
+.search-bar {
+    height: 37px;
+    background-color: white;
+    border: 1px solid #565353;
+    border-radius: 50px;
+    margin: 10px 0px;
+    padding-right: 0px;
+}
+
+.search-bar .search-logo {
+    padding-right: 5px;
+    color: #565353;
+    cursor: pointer;
+}
+
+.search-bar input {
+    border: 0px solid #ccc;
+    line-height: 35px;
+    width: 400px;
+    padding-left: 5px;
+    border-style: hidden;
+}
+
+.search-bar input:focus {
+    outline: none;
+}
+
+.notify-logOut {
+    text-align: center;
+    margin-left: 60px;
+}
+
+.notify-logOut .fa-solid {
+    font-size: 25px;
+    margin: 10px 0;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: color 0.4s;
+}
+
+.notify-logOut .fa-solid:hover {
+    color: #9b9696;
+}
+
+/* content */
+.content.container-fluid {
+    height: 740px;
+    padding: 0 50px;
+}
+
+.content.container-fluid .table-header {
+    width: 1448px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 700;
+    border-radius: 10px;
+    background-color: white;
+    border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.content .waiting-list {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.content .waiting-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.content .waiting-list::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.content .waiting-list .row {
+    width: 1427px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    border-radius: 6px;
+    background-color: white;
+}
+
+.content .waiting-list .row:hover {
+    background-color: rgb(249, 249, 249);
+}
+
+.content .waiting-list .row .btn-edit,
+.btn-delete {
+    border: none;
+    color: white;
+    border-radius: 10px;
+    height: 33px;
+    line-height: 33px;
+    margin: 3px 10px 0 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-edit {
+    background-color: #00b894;
+}
+
+.btn-edit-link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.btn-delete {
+    background-color: #ff7675;
+}
+
+.content .waiting-list .row .status {
+    background-color: aquamarine;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    height: 33px;
+    margin-top: 3px;
+    border-radius: 6px;
+}

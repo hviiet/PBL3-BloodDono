@@ -50,67 +50,6 @@
         <div id="event-panel">
             <ul class="lastest-events">
                 <h1>Sự kiện mới nhất</h1>
-                <!-- 3 sự kiện gần nhất -->
-                <!-- SK1 -->
-                <li class="event flex">
-                    <h2 class="rank">1.</h2>
-                    <div class="event-content">
-                        <h2 class="event-name">Hiến máu nhân đạo tháng 4</h2>
-
-                        <div class="event-time flex">
-                            <div class="label">Bắt đầu:</div>
-                            <div class="event-time-detail">19/04/2023</div>
-                        </div>
-
-                        <div class="event-address flex">
-                            <div class="label">Địa điểm:</div>
-                            <div class="event-address-detail"> Trường Đại học Bách Khoa Đà Nẵng, 54 Nguyễn Lương Bằng,
-                                Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng</div>
-                        </div>
-                    </div>
-                </li>
-                <!-- ------------------- -->
-
-                <!-- SK2 -->
-                <li class="event flex">
-                    <h2 class="rank">2.</h2>
-                    <div class="event-content">
-                        <h2 class="event-name">Hiến máu nhân đạo tháng 4</h2>
-
-                        <div class="event-time flex">
-                            <div class="label">Bắt đầu:</div>
-                            <div class="event-time-detail">19/04/2023</div>
-                        </div>
-
-                        <div class="event-address flex">
-                            <div class="label">Địa điểm:</div>
-                            <div class="event-address-detail"> Trường Đại học Bách Khoa Đà Nẵng, 54 Nguyễn Lương Bằng,
-                                Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng</div>
-                        </div>
-                    </div>
-                </li>
-                <!-- ------------------- -->
-
-                <!-- SK3 -->
-                <li class="event flex">
-                    <h2 class="rank">3.</h2>
-                    <div class="event-content">
-                        <h2 class="event-name">Hiến máu nhân đạo tháng 4</h2>
-
-                        <div class="event-time flex">
-                            <div class="label">Bắt đầu:</div>
-                            <div class="event-time-detail">19/04/2023</div>
-                        </div>
-
-                        <div class="event-address flex">
-                            <div class="label">Địa điểm:</div>
-                            <div class="event-address-detail"> Trường Đại học Bách Khoa Đà Nẵng, 54 Nguyễn Lương Bằng,
-                                Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng</div>
-                        </div>
-                    </div>
-                </li>
-                <!-- ------------------- -->
-                <!-- ---------------------------------- -->
             </ul>
         </div>
         <!-- ------------------------------------------------------- -->
@@ -182,7 +121,6 @@
                         <p>Điện thoại : 0702708357</p>
                         <p>Email : <a href="">BloodDonoVietnam@gmail.com</a></p>
                     </div>
-
                     <div class="col-md-4 social margin">
                         <h1>Theo dõi chúng tôi </h1>
                         <div class="combo">
@@ -196,6 +134,37 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.get("http://localhost:3000/api/recentEvent")
+            .then((response) => {
+                // handle success
+                const data = response.data.data;
+                const lastestEvents = document.querySelector('.lastest-events');
+                const [date, time] = data[0].eventStartTime.split('T');
+                data.forEach(element => {
+                    lastestEvents.innerHTML += `<li class="event flex">
+                    <div class="event-content">
+                        <h2 class="event-name"><a href="http://localhost:3000/event/view/${element.eventID}">${element.eventName}</a></h2>
+
+                        <div class="event-time flex">
+                            <div class="label">Bắt đầu:</div>
+                            <div class="event-time-detail">${date}</div>
+                        </div>
+
+                        <div class="event-address flex">
+                            <div class="label">Địa điểm:</div>
+                            <div class="event-address-detail">${element.eventAddress}</div>
+                        </div>
+                    </div>
+                </li>`;
+                });
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    </script>
 </body>
 
 </html>
