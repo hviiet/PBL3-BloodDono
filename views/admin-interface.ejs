@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
     <title>BloodDono-Admin</title>
 </head>
+
 <body>
     <header>
         <div class="container-fluid">
@@ -30,8 +32,7 @@
     <div id="content">
         <div class="container-fluid">
             <h1 class="heading-waiting-list">
-                Danh sách bệnh viện chờ xét duyệt
-                <div class="waiting-number">(5)</div>
+                Danh sách bệnh viện
             </h1>
 
             <div class="row table-header">
@@ -42,14 +43,6 @@
             </div>
 
             <ul class="waiting-list">
-                <li class="row">
-                    <div class="col-1">1</div>
-                    <div class="col-3">bvQuocTeVinmecDaNang</div>
-                    <div class="col-3">Bệnh viện Quốc tế Vinmec Đà Nẵng</div>
-                    <div class="col-4">30 tháng 4, Hòa Cường Bắc, Hải Châu, Đà Nẵng</div>
-                    <button class="col-1">Liên lạc</button>
-                </li>
-                
             </ul>
 
             <h1>Tỉ lệ bệnh viện được xét duyệt</h1>
@@ -70,7 +63,6 @@
 
                     <div class="radios">
                         <div class="acp-number"></div>
-                        <div class="acp-radios"></div>
                     </div>
                 </div>
 
@@ -80,36 +72,153 @@
                     </div>
                     <div class="radios">
                         <div class="wait-number"></div>
-                        <div class="wait-radios"></div>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <div class="Modal js-Modal">
+        <div class="Modal-container">
+            <i class="close js-close fa-solid fa-xmark"></i>
+            <div class="Modal-header">Thông tin chi tiết</div>
+
+            <div class="detail"></div>
+            <div class="Buttons">
+            </div>
+        </div>
+    </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    const waitingList = document.querySelector('.waiting-list');
-    const waitingCount = waitingList.querySelectorAll('li').length;
+    axios.get('/api/hospital')
+        .then(res => {
+            console.log(res.data.data);
+            const data = res.data.data;
+            const waitingList = document.querySelector('.waiting-list');
+            let numericalOrder = 0;
+            let acpCount = 0;
+            data.forEach(element => {
+                numericalOrder++;
+                if (element.isVerified == 1) {
+                    acpCount++;
+                }
+                const fullAddress = element.address.street + ", " + element.address.ward + ", " + element.address.district + ", " + element.address.province;
+                const waitingItem = document.createElement('li');
+                waitingItem.classList.add('row', 'waiting-item');
+                waitingItem.innerHTML = `
+                    <div class="col-1">${numericalOrder}</div>
+                    <div class="col-3">${element.username}</div>
+                    <div class="col-3">${element.name}</div>
+                    <div class="col-4">${fullAddress}</div>
+                    <button class="col-1 btn-contact"
+                        data-username="${element.username}"
+                        data-name="${element.name}"
+                        data-address="${fullAddress}"
+                        data-phone="${element.phoneNumber}"
+                        data-email="${element.email}"
+                        data-isVerified="${element.isVerified ? 1 : 0}">Chi tiết</button>
+                `;
+                const btnContact = waitingItem.querySelector('.btn-contact');
+                if (element.isVerified == 1) {
+                    btnContact.style.backgroundColor = 'rgb(29, 218, 105)';
+                }
+                else {
+                    btnContact.style.backgroundColor = 'rgb(255, 100, 90)';
+                }
+                waitingList.appendChild(waitingItem);
+            });
+            const btnContact = document.querySelectorAll('.btn-contact');
+            const modal = document.querySelector('.js-Modal');
+            const modalClose = document.querySelector('.js-close');
+            const detail = document.querySelector('.detail');
+            const buttons = document.querySelector('.Buttons');
+            btnContact.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    detail.innerHTML = `
+                <div class="hospital-username flex">
+                    <!--<div style="margin-right: 4px;">Username bệnh viện:</div>-->
+                    <h3 class="username">${e.target.getAttribute('data-username')}</h3>
+                </div>
 
-    const headingWaitingNumber = document.querySelector('.waiting-number');
-    headingWaitingNumber.innerHTML = `(${waitingCount})`;
+                <div class="label">Tên bệnh viện</div>
+                <div class="hospital-name">${e.target.getAttribute('data-name')}</div>
 
-    const sumAccount = document.querySelector('.sum-account');
-    const sumCount = sumAccount.querySelector('.sum-number').innerHTML = 102;
+                <div class="label">Địa chỉ</div>
+                <div class="hospital-address flex">
+                    <!-- <div class="street">2 tháng 9</div> -->
+                    <div class="ward-district-city">${e.target.getAttribute('data-address')}</div>
+                </div>
 
-    const acceptAccount = document.querySelector('.accept-account');
-    const acceptCount = sumCount - waitingCount;
-    acceptAccount.querySelector('.acp-number').innerHTML = acceptCount;
+                <div class="contact flex">
+                    <div class="phone-number">
+                        <div class="label">Số điện thoại</div>
+                        <div class="hospital-phone">${e.target.getAttribute('data-phone')}</div>
+                    </div>
 
-    const acceptRadios = acceptAccount.querySelector('.acp-radios');
-    acceptRadios.innerHTML = `${Math.abs((acceptCount / sumCount) * 100).toFixed(1)}%`;
+                    <div class="email">
+                        <div class="label">Email</div>
+                        <div class="hospital-email">${e.target.getAttribute('data-email')}</div>
+                    </div>
+                </div>
+                `;
+                    if (e.target.getAttribute('data-isVerified') == '0') {
+                        buttons.innerHTML = ` 
+                    <button class="reject" data-username="${e.target.getAttribute('data-username') ?? ''}"><i class="fa-regular fa-trash-can" ></i> Từ chối</button>
+                    <button class="accept" data-username="${e.target.getAttribute('data-username') ?? ''}"><i class="fa-regular fa-circle-check" ></i> Xét duyệt</button>
+                `;
+                    }
+                    else {
+                        buttons.innerHTML = '';
+                    }
+                    modal.classList.add('open');
+                    const rejectBtn = document.querySelector('.reject');
+                    const acceptBtn = document.querySelector('.accept');
+                    rejectBtn.addEventListener('click', (e) => {
+                        const username = e.target.getAttribute('data-username');
+                        axios.post(`http://localhost:3000/user/${username}/delete-user`)
+                            .then(res => {
+                                console.log(res);
+                                alert(res.data.message);
+                                window.location.reload();
+                            })
+                            .catch(err => {
+                                alert(err.response.data.message);
+                            })
+                    });
+                    acceptBtn.addEventListener('click', (e) => {
+                        const username = e.target.getAttribute('data-username');
+                        axios.post(`http://localhost:3000/user/${username}/approve-hospital`)
+                            .then(res => {
+                                console.log(res);
+                                alert(res.data.message);
+                                window.location.reload();
+                            })
+                            .catch(err => {
+                                alert(err.response.data.message);
+                            })
+                    });
+                });
+            });
+            modalClose.addEventListener('click', () => {
+                modal.classList.remove('open');
+            });
+            const sumNumber = document.querySelector('.sum-number');
+            const acpNumber = document.querySelector('.acp-number');
+            const waitNumber = document.querySelector('.wait-number');
+            sumNumber.innerHTML = data.length;
+            acpNumber.innerHTML = acpCount;
+            waitNumber.innerHTML = data.length - acpCount;
 
-    const waitingAccount = document.querySelector('.waiting-account');
-    waitingAccount.querySelector('.wait-number').innerHTML = waitingCount;
-
-    const waitingRadios = waitingAccount.querySelector('.wait-radios');
-    waitingRadios.innerHTML = `${Math.abs((waitingCount / sumCount) * 100).toFixed(1)}%`;
+        })
+        .catch(err => {
+            console.log(err);
+        })
 </script>
+<script>
+
+
+</script>
+
 </html>

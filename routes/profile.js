@@ -2,23 +2,24 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
-const { updatePassword, updateProfile, uploadImageForProfile } = require('../controllers/profile');
+const { updatePassword, updateProfile, uploadImageForProfile, deleteUser, approveHospital } = require('../controllers/profile');
 const { cookieJwtAuth } = require('../middleware/cookieJwtAuth');
 const { donorCheck } = require('../middleware/donorCheck');
 
 router.route('/:username').get(cookieJwtAuth, (req, res) => {
 
     if (req.user.role == '1') {
-        // res.sendFile(path.join(__dirname, '..','views','donor-interface.html'));
         res.render('donor-interface', {
             username: req.user.username
         });
     }
     else if (req.user.role == '2') {
-        // res.sendFile(path.join(__dirname, '..','views','doctor-interface.html'));
         res.render('doctor-interface', {
             username: req.user.username
         });
+    }
+    else if (req.user.role == '3') {
+        res.render('admin-interface');
     }
     else
         res.redirect('/login');
@@ -40,6 +41,9 @@ router.route('/:username/donate-history').post([cookieJwtAuth, donorCheck], upda
         username: req.user.username
     });
 });
+//admin route
+router.route('/:username/approve-hospital').post(cookieJwtAuth, approveHospital);
+router.route('/:username/delete-user').post(cookieJwtAuth, deleteUser);
 
 
 module.exports = router;

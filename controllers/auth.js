@@ -10,33 +10,41 @@ const login = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
     //check if user exists
     const userExists = await AccountInfo.findOne({ where: { Username: username } });
-    if (!userExists) return res.status(400).json({ status: 'fail', message: 'User not found' });
+    if (!userExists) return res.status(400).json({ status: 'fail', message: 'Không tìm thấy tài khoản' });
     //check if password is correct
     const validPassword = await bcrypt.compare(password, userExists.Password);
-    if (!validPassword) return res.status(400).json({ status: 'fail', message: 'Invalid password' });
+    if (!validPassword) return res.status(400).json({ status: 'fail', message: 'Mật khẩu không chính xác' });
     //create and assign a token
     let user;
     if (userExists.Role === 1) {
         const DonoInfo = db.Donor_Information;
-        const _donor = await DonoInfo.findOne({
+        const donor = await DonoInfo.findOne({
             where: { AccountID: userExists.AccountID },
             attributes: ['DonorID'],
         });
         user = {
             username: userExists.Username,
-            donorID: _donor.DonorID,
+            donorID: donor.DonorID,
             role: userExists.Role
         };
     }
     else if (userExists.Role === 2) {
         const HospitalInfo = db.Hospital_Information;
-        const _doctor = await HospitalInfo.findOne({
+        const doctor = await HospitalInfo.findOne({
             where: { AccountID: userExists.AccountID },
-            attributes: ['HospitalID'],
+            attributes: ['HospitalID', 'HospitalIsVerified'],
         });
+        console.log(doctor.HospitalIsVerified);
+        if (!doctor.HospitalIsVerified) return res.status(400).json({ status: 'fail', message: 'Tài khoản chưa được xác minh' });
         user = {
             username: userExists.Username,
-            hospitalID: _doctor.HospitalID,
+            hospitalID: doctor.HospitalID,
+            role: userExists.Role
+        }
+    }
+    else if (userExists.Role === 3) {
+        user = {
+            username: userExists.Username,
             role: userExists.Role
         }
     }
@@ -48,46 +56,45 @@ const register = asyncHandler(async (req, res) => {
     const AccountInfo = db.Account_Information;
     const { username, password, role } = req.body;
     //check if user exists
-    const _userExists = await AccountInfo.findOne({ where: { Username: username } });
-    if (_userExists)
-        return res.status(400).json({ message: 'User already exists' });
-    const _salt = bcrypt.genSaltSync(10);
-    const _hashedPassword = bcrypt.hashSync(password, _salt);
+    const userExists = await AccountInfo.findOne({ where: { Username: username } });
+    if (userExists)
+        return res.status(400).json({ status: 'fail', message: 'Tài khoản đã tồn tại' });
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
     //create account ID
-    console.log('1');
-    const _AccountID = await getNextID('Account_Information', 'AccountID');
+    const AccountID = await getNextID('Account_Information', 'AccountID');
     //create user
-    const _user = await AccountInfo.create({
-        AccountID: `${_AccountID}`,
+    const user = await AccountInfo.create({
+        AccountID: `${AccountID}`,
         Username: `${username}`,
-        Password: `${_hashedPassword}`,
+        Password: `${hashedPassword}`,
         Role: parseInt(role)
     });
-    if (!_user)
-        return res.status(400).json({ message: 'User not created, something is wrong!' });
+    if (!user)
+        return res.status(400).json({ status: 'fail', message: 'Tài khoản chưa được tạo thành công' });
     //create donor
     if (parseInt(role) === 1) {
         const DonoInfo = db.Donor_Information;
         const { name, gender, birth, height, weight, bloodType, address, phoneNumber, email, selectedIllnessList } = req.body;
-        const _donorID = await getNextID('Donor_Information', 'DonorID');
-        const _addressID = await createNewAddress(address.street, address.ward, address.district, address.province);
+        const donorID = await getNextID('Donor_Information', 'DonorID');
+        const addressID = await createNewAddress(address.street, address.ward, address.district, address.province);
         await DonoInfo.create({
-            AccountID: _AccountID,
-            DonorID: _donorID,
+            AccountID: AccountID,
+            DonorID: donorID,
             DonorName: name,
             DonorGender: gender,
             DonorBirth: birth,
             DonorHeight: height,
             DonorWeight: weight,
             DonorBloodType: bloodType,
-            DonorAddress: _addressID,
+            DonorAddress: addressID,
             DonorPhoneNumber: phoneNumber,
             DonorEmail: email,
         });
         const MedicalHistory = db.Medical_History;
         for (let i = 0; i < selectedIllnessList.length; i++) {
             await MedicalHistory.create({
-                DonorID: _donorID,
+                DonorID: donorID,
                 IllnessID: selectedIllnessList[i]
             });
         }
@@ -96,13 +103,13 @@ const register = asyncHandler(async (req, res) => {
     else if (parseInt(role) === 2) {
         const HospitalInfo = db.Hospital_Information;
         const { name, address, phoneNumber, email } = req.body;
-        const _HospitalID = await getNextID('Hospital_Information', 'HospitalID');
-        const _addressID = await createNewAddress(address.street, address.ward, address.district, address.province);
+        const HospitalID = await getNextID('Hospital_Information', 'HospitalID');
+        const addressID = await createNewAddress(address.street, address.ward, address.district, address.province);
         await HospitalInfo.create({
-            AccountID: _AccountID,
-            HospitalID: _HospitalID,
+            AccountID: AccountID,
+            HospitalID: HospitalID,
             HospitalName: name,
-            HospitalAddress: _addressID,
+            HospitalAddress: addressID,
             HospitalPhoneNumber: phoneNumber,
             HospitalEmail: email,
         });

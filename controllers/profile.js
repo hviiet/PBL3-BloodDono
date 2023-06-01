@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const db = require('../models');
 const { uploadImage, deleteLocalImage } = require('../utils/uploadImage');
-const { getDonorIDByUserName } = require('../utils/util');
+const { getDonorIDByUserName, getHospitalIDByUserName } = require('../utils/util');
 
 
 const updateProfile = asyncHandler(async (req, res) => {
@@ -73,4 +73,33 @@ const uploadImageForProfile = asyncHandler(async (req, res) => {
     await db.Donor_Information.update({ DonorPhoto: imageLink }, { where: { DonorID: donorID } });
     res.status(200).json({ imageLink: imageLink });
 });
-module.exports = { updatePassword, updateProfile, uploadImageForProfile }
+const deleteUser = asyncHandler(async (req, res) => {
+    const username = req.params.username;
+    const accountInfo = await db.Account_Information.findOne({ where: { Username: username } });
+    if (!accountInfo) {
+        return res.status(400).json({ message: 'Không tìm thấy tài khoản' });
+    }
+    if (accountInfo.Role == 1) {
+        const donorID = await getDonorIDByUserName(username);
+        const address = await db.Donor_Information.findOne({ where: { DonorID: donorID } });
+        await db.Address.destroy({ where: { AddressID: address.DonorAddress } });
+        await db.Donor_Information.destroy({ where: { DonorID: donorID } });
+        await db.Account_Information.destroy({ where: { Username: username } });
+        res.status(200).json({ message: 'Tài khoản đã được xóa' });
+    }
+    if (accountInfo.Role == 2) {
+        const hospitalID = await getHospitalIDByUserName(username);
+        const address = await db.Hospital_Information.findOne({ where: { HospitalID: hospitalID } });
+        await db.Hospital_Information.destroy({ where: { HospitalID: hospitalID } });
+        await db.Address.destroy({ where: { AddressID: address.HospitalAddress } });
+        await db.Account_Information.destroy({ where: { Username: username } });
+        res.status(200).json({ message: 'Tài khoản đã được xóa' });
+    }
+    res.status(400).json({ message: 'Lỗi hệ thống' });
+});
+const approveHospital = asyncHandler(async (req, res) => {
+    const hospitalID = await getHospitalIDByUserName(req.params.username);
+    await db.Hospital_Information.update({ HospitalIsVerified: true }, { where: { HospitalID: hospitalID } });
+    res.status(200).json({ message: 'Tài khoản bệnh viện đã được duyệt' });
+});
+module.exports = { updatePassword, updateProfile, uploadImageForProfile, deleteUser, approveHospital }

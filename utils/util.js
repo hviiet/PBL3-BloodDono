@@ -73,7 +73,8 @@ async function getOneUser(username) {
             name: userInfo.HospitalName,
             address: addressData,
             phoneNumber: userInfo.HospitalPhoneNumber,
-            email: userInfo.HospitalEmail
+            email: userInfo.HospitalEmail,
+            isVerified: userInfo.HospitalIsVerified
         }
     }
     //return user info

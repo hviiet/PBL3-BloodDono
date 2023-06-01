@@ -15,6 +15,10 @@ h1 {
     padding: 30px 0 !important;
 }
 
+.flex {
+    display: flex !important;
+}
+
 ul li {
     list-style: none;
 }
@@ -22,7 +26,8 @@ ul li {
 /* Header */
 header .container-fluid {
     background-color: rgba(89, 193, 189, 0.5);
-    border-bottom: 1px solid rgb(89, 92, 94);;
+    border-bottom: 1px solid rgb(89, 92, 94);
+    ;
     height: 46px;
 }
 
@@ -53,7 +58,7 @@ header .line {
 }
 
 .log-in-out .fa-solid {
-    font-size:25px;
+    font-size: 25px;
     padding: 10px 15px;
     cursor: pointer;
     transition: color 0.3s;
@@ -62,6 +67,7 @@ header .line {
 .log-in-out .fa-solid:hover {
     color: rgb(113, 114, 114);
 }
+
 /* -------------------------------------- */
 
 /* Content */
@@ -71,7 +77,8 @@ header .line {
 }
 
 #content .container-fluid .table-header {
-    width: 1448px;
+    /* width: 1448px; */
+    width: 1550px;
     height: 40px;
     line-height: 40px;
     font-weight: 700;
@@ -171,4 +178,149 @@ header .line {
 .acp-radios {
     height: 14px;
     font-size: 13px;
+}
+
+.Modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.Modal.open {
+    display: flex;
+}
+
+.Modal .Modal-container {
+    background-color: white;
+    width: 620px;
+    max-width: calc(100% - 40px);
+    min-height: 342.5px;
+    position: relative;
+    border-radius: 10px;
+    animation: fadeIn ease 0.5s;
+}
+
+.Modal .Modal-container .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 13px;
+    font-size: 22px;
+    cursor: pointer;
+    color: rgb(115, 113, 113);
+    transition: color 0.3s;
+}
+
+.Modal .Modal-container .close:hover {
+    color: red;
+}
+
+.Modal .Modal-container .Modal-header {
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.Modal .detail {
+    margin: 20px;
+}
+
+.Modal .hospital-username {
+    margin: 10px 0;
+}
+
+.Modal .hospital-name {
+    padding: 4px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.Modal .hospital-address .street {
+    width: 170px;
+    padding: 4px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.Modal .hospital-address .ward-district-city {
+    width: 405px;
+    padding: 4px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.Modal .phone-number {
+    margin-right: 5px;
+}
+
+.Modal .phone-number .hospital-phone {
+    padding: 4px 80px 4px 4px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.Modal .email .hospital-email {
+    width: 405px;
+    padding: 4px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.Modal .Buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
+
+.Modal button {
+    border: none;
+    color: white;
+    border-radius: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.Modal .reject {
+    background-color: rgb(255, 100, 90);
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.Modal .reject:hover {
+    background-color: red;
+}
+
+.Modal .accept {
+    background-color: rgb(29, 218, 105);
+    width: 100px;
+    height: 40px;
+}
+
+.Modal .accept:hover {
+    background-color: rgb(29, 187, 29);
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
