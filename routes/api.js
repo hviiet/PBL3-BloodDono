@@ -4,7 +4,7 @@ const { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile } = 
 const { getEvent, getAllEventOfHospital, getRecentEvent } = require('../controllers/eventAPI');
 const { getAllIllness, getIllnessByUsername } = require('../controllers/othersAPI');
 const { getProvince, getDistrict, getWard } = require('../controllers/addressAPI');
-const { searchByBloodTypeAndAddress } = require('../controllers/searchAPI');
+const { searchByBloodTypeAndAddress, searchHospitalByAddress } = require('../controllers/searchAPI');
 //user
 router.route('/user/:username').get(getProfile);
 router.route('/user').get(getAllProfile);
@@ -24,7 +24,8 @@ router.route('/address/province').get(getProvince);
 router.route('/address/district/:provinceID').get(getDistrict);
 router.route('/address/ward/:districtID').get(getWard);
 //search
-router.route('/search').get(searchByBloodTypeAndAddress);
+router.route('/search/donor').get(searchByBloodTypeAndAddress);
+router.route('/search/hospital').get(searchHospitalByAddress);
 
 
 module.exports = router;

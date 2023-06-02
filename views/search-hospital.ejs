@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/change-donor.css" />
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css" />
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css" />
+    <title>BloodDono-Thay đổi thông tin</title>
+</head>
+
+<body>
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <a href="/" class="logo">
+                    <div class="logo-pic line">
+                        <img src="/assets/img/logo-pic.png" alt="" />
+                    </div>
+                    <div class="logo-name line">BloodDono</div>
+                </a>
+
+                <div class="log-in-out">
+                    <i class="fa-solid fa-bell"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container d-flex justify-content-center">
+            <div class="row donor-box d-flex justify-content-around">
+                <div class="col-3">
+                    <!-- Hình ảnh và tên user -->
+                    <div class="user-interface">
+                        <img src="/assets/img/help.png" alt="" class="user-avt" />
+                        <div class="user-name">Fujiguro Toji</div>
+                        <div class="edit-tag">
+                            <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+                        </div>
+                    </div>
+                    <!-- ------------------------------------- -->
+
+                    <!-- Các chức năng -->
+                    <div class="confirm-btn">
+                        <button class="btn back">Trở về</button>
+                    </div>
+                    <!-- ------------------------------------- -->
+                </div>
+
+                <div class="col-8">
+                    <h3>Tìm kiếm nơi hiến máu</h3>
+                    <div class="search-address">
+                        <label for="district">Quận/Huyện</label>
+                        <select class="customize search-district" id="district" name="district">
+                            <option value="default" selected>Tất cả</option>
+                        </select>
+                        <label for="province">Tỉnh/Thành Phố</label>
+                        <select class="customize search-province" id="province" name="province">
+                            <option value="default" selected>Tất cả</option>
+                        </select>
+
+                    </div>
+
+                    <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i> Tìm
+                        kiếm</button>
+                    <div class="search-result">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Tên bệnh viện</th>
+                                    <th scope="col">Địa chỉ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr>
+                                    <th scope="row">1</th>
+                                    <td>Trung tâm hiến máu huyện Bình Chánh</td>
+                                    <td>Đường Nguyễn Văn Linh, Xã Bình Chánh, Huyện Bình Chánh, Thành phố Hồ Chí Minh
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Trung tâm hiến máu huyện Cần Giờ</td>
+                                    <td>Đường Nguyễn Văn Linh, Xã Cần Thạnh, Huyện Cần Giờ, Thành phố Hồ Chí Minh</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Trung tâm hiến máu huyện Củ Chi</td>
+                                    <td>Đường Nguyễn Văn Linh, Xã Củ Chi, Huyện Củ Chi, Thành phố Hồ Chí Minh</td>
+                                </tr> -->
+                            </tbody>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- get data for address -->
+<script>
+    const username = '<%= username %>'
+    const province = document.getElementById("province");
+    const district = document.getElementById("district");
+    const searchBtn = document.querySelector(".btn-search");
+    const backBtn = document.querySelector(".back");
+    backBtn.addEventListener("click", () => {
+        window.location.href = `http://localhost:3000/user/${username}`;
+    });
+    searchBtn.addEventListener("click", () => {
+        const province_id = province.value;
+        const district_id = district.value;
+        let url = `http://localhost:3000/api/search/hospital?`;
+        if (province_id != "default") {
+            url += `province=${province_id}`;
+        }
+        if (district_id != "default") {
+            url += `&district=${district_id}`;
+        }
+        axios
+            .get(url)
+            .then((response) => {
+                // handle success
+                const data = response.data.result;
+                const table = document.querySelector("tbody");
+                table.innerHTML = "";
+                data.forEach((element, index) => {
+                    table.innerHTML += `
+                    <tr>
+                        <th scope="row">${index + 1}</th>
+                        <td>${element.HospitalName}</td>
+                        <td>${element.HospitalAddress}</td>
+                    </tr>
+                    `;
+                });
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    });
+    axios.get('http://localhost:3000/api/address/province')
+        .then((response) => {
+            // handle success
+            const data = response.data;
+            data.forEach(element => {
+                province.innerHTML += `<option value="${element.Province_id}">${element.Name}</option>`;
+            });
+        })
+        .catch((error) => {
+            // handle error
+            console.log(error);
+        });
+    province.addEventListener("change", (e) => {
+        const province_id = e.target.value;
+        axios
+            .get(`http://localhost:3000/api/address/district/${province_id}`)
+            .then((response) => {
+                // handle success
+                const data = response.data;
+                district.innerHTML = `<option value="default" selected disabled hidden>Chọn huyện/phường</option>`;
+                data.forEach((element) => {
+                    district.innerHTML += `<option value="${element.District_id}">${element.Name}</option>`;
+                });
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    });
+
+
+</script>
+
+</html>

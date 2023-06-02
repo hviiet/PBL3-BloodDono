@@ -82,8 +82,8 @@ const deleteUser = asyncHandler(async (req, res) => {
     if (accountInfo.Role == 1) {
         const donorID = await getDonorIDByUserName(username);
         const address = await db.Donor_Information.findOne({ where: { DonorID: donorID } });
-        await db.Address.destroy({ where: { AddressID: address.DonorAddress } });
         await db.Donor_Information.destroy({ where: { DonorID: donorID } });
+        await db.Address.destroy({ where: { AddressID: address.DonorAddress } });
         await db.Account_Information.destroy({ where: { Username: username } });
         res.status(200).json({ message: 'Tài khoản đã được xóa' });
     }

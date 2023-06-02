@@ -154,7 +154,7 @@
             const ward = document.getElementById('ward').value;
             const district = document.getElementById('district').value;
             const province = document.getElementById('province').value;
-            let url = `http://localhost:3000/api/search`;
+            let url = `http://localhost:3000/api/search/donor`;
             if (bloodType || ward || district || province) {
                 url += '?';
             }

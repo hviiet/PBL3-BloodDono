@@ -49,6 +49,7 @@
                         <button class="btn change-password">Đổi mật khẩu</button>
                         <button class="btn change-info">Thay đổi thông tin</button>
                         <button class="btn donation-record">Lịch sử hiến máu</button>
+                        <button class="btn search-hospital">Tìm nơi hiến máu</button>
                     </div>
                     <!-- ------------------------------------- -->
                 </div>
@@ -190,6 +191,7 @@
         const changePasswordBtn = document.querySelector('.change-password');
         const changeInfoBtn = document.querySelector('.change-info');
         const historyExamBtn = document.querySelector('.donation-record');
+        const searchHospitalBtn = document.querySelector('.search-hospital');
         changePasswordBtn.addEventListener('click', () => {
             window.location.href = `/user/${userName}/update-password`;
         });
@@ -198,6 +200,9 @@
         });
         historyExamBtn.addEventListener('click', () => {
             window.location.href = `/user/${userName}/donate-history`;
+        });
+        searchHospitalBtn.addEventListener('click', () => {
+            window.location.href = `/user/${userName}/search-hospital`;
         });
 
     </script>

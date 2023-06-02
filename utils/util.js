@@ -155,11 +155,7 @@ async function createNewAddress(street, ward, district, province) {
 }
 async function getFullAddress(addressID) {
     let data = {};
-    const Address = db.Address;
-    const Ward = db.Ward_Information;
-    const District = db.District_Information;
-    const Province = db.Province_Information;
-    const address = await Address.findOne({ where: { AddressID: addressID } });
+    const address = await db.Address.findOne({ where: { AddressID: addressID } });
     if (!address) {
         data = {
             status: 'fail',
@@ -167,9 +163,9 @@ async function getFullAddress(addressID) {
         }
         return data;
     }
-    const ward = await Ward.findOne({ where: { Wards_id: address.AddressWard } });
-    const district = await District.findOne({ where: { District_id: address.AddressDistrict } });
-    const province = await Province.findOne({ where: { Province_id: address.AddressProvince } });
+    const ward = await db.Ward_Information.findOne({ where: { Wards_id: address.AddressWard } });
+    const district = await db.District_Information.findOne({ where: { District_id: address.AddressDistrict } });
+    const province = await db.Province_Information.findOne({ where: { Province_id: address.AddressProvince } });
     data = {
         status: 'success',
         street: address.AddressStreet,

@@ -35,6 +35,11 @@ router.route('/:username/update-profile').post([cookieJwtAuth, donorCheck], upda
         username: req.user.username
     });
 });
+router.route('/:username/search-hospital').get((req, res) => {
+    res.render('search-hospital', {
+        username: req.params.username
+    });
+});
 router.route('/:username/upload-image').post(upload.single('myImage'), uploadImageForProfile);
 router.route('/:username/donate-history').post([cookieJwtAuth, donorCheck], updateProfile).get([cookieJwtAuth, donorCheck], (req, res) => {
     res.render('donate-history', {
