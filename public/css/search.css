@@ -95,24 +95,15 @@ header .line {
 }
 
 select {
-    width: 80px;
+    width: 160px;
     height: 30px;
     border: 1px solid rgba(0, 84, 76, 0.63);
     border-radius: 20px;
     padding: 0 10px;
-}
-
-.filter input {
-    width: 240px;
-    height: 30px;
-    border: 1px solid rgba(0, 84, 76, 0.63);
-    border-radius: 20px;
-    padding: 0 10px;
-    margin: 5px;
 }
 
 select.customize {
-    width: 240px;
+    width: 220px;
     height: 30px;
     border: 1px solid rgba(0, 84, 76, 0.63);
     border-radius: 20px;

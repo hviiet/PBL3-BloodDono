@@ -21,6 +21,10 @@ li {
     list-style-type: none;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 #header .container-fluid {
     background-color: rgba(89, 193, 189, 0.5);
     border-bottom: 1px solid rgb(89, 92, 94);
@@ -140,6 +144,11 @@ li {
     padding: 20px;
     margin: 20px 20px 20px 90px;
     border-radius: 20px;
+    transition: background 0.3s;
+}
+
+#event-panel .lastest-events .event:hover {
+    background-color: rgba(0, 84, 76, 0.3);
 }
 
 .grey-background {
@@ -212,6 +221,75 @@ li {
     background-color: white;
     color: rgb(13, 76, 146);
 }
+
+
+.carousel {
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+}
+
+.carousel h1 {
+    font-weight: 700;
+    margin-left: 40px;
+}
+
+.carousel-inner {
+    display: flex;
+    align-items: center;
+}
+
+.carousel .carousel-item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.carousel .carousel-item .feedback-box {
+    display: flex;
+    align-items: center;
+    min-height: 250px;
+    margin: 50px 180px;
+    padding: 0 60px;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    position: relative;
+}
+
+.feedback-box .feedback-description {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px;
+    text-align: justify;
+    font-style: italic;
+}
+
+.feedback-box .feedback-author {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px;
+    text-align: left;
+}
+
+.fa-quote-left {
+    position: absolute;
+    top: 7%;
+    left: 19%;
+    font-size: 50px;
+    color: rgb(89, 193, 189);
+}
+
+.fa-quote-left.fa-rotate-180 {
+    position: absolute;
+    bottom: 7%;
+    right: 19%;
+    font-size: 50px;
+    color: rgb(89, 193, 189);
+}
+
+
 
 #footer {
     background-color: rgb(89, 193, 189);

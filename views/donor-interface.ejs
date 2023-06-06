@@ -22,8 +22,9 @@
                 </a>
                 <div class="log-in-out">
                     <i class="fa-solid fa-bell"></i>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="/logout" class="login line"><i class="fa-solid fa-right-from-bracket"></i></a>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -36,12 +37,12 @@
                     <!-- Hình ảnh và tên user -->
                     <div class="user-interface">
                         <img src="/assets/img/user_avt.png" alt="" class="user-avt">
+                        <div class="file-input">
+                            <input type="file" id="uploadImage" name="myImage" accept="image/png, image/jpg, image/jpeg" hidden>
+                            <label for="uploadImage" class="btnUpload"><i class="fa-solid fa-camera"></i></label>
+                        </div>
                         <div class="user-name">Fujiguro Toji</div>
                         <!-- <input type="file" id="uploadImage" name="myImage"> -->
-                        <div class="file-input">
-                            <input type="file" id="uploadImage" name="myImage" hidden>
-                            <label for="uploadImage" class="btnUpload">Chọn ảnh</label>
-                        </div>
                     </div>
                     <!-- ------------------------------------- -->
                     <!-- Các chức năng -->

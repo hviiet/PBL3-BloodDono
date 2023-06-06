@@ -7,23 +7,18 @@
 html {
     font-family: Helvetica, Arial, sans-serif;
     scroll-behavior: smooth;
-    background-color: rgb(229, 252, 244);
+    background-color: rgb(207, 245, 231);
 }
 
 body {
     background-color: rgb(207, 245, 231);
 }
 
-li {
-    list-style-type: none;
-}
-
 
 /* -------------------Header------------------- */
 #header .container-fluid {
     background-color: rgba(89, 193, 189, 0.5);
-    border-bottom: 1px solid rgb(89, 92, 94);
-    ;
+    border-bottom: 1px solid rgb(89, 92, 94);;
     height: 46px;
 }
 
@@ -49,7 +44,7 @@ li {
 }
 
 .log-in-out .fa-solid {
-    font-size:25px;
+    font-size: 25px;
     padding: 10px 15px;
     color: black;
     cursor: pointer;
@@ -59,11 +54,7 @@ li {
 .log-in-out .fa-solid:hover {
     color: rgb(113, 114, 114);
 }
-
 /* -------------------------------------- */
-
-
-/* ----------Content--------------------- */
 
 #content {
     background-color: rgb(207, 245, 231);
@@ -73,7 +64,8 @@ li {
     width: 90%;
     height: 94vh;
     padding-top: 40px;
-    background: rgb(2, 0, 36);
+    padding-bottom: 110px;
+    background: rgb(2,0,36);
     background: rgb(160, 228, 203);
 }
 
@@ -87,25 +79,6 @@ li {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    position: relative;
-}
-
-.file-input .btnUpload {
-    position: absolute;
-    bottom: 75%;
-    right: 21%;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 20px;
-    line-height: 32px;
-    background-color: #D8DADF;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.file-input .btnUpload:hover {
-    background-color: #b8b9ba;
 }
 
 .donor-box .col-3 .user-interface .user-name {
@@ -114,13 +87,20 @@ li {
     margin-top: 10px;
 }
 
-.donor-box .col-3 .func-btn {
-    margin-top: 35px;
+.donor-box .col-3 .user-interface .edit-tag {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(83, 137, 231);
+}
+
+.donor-box .col-3 .confirm-btn {
+    margin-top: 85px;
     text-align: center;
 }
 
 .donor-box .col-3 .btn {
-    margin-bottom: 35px;
+    margin-bottom: 40px;
     width: 170px;
     height: 50px;
     border-radius: 10px;
@@ -137,76 +117,96 @@ li {
     background-color: white;
 }
 
-.confirm-btn .cancel {
-    background-color: rgb(124, 124, 124) !important;
-}
-
-.confirm-btn .cancel:hover {
-    background-color: rgb(175, 174, 174) !important;
-    color: white !important;
+.donor-box .col-8 h3 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .donor-box .col-8 {
     padding: 10px;
 }
 
-
-.donor-box .col-8 .info {
-    margin: 0 20px;
+.donor-box .col-8 .search-address {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
 }
 
-.donor-box .col-8 .basic {
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgb(13, 76, 146);
-}
 
-.col-8 .info .frame {
-    margin: 10px 30px;
-}
-
-.col-8 .info .frame input {
-    width: 250px;
-    height: 40px;
-    border: 1px solid rgba(0, 84, 76, 0.63);
+.donor-box .col-8 .btn-search {
+    width: 100px;
+    height: 30px;
     border-radius: 5px;
-    padding-left: 5px;
+    border: none;
+    background-color: rgb(0, 84, 76);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s;
 }
 
-.combobox {
-    margin-left: 18px !important;
+.donor-box .col-8 .btn-search:hover {
+    color: white;
+    background-color: rgb(0, 84, 76, 0.6);
 }
 
 select {
     margin-right: 8px !important;
-    width: 180px;
+    width: 250px;
     height: 27px;
     border: 1px solid rgba(0, 84, 76, 0.63);
     border-radius: 5px;
 }
 
-.col-8 .info .frame .record {
-    width: 560px;
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
 }
 
-.col-8 .info .frame label {
-    font-size: 16px;
-    font-weight: 600;
+thead {
+    background: #f9f9f9;
+    display: table;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
 }
 
-.sick-tag {
-    background-color: #f6f5f7;
-    border-radius: 20px !important;
-    border: none;
-    color: #747373;
-    font-size: 14px;
-    font-weight: 100;
-    margin: 10px 10px 10px 0;
-    padding: 5px;
-    width: 30%;
+tbody {
+    background-color: #f9f9f9;
+    max-height: 460px;
+    overflow: auto;
+    display: block;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+}
+
+tbody::-webkit-scrollbar {
+    width: 5px;
+}
+
+tbody::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.index {
+    width: 10%;
+    text-align: center;
 }
 
 .flex-around {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
