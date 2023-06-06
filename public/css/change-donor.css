@@ -61,9 +61,8 @@ body {
 
 #content .donor-box {
     width: 90%;
-    height: 100vh;
-    padding-top: 40px;
-    padding-bottom: auto;
+    height: 100%;
+    padding: 40px 0;
     background: rgb(2,0,36);
     background: rgb(160, 228, 203);
 }
