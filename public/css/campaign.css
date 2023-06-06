@@ -60,8 +60,8 @@ body {
 }
 
 #content {
-    height: 675px;
-    padding-top: 40px;
+    height: 84.5vh;
+    padding-top: 10px;
     font-weight: 650;
     background-color: rgb(207, 245, 231);
 }

@@ -71,7 +71,7 @@ li {
 
 #content .donor-box {
     width: 90%;
-    height: 94vh;
+    height: 100vh;
     padding-top: 40px;
     background: rgb(2, 0, 36);
     background: rgb(160, 228, 203);
@@ -197,12 +197,13 @@ select {
     background-color: #f6f5f7;
     border-radius: 20px !important;
     border: none;
-    color: #747373;
-    font-size: 14px;
-    font-weight: 100;
+    color: black;
+    font-size: 17px;
+    font-weight: 550;
     margin: 10px 10px 10px 0;
     padding: 5px;
     width: 30%;
+    text-align: center;
 }
 
 .flex-around {

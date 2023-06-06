@@ -72,13 +72,13 @@ header .line {
 
 /* Content */
 #content .container-fluid {
-    height: 740px;
+    /* height: 93.5vh; */
     padding: 0 50px;
 }
 
 #content .container-fluid .table-header {
     /* width: 1448px; */
-    width: 1550px;
+    width: 94vw;
     height: 40px;
     line-height: 40px;
     font-weight: 700;
@@ -101,8 +101,8 @@ header .line {
 }
 
 #content .waiting-list .row {
-    width: 1427px;
-    height: 40px;
+    width: 93vw;
+    min-height: 40px;
     line-height: 40px;
     border-bottom: 1px solid rgb(233, 233, 233);
     border-radius: 10px;

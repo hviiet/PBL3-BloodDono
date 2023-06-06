@@ -100,12 +100,12 @@ header .line {
 
 /* content */
 .content.container-fluid {
-    height: 740px;
+    /* height: 93.5vh; */
     padding: 0 50px;
 }
 
 .content.container-fluid .table-header {
-    width: 1448px;
+    width: 94vw;
     height: 40px;
     line-height: 40px;
     font-weight: 700;
@@ -115,7 +115,8 @@ header .line {
 }
 
 .content .waiting-list {
-    height: 300px;
+    height: 450px;
+    margin-bottom: 0;
     overflow-y: auto;
 }
 
@@ -129,7 +130,8 @@ header .line {
 }
 
 .content .waiting-list .row {
-    width: 1430px;
+    /* width: 1430px; */
+    width: 93.5vw;
     min-height: 40px;
     line-height: 40px;
     border-bottom: 1px solid rgb(233, 233, 233);

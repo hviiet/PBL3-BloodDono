@@ -135,14 +135,14 @@ a {
 #event-panel .lastest-events h1 {
     font-size: 60px;
     font-weight: 700;
-    margin: 40px 80px;
+    margin: 40px 200px;
 }
 
 #event-panel .lastest-events .event {
     background-color: rgba(0, 84, 76, 0.14);
-    width: 1350px;
+    width: 1080px;
     padding: 20px;
-    margin: 20px 20px 20px 90px;
+    margin: 20px 0 20px 210px;
     border-radius: 20px;
     transition: background 0.3s;
 }
@@ -231,7 +231,7 @@ a {
 
 .carousel h1 {
     font-weight: 700;
-    margin-left: 40px;
+    margin-left: 200px;
 }
 
 .carousel-inner {
@@ -250,7 +250,7 @@ a {
     display: flex;
     align-items: center;
     min-height: 250px;
-    margin: 50px 180px;
+    margin: 50px 180px 50px 100px;
     padding: 0 60px;
     border-radius: 20px;
     background-color: whitesmoke;
@@ -276,7 +276,7 @@ a {
 .fa-quote-left {
     position: absolute;
     top: 7%;
-    left: 19%;
+    left: 12%;
     font-size: 50px;
     color: rgb(89, 193, 189);
 }
@@ -284,7 +284,7 @@ a {
 .fa-quote-left.fa-rotate-180 {
     position: absolute;
     bottom: 7%;
-    right: 19%;
+    right: 21%;
     font-size: 50px;
     color: rgb(89, 193, 189);
 }

@@ -62,7 +62,7 @@ body {
 
 #content .donor-box {
     width: 90%;
-    height: 94vh;
+    height: 93.5vh;
     padding-top: 40px;
     padding-bottom: 110px;
     background: rgb(2,0,36);
@@ -95,7 +95,7 @@ body {
 }
 
 .donor-box .col-3 .confirm-btn {
-    margin-top: 85px;
+    margin-top: 260px;
     text-align: center;
 }
 
@@ -163,6 +163,7 @@ select {
 table {
     table-layout: fixed;
     border-collapse: collapse;
+    margin-bottom: 0 !important;
 }
 
 thead {
@@ -174,7 +175,7 @@ thead {
 
 tbody {
     background-color: #f9f9f9;
-    max-height: 460px;
+    max-height: 420px;
     overflow: auto;
     display: block;
     width: 100%;
