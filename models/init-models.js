@@ -10,7 +10,6 @@ var _Feedback = require("./Feedback");
 var _Find_Donor = require("./Find_Donor");
 var _Hospital_Information = require("./Hospital_Information");
 var _Illness_Reference = require("./Illness_Reference");
-var _Image_Table = require("./Image_Table");
 var _Joined_Donor = require("./Joined_Donor");
 var _Medical_History = require("./Medical_History");
 var _Province_Information = require("./Province_Information");
@@ -29,7 +28,6 @@ function initModels(sequelize) {
   var Find_Donor = _Find_Donor(sequelize, DataTypes);
   var Hospital_Information = _Hospital_Information(sequelize, DataTypes);
   var Illness_Reference = _Illness_Reference(sequelize, DataTypes);
-  var Image_Table = _Image_Table(sequelize, DataTypes);
   var Joined_Donor = _Joined_Donor(sequelize, DataTypes);
   var Medical_History = _Medical_History(sequelize, DataTypes);
   var Province_Information = _Province_Information(sequelize, DataTypes);
@@ -62,10 +60,10 @@ function initModels(sequelize) {
   Event_Information.hasMany(Joined_Donor, { as: "Joined_Donors", foreignKey: "EventID"});
   Event_Information.belongsTo(Hospital_Information, { as: "Hospital", foreignKey: "HospitalID"});
   Hospital_Information.hasMany(Event_Information, { as: "Event_Informations", foreignKey: "HospitalID"});
+  Joined_Donor.belongsTo(Hospital_Information, { as: "Hospital", foreignKey: "HospitalID"});
+  Hospital_Information.hasMany(Joined_Donor, { as: "Joined_Donors", foreignKey: "HospitalID"});
   Medical_History.belongsTo(Illness_Reference, { as: "Illness", foreignKey: "IllnessID"});
   Illness_Reference.hasMany(Medical_History, { as: "Medical_Histories", foreignKey: "IllnessID"});
-  Donor_Information.belongsTo(Image_Table, { as: "DonorPhoto_Image_Table", foreignKey: "DonorPhoto"});
-  Image_Table.hasMany(Donor_Information, { as: "Donor_Informations", foreignKey: "DonorPhoto"});
   Address.belongsTo(Province_Information, { as: "AddressProvince_Province_Information", foreignKey: "AddressProvince"});
   Province_Information.hasMany(Address, { as: "Addresses", foreignKey: "AddressProvince"});
   Address.belongsTo(Ward_Information, { as: "AddressWard_Ward_Information", foreignKey: "AddressWard"});
@@ -83,7 +81,6 @@ function initModels(sequelize) {
     Find_Donor,
     Hospital_Information,
     Illness_Reference,
-    Image_Table,
     Joined_Donor,
     Medical_History,
     Province_Information,

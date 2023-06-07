@@ -2,11 +2,12 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Feedback', {
     FeedbackID: {
-      type: DataTypes.CHAR(8),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    Username: {
+    Name: {
       type: DataTypes.CHAR(255),
       allowNull: false
     },
@@ -21,6 +22,14 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "FeedbackID" },
+        ]
+      },
+      {
+        name: "FeedbackID_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [

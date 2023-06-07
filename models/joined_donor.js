@@ -22,6 +22,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
+    },
+    IsDonated: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
+    },
+    HospitalID: {
+      type: DataTypes.CHAR(8),
+      allowNull: true,
+      references: {
+        model: 'Hospital_Information',
+        key: 'HospitalID'
+      }
     }
   }, {
     sequelize,
@@ -48,6 +61,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "EventID" },
+        ]
+      },
+      {
+        name: "FK_Joined_Donor_Hospital_Information_idx",
+        using: "BTREE",
+        fields: [
+          { name: "HospitalID" },
         ]
       },
     ]

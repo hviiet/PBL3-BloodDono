@@ -51,10 +51,12 @@ const registerEvent = asyncHandler(async (req, res) => {
         res.status(400).json({ message: 'You already register this event' });
         return;
     }
+    const hospitalID = await db.Event_Information.findOne({ where: { EventID: eventID } }).then(event => event.HospitalID);
     //insert into event registration
     const newJoinedDonor = await db.Joined_Donor.create({
         EventID: eventID,
         DonorID: userID,
+        HospitalID: hospitalID
     });
     if (newJoinedDonor) res.status(200).json({ message: 'Register event successfully' });
     else res.status(500).json({ message: 'Register event failed' });

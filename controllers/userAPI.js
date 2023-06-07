@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const db = require('../models');
-const { getOneUser } = require('../utils/util');
+const { getOneUser, getHospitalIDByUserName } = require('../utils/util');
 
 
 const getProfile = asyncHandler(async (req, res) => {
@@ -51,5 +51,36 @@ const getDonationRecord = asyncHandler(async (req, res) => {
     res.json(_donation);
 
 });
+const getHospitalSummary = asyncHandler(async (req, res) => {
+    const username = req.params.username;
+    const hospitalID = await getHospitalIDByUserName(username);
+    const eventSum = await db.Event_Information.count({ where: { HospitalID: hospitalID } });
+    const donorSum = await db.Joined_Donor.count({ where: { HospitalID: hospitalID } });
+    const donatedSum = await db.Joined_Donor.count({ where: { HospitalID: hospitalID, IsDonated: true } });
+    const data = {
+        eventSum: eventSum,
+        donorSum: donorSum,
+        donatedSum: donatedSum
+    }
+    const query = `SELECT Event_Information.EventID, EventName, EventStartTime, Count(*) AS Joined_Number
+                   FROM Event_Information INNER JOIN Joined_Donor ON (Event_Information.EventID = Joined_Donor.EventID)
+                   WHERE Event_Information.HospitalID = '${hospitalID}'
+                   GROUP BY EventID, EventName, EventStartTime
+                   ORDER BY EventStartTime DESC
+                   LIMIT 30;`;
+    const eventList = await db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT });
+    let graphData =
+    {
+        labels: [],
+        eventID: [],
+        data: [],
+    };
+    for (let i = 0; i < eventList.length; i++) {
+        graphData.labels.push(eventList[i].EventName);
+        graphData.eventID.push(eventList[i].EventID);
+        graphData.data.push(eventList[i].Joined_Number);
+    }
+    res.status(200).json({ status: 'success', data: data, graphData: graphData });
+});
 
-module.exports = { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile }
+module.exports = { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile, getHospitalSummary }

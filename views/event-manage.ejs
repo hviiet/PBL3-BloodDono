@@ -41,7 +41,7 @@
                 <div class="col-2">Trạng thái</div>
                 <div class="col-2">Tác vụ</div>
             </div>
-
+            <a href=""></a>
             <ul class="waiting-list">
             </ul>
         </section>
@@ -54,6 +54,7 @@
     axios.get(`http://localhost:3000/api/allEvent/${username}`)
         .then(res => {
             const data = res.data.data;
+            console.log(data);
             let stt = 1;
             data.forEach(element => {
                 const [startDate, startTime] = element.eventStartTime.split('T');
@@ -71,13 +72,14 @@
                 }
 
                 waitingList.innerHTML += `
-                    <li class="row waiting-item">
+                    <li class="row waiting-item">                                                
                         <div class="col-1">${stt}</div>
                         <div class="col-3">${element.eventName}</div>
                         <div class="col-3">${startDate} → ${endDate}</div>
-                        <div class="col-2 status">${status}</div>
+                        <div class="col-2 status"><a href="http://localhost:3000/event/view/${element.eventID}">${status}</a></div>
                         <button class="col-1 btn-edit"><a class="btn-edit-link" href="http://localhost:3000/event/update-event/${element.eventID}">Chỉnh sửa</a></button>
                         <button class="col-1 btn-delete" data-eventID="${element.eventID}">Xóa</button>
+                        
                     </li>
                 `;
                 stt++;

@@ -52,11 +52,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     DonorPhoto: {
       type: DataTypes.CHAR(50),
-      allowNull: true,
-      references: {
-        model: 'Image_Table',
-        key: 'ImageID'
-      }
+      allowNull: true
     },
     DonorEmail: {
       type: DataTypes.CHAR(255),

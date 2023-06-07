@@ -28,7 +28,8 @@
                     </div>
                     <div class="notify-logOut col-md-2">
                         <i class="fa-solid fa-bell"></i>
-                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                        <!-- <i class="fa-solid fa-right-from-bracket"></i> -->
                     </div>
                 </div>
             </div>
@@ -37,60 +38,81 @@
         <div id="content">
             <div class="container">
                 <div class="row choose-btn d-flex justify-content-between">
-                    <a href="http://localhost:3000/event/create-event" class="col-md-2">Tạo chiến dịch
-                        mới</a>
-                    <div class="col-md-2">Chiến dịch gần nhất</div>
+                    <a href="http://localhost:3000/event/create-event" class="col-md-2">Tạo chiến dịch mới</a>
                     <a href="http://localhost:3000/event/manage" class="col-md-2">Quản lí chiến dịch</a>
+                    <div class="col-md-2">Thông tin hiến máu</div>
                 </div>
 
                 <div class="row campaign-info d-flex justify-content-between">
+                    <!-- Số chiến dịch đã thực hiện -->
+                    <div class="col-md-2" id="sum-campaigns">
+                        <img src="/assets/img/campaign.png" alt="">
+                        <span id="eventSum">-</span>
+                        <div class="info">Tổng số chiến dịch</div>
+                    </div>
                     <!-- Số người đăng kí trung bình -->
                     <div class="col-md-2" id="donor-number">
                         <img src="/assets/img/user_avt.png" alt="">
-                        <span>587</span>
-                        <div class="info">Số người đăng kí trung bình</div>
+                        <span id="donorSum">-</span>
+                        <div class="info">Số người đăng kí</div>
                     </div>
                     <!-- ---------------------------------------------- -->
 
                     <!-- Số người tiếp cận -->
                     <div class="col-md-2" id="visitor">
                         <img src="/assets/img/networking.png" alt="">
-                        <span>748</span>
-                        <div class="info">Số người tiếp cận</div>
+                        <span id="donatedSum">-</span>
+                        <div class="info">Số người hiến máu thành công</div>
                     </div>
                     <!-- ---------------------------------------------- -->
 
-                    <!-- Số chiến dịch đã thực hiện -->
-                    <div class="col-md-2" id="sum-campaigns">
-                        <img src="/assets/img/campaign.png" alt="">
-                        <span>12</span>
-                        <div class="info">Tổng số chiến dịch</div>
-                    </div>
+
                     <!-- ---------------------------------------------- -->
                 </div>
-
                 <div class="nearest-campaign">
-                    <div class="nearest-title">Chiến dịch gần nhất: "Mùa hè đỏ"</div>
-                    <div class="row">
-                        <img src="/assets/img/number donors.png" alt="">
-                        <div class="cons">Số lượng người đã đăng kí: 482</div>
-                    </div>
-                    <div class="row">
-                        <img src="/assets/img/blood.png" alt="">
-                        <div class="cons">Nhóm máu cần thiết: A, B, AB</div>
-                    </div>
-                    <div class="row">
-                        <img src="/assets/img/schedule.png" alt="">
-                        <div class="cons">7h-17h ngày 30/2/2023</div>
-                    </div>
-                    <div class="row">
-                        <img src="/assets/img/destination.png" alt="">
-                        <div class="cons">Hoàng Trung Thông, Hoà Minh, Liên Chiểu, Đà Nẵng</div>
-                    </div>
+                    <h2>Thông tin chiến dịch</h2>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const username = '<%= username %>';
+    axios.get(`http://localhost:3000/api/hospital/summary/${username}`)
+        .then(function (response) {
+            // handle success
+            const data = response.data.data;
+            const graphData = response.data.graphData;
+            document.getElementById('eventSum').innerHTML = data.eventSum;
+            document.getElementById('donorSum').innerHTML = data.donorSum;
+            document.getElementById('donatedSum').innerHTML = data.donatedSum;
+            const ctx = document.getElementById('myChart');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: graphData.labels,
+                    datasets: [{
+                        label: 'Số người tham gia',
+                        data: graphData.data,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        });
+</script>
 
 </html>
