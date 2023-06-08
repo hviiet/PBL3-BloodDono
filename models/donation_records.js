@@ -22,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
     DonationVolume: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    EventID: {
+      type: DataTypes.CHAR(8),
+      allowNull: true
     }
   }, {
     sequelize,

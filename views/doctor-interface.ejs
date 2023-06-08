@@ -40,7 +40,8 @@
                 <div class="row choose-btn d-flex justify-content-between">
                     <a href="http://localhost:3000/event/create-event" class="col-md-2">Tạo chiến dịch mới</a>
                     <a href="http://localhost:3000/event/manage" class="col-md-2">Quản lí chiến dịch</a>
-                    <div class="col-md-2">Thông tin hiến máu</div>
+                    <a href="http://localhost:3000/event/donation-info/<%= username %>" class="col-md-2">Thông tin hiến
+                        máu</a>
                 </div>
 
                 <div class="row campaign-info d-flex justify-content-between">
@@ -97,13 +98,17 @@
                     datasets: [{
                         label: 'Số người tham gia',
                         data: graphData.data,
-                        borderWidth: 3
+                        borderWidth: 3,
+                        tension: 0.1
                     }]
                 },
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
                         }
                     }
                 }

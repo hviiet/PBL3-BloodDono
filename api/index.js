@@ -24,7 +24,7 @@ app.use('/', require('../routes/auth'));
 //Home Page
 app.use('/', require('../routes/home'));
 //Profile Page
-app.use('/user', require('../routes/profile'));
+app.use('/user', require('../routes/user'));
 //Event Page
 app.use('/event', require('../routes/event'));
 //Search 
@@ -32,7 +32,7 @@ app.use('/search', require('../routes/search'));
 //All api
 app.use('/api', require('../routes/api'))
 // Error 404
-app.use('/404',(req, res) => {
+app.use('/404', (req, res) => {
     res.status(404).render('error404');
 });
 

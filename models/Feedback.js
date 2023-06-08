@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    Name: {
+    Username: {
       type: DataTypes.CHAR(255),
       allowNull: false
     },

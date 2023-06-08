@@ -102,4 +102,12 @@ const approveHospital = asyncHandler(async (req, res) => {
     await db.Hospital_Information.update({ HospitalIsVerified: true }, { where: { HospitalID: hospitalID } });
     res.status(200).json({ message: 'Tài khoản bệnh viện đã được duyệt' });
 });
-module.exports = { updatePassword, updateProfile, uploadImageForProfile, deleteUser, approveHospital }
+const sendFeedback = asyncHandler(async (req, res) => {
+    const { username, feedback } = req.body;
+    await db.Feedback.create({
+        Username: username,
+        FeedbackText: feedback
+    });
+    res.status(200).json({ message: 'Gửi phản hồi thành công' });
+});
+module.exports = { updatePassword, updateProfile, uploadImageForProfile, deleteUser, approveHospital, sendFeedback }

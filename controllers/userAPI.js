@@ -62,8 +62,18 @@ const getHospitalSummary = asyncHandler(async (req, res) => {
         donorSum: donorSum,
         donatedSum: donatedSum
     }
-    const query = `SELECT Event_Information.EventID, EventName, EventStartTime, Count(*) AS Joined_Number
-                   FROM Event_Information INNER JOIN Joined_Donor ON (Event_Information.EventID = Joined_Donor.EventID)
+    // const query = `SELECT Event_Information.EventID, EventName, EventStartTime, Count(*) AS Joined_Number
+    //                FROM Event_Information INNER JOIN Joined_Donor ON (Event_Information.EventID = Joined_Donor.EventID)
+    //                WHERE Event_Information.HospitalID = '${hospitalID}'
+    //                GROUP BY EventID, EventName, EventStartTime
+    //                ORDER BY EventStartTime DESC
+    //                LIMIT 30;`;
+    const query = `SELECT Event_Information.EventID, EventName, EventStartTime, 
+	               IF (
+                   EXISTS (SELECT EventID
+                   FROM Joined_Donor
+                   WHERE EventID = Event_Information.EventID), COUNT(*), 0) AS Joined_Number
+                   FROM Event_Information LEFT JOIN Joined_Donor ON (Event_Information.EventID = Joined_Donor.EventID)
                    WHERE Event_Information.HospitalID = '${hospitalID}'
                    GROUP BY EventID, EventName, EventStartTime
                    ORDER BY EventStartTime DESC
@@ -82,5 +92,24 @@ const getHospitalSummary = asyncHandler(async (req, res) => {
     }
     res.status(200).json({ status: 'success', data: data, graphData: graphData });
 });
+const getFeedback = asyncHandler(async (req, res) => {
+    const feedback = await db.Feedback.findAll({
+        limit: 10,
+        order: [['FeedbackID', 'DESC']],
+        attributes: ['Username', 'FeedbackText']
+    });
+    let data = [];
+    for (let i = 0; i < feedback.length; i++) {
+        const user = await getOneUser(feedback[i].Username);
+        data.push({
+            name: user.name,
+            photo: user.photo ?? '/assets/img/help.png',
+            feedbackText: feedback[i].FeedbackText
+        });
+    }
+    console.log(data);
+    res.status(200).json({ status: 'success', data: data });
+});
 
-module.exports = { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile, getHospitalSummary }
+
+module.exports = { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile, getHospitalSummary, getFeedback }

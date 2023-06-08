@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/confirm-participants.css">
+    <link rel="icon" href="/assets/img/logo-pic.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <title>BloodDono-Xác nhận người đã tham gia</title>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <a href="/" class="logo col-md-4">
+                    <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
+                    <div class="logo-name line">BloodDono</div>
+                </a>
+                <div class="search-bar col-md-4">
+                    <label for="search" class="search-logo"><i class="fa-solid fa-magnifying-glass"></i></label>
+                    <input type="text" name="search" id="search" placeholder="Tìm kiếm">
+                </div>
+                <div class="notify-logOut col-md-3">
+                    <i class="fa-solid fa-bell"></i>
+                    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="campaigns">
+            <label for="">Chọn đợt hiến máu</label> <br>
+            <select name="" id="event-selection">
+                <option value="default" selected disabled hidden>Chọn đợt hiến máu...</option>
+            </select>
+            <button id="searchBtn" class="btn btn-primary">Tìm kiếm</button>
+        </div>
+        <div class="container-fluid">
+            <p>Danh sách người tham gia</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="index">STT</th>
+                        <th scope="col" class="name">Họ và tên</th>
+                        <th scope="col" class="date-of-birth">Ngày sinh</th>
+                        <th scope="col" class="blood-type">Nhóm máu</th>
+                        <th scope="col" class="phone-number">Số điện thoại</th>
+                        <th scope="col" class="email">Email</th>
+                        <th scope="col" class="status">Trạng thái</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listDonorTable">
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+
+    <section class="Modal js-Modal">
+        <div class="Modal-container">
+            <i class="close js-close fa-solid fa-xmark"></i>
+            <div class="Modal-header"></div>
+
+            <div class="detail">
+            </div>
+        </div>
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const username = '<%= username %>';
+    axios.get(`http://localhost:3000/api/allEvent/${username}`)
+        .then(function (response) {
+            // handle success
+            const data = response.data.data;
+            const eventSelection = document.getElementById('event-selection');
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.eventID;
+                option.innerHTML = item.eventName;
+                eventSelection.appendChild(option);
+            })
+            document.getElementById('listDonorTable').innerHTML = '<h3 class="text-center">Không có dữ liệu</h3>';
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        });
+    const searchBtn = document.getElementById('searchBtn');
+    const Close = document.querySelector('.js-close');
+    const Modal = document.querySelector('.js-Modal');
+    searchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const eventID = document.getElementById('event-selection').value;
+        if (eventID === 'default') return alert('Vui lòng chọn đợt hiến máu');
+        axios.get(`http://localhost:3000/api/all-joined-donor/${eventID}`)
+            .then(function (response) {
+                // handle success
+                const data = response.data.data;
+                console.log(data);
+                const listDonorTable = document.getElementById('listDonorTable');
+                if (data.length === 0) return listDonorTable.innerHTML = '<h3 class="text-center">Không có dữ liệu</h3>';
+                let index = 1;
+                listDonorTable.innerHTML = '';
+                data.forEach(donor => {
+                    listDonorTable.innerHTML += `
+                    <tr class="item">
+                        <th scope="row" class="index">${index}</th>
+                        <td class="name">${donor.donorName}</td>
+                        <td class="date-of-birth">${donor.donorBirth}</td>
+                        <td class="blood-type">${donor.donorBloodType}</td>
+                        <td class="phone-number">${donor.donorPhoneNumber}</td>
+                        <td class="email">${donor.donorEmail}</td>
+                        <td class="status">
+                            <button id="detailBtn" class="btn detailBtn ${donor.isDonated ? 'btn-primary' : 'btn-danger'}"
+                            data-donor-id="${donor.donorID}"
+                            data-name="${donor.donorName}"
+                            data-birth="${donor.donorBirth}"
+                            data-blood-type="${donor.donorBloodType}"
+                            data-phone-number="${donor.donorPhoneNumber}"
+                            data-email="${donor.donorEmail}"
+                            data-is-donated="${donor.isDonated}"
+                            data-donate-date="${donor.donationDate}"
+                            data-donate-volume="${donor.donationVolume}"
+                            ">${donor.isDonated ? 'Đã hiến' : 'Chưa hiến'}</button>
+                            </td>
+                    </tr>`;
+                    index++;
+                });
+                const itemList = document.querySelectorAll('.detailBtn');
+                itemList.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log(e.target);
+                        const detail = document.querySelector('.detail');
+                        const selectElement = document.getElementById('event-selection');
+                        const selectedOption = selectElement.options[selectElement.selectedIndex];
+                        const selectedOptionInnerHTML = selectedOption.innerHTML;
+                        detail.innerHTML = `
+                        <div class="detail">
+                            <div class="label">Tên đợt hiến máu</div>
+                            <div class="campaign-name">${selectedOptionInnerHTML}</div>
+
+                            <div class="name-bloodtype flex">
+                                <div class="name">
+                                    <div class="label">Tên người hiến</div>
+                                    <div class="name-detail">${e.target.getAttribute('data-name')}</div>
+                                </div>                                
+                            </div>
+                            
+                            <div class="birth-blood-type flex">
+                                <div class="date">
+                                    <div class="label">Ngày sinh</div>
+                                    <div class="date-detail">${e.target.getAttribute('data-birth')}</div>
+                                </div>
+                                <div class="blood-type">
+                                    <div class="label">Nhóm máu</div>
+                                    <div class="blood-type-detail">${e.target.getAttribute('data-blood-type')}</div>
+                                </div>
+                            </div> 
+                            <div class="phone-email flex">
+                                <div class="phone">
+                                    <div class="label">Số điện thoại</div>
+                                    <div class="phone-detail">${e.target.getAttribute('data-phone-number')}</div>
+                                </div>
+
+                                <div class="email">
+                                    <div class="label">Email</div>
+                                    <div class="email-detail">${e.target.getAttribute('data-email')}</div>
+                                </div>
+                            </div> 
+
+                            <div class="status-cardiac-output flex">
+                                <div class="cardiac-output">
+                                    <div class="label">Ngày hiến</div>
+                                    <input type="date" name="" id="" class="cardiac-date-detail cardiac-output-detail">
+                                </div>
+                                <div class="cardiac-output">
+                                    <div class="label">Lượng máu hiến</div>
+                                    <input type="text" name="" id="" class="cardiac-volume-detail cardiac-output-detail">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Buttons">
+                            <button class="accept saveBtn"><i class="fa-regular fa-circle-check"></i> Lưu</button>
+                        </div>
+                        `;
+                        if (e.target.getAttribute('data-is-donated') === 'true') {
+                            document.querySelector('.cardiac-date-detail').value = e.target.getAttribute('data-donate-date');
+                            document.querySelector('.cardiac-volume-detail').value = e.target.getAttribute('data-donate-volume');
+                        }
+                        Modal.classList.add('open');
+                        const saveBtnList = document.querySelectorAll('.saveBtn');
+                        const donorID = e.target.getAttribute('data-donor-id');
+                        saveBtnList.forEach(saveBtn => {
+                            saveBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                const cardiacDateDetail = document.querySelector('.cardiac-date-detail').value;
+                                const cardiacVolumeDetail = document.querySelector('.cardiac-volume-detail').value;
+                                console.log(donorID);
+                                if (cardiacDateDetail === '' || cardiacVolumeDetail === '') return alert('Vui lòng nhập đầy đủ thông tin');
+                                const data = {
+                                    eventID: eventID,
+                                    donationDate: cardiacDateDetail,
+                                    donationVolume: cardiacVolumeDetail
+                                }
+                                axios.post(`http://localhost:3000/event/update-donation-info/${donorID}`, data)
+                                    .then(function (response) {
+                                        // handle success
+                                        console.log(response);
+                                        alert('Cập nhật thành công');
+                                        window.location.reload();
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                            })
+                        })
+                    });
+                });
+                Close.addEventListener('click', () => {
+                    Modal.classList.remove('open');
+                })
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    });
+
+</script>
+
+</html>

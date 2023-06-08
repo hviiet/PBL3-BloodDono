@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
-const { updatePassword, updateProfile, uploadImageForProfile, deleteUser, approveHospital } = require('../controllers/profile');
+const { updatePassword, updateProfile, uploadImageForProfile, deleteUser, approveHospital, sendFeedback } = require('../controllers/user');
 const { cookieJwtAuth } = require('../middleware/cookieJwtAuth');
 const { donorCheck } = require('../middleware/donorCheck');
 
@@ -49,6 +49,7 @@ router.route('/:username/donate-history').post([cookieJwtAuth, donorCheck], upda
 //admin route
 router.route('/:username/approve-hospital').post(cookieJwtAuth, approveHospital);
 router.route('/:username/delete-user').post(cookieJwtAuth, deleteUser);
-
+//feedback route
+router.route('/:username/send-feedback').post(cookieJwtAuth, sendFeedback);
 
 module.exports = router;

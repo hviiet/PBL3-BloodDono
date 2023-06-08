@@ -72,4 +72,36 @@ const deleteEvent = asyncHandler(async (req, res) => {
     await db.Event_Information.destroy({ where: { EventID: eventID } });
     res.status(200).json({ message: 'Delete event successfully' });
 });
-module.exports = { createNewEvent, updateEvent, registerEvent, deleteEvent };
+const updateDonationInfo = asyncHandler(async (req, res) => {
+    const donorID = req.params.donorID;
+    const { eventID, donationDate, donationVolume } = req.body;
+    console.log(donorID);
+    console.log(eventID);
+    console.log(donationDate);
+    console.log(donationVolume);
+    await db.Joined_Donor.update({ IsDonated: true }, { where: { EventID: eventID, DonorID: donorID } });
+    const isExits = await db.Donation_Records.findOne({ where: { DonorID: donorID, EventID: eventID } });
+    if (isExits != null) {
+        await db.Donation_Records.update({
+            DonationDate: donationDate,
+            DonationVolume: donationVolume
+        },
+            {
+                where: { DonorID: donorID, EventID: eventID }
+            }
+        );
+    }
+    else {
+        await db.Donation_Records.create({
+            DonorID: donorID,
+            EventID: eventID,
+            DonationDate: donationDate,
+            DonationVolume: donationVolume
+        });
+    }
+
+    console.log('update donation info');
+    res.status(200).json({ message: 'Update donation info successfully' });
+});
+
+module.exports = { createNewEvent, updateEvent, registerEvent, deleteEvent, updateDonationInfo };

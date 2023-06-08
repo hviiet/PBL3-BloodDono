@@ -57,4 +57,47 @@ const getRecentEvent = asyncHandler(async (req, res) => {
     }
     res.status(200).json({ status: 'success', data });
 });
-module.exports = { getEvent, getAllEventOfHospital, getRecentEvent };
+const getAllJoinedDonor = asyncHandler(async (req, res) => {
+    const listJoinedDonor = await db.Joined_Donor.findAll({
+        where: { EventID: req.params.eventID },
+        attributes: ['DonorID', 'IsDonated']
+    });
+    let data = [];
+    for (let i = 0; i < listJoinedDonor.length; i++) {
+        const donor = await db.Donor_Information.findOne({ where: { DonorID: listJoinedDonor[i].DonorID } });
+        if (listJoinedDonor[i].IsDonated) {
+            const donation = await db.Donation_Records.findOne({
+                where: {
+                    DonorID: listJoinedDonor[i].DonorID,
+                    EventID: req.params.eventID
+                },
+                attributes: ['DonationDate', 'DonationVolume']
+            });
+            data.push({
+                donorID: donor.DonorID,
+                donorName: donor.DonorName,
+                donorBirth: donor.DonorBirth,
+                donorBloodType: donor.DonorBloodType,
+                donorPhoneNumber: donor.DonorPhoneNumber,
+                donorEmail: donor.DonorEmail,
+                isDonated: listJoinedDonor[i].IsDonated,
+                donationDate: donation.DonationDate,
+                donationVolume: donation.DonationVolume
+            });
+        }
+        else {
+            data.push({
+                donorID: donor.DonorID,
+                donorName: donor.DonorName,
+                donorBirth: donor.DonorBirth,
+                donorBloodType: donor.DonorBloodType,
+                donorPhoneNumber: donor.DonorPhoneNumber,
+                donorEmail: donor.DonorEmail,
+                isDonated: listJoinedDonor[i].IsDonated
+            });
+        }
+
+    }
+    res.status(200).json({ status: 'success', data: data });
+});
+module.exports = { getEvent, getAllEventOfHospital, getRecentEvent, getAllJoinedDonor };

@@ -144,12 +144,12 @@
             </div>
             <h3 class="Modal-header">Đóng góp ý kiến</h1>
 
-            <div class="Modal-content">
-                <p>Hãy cho chúng tôi biết cảm nhận của bạn!</p>
-                <textarea name="" id="" cols="76" rows="6"></textarea>
-            </div>
+                <div class="Modal-content">
+                    <p>Hãy cho chúng tôi biết cảm nhận của bạn!</p>
+                    <textarea name="" id="" cols="76" rows="6"></textarea>
+                </div>
 
-            <button class="btn-send-feedback">Gửi ý kiến</button>
+                <button class="btn-send-feedback">Gửi ý kiến</button>
         </div>
     </div>
 
@@ -190,13 +190,35 @@
         const modal = document.querySelector('.js-Modal');
         const modalClose = document.querySelector('.js-close');
         const modalFeedback = document.querySelector('.feedback');
-
+        const username = '<%= username %>'
         modalFeedback.addEventListener('click', () => {
             modal.classList.add('open');
         });
 
         modalClose.addEventListener('click', () => {
             modal.classList.remove('open');
+        });
+        const btnSendFeedback = document.querySelector('.btn-send-feedback');
+        btnSendFeedback.addEventListener('click', () => {
+            const feedbackText = document.querySelector('.Modal-content textarea').value;
+            if (feedbackText === '') {
+                alert('Vui lòng nhập nội dung đóng góp');
+                return;
+            }
+            const data = {
+                username: username,
+                feedback: feedbackText
+            }
+            axios.post(`http://localhost:3000/user/${username}/send-feedback`, data)
+                .then((response) => {
+                    // handle success
+                    alert('Gửi đóng góp thành công');
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
         });
     </script>
 </body>
