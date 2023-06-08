@@ -94,9 +94,10 @@
             });
 
             btnEdit.forEach(btn => {
-                if (btn.previousElementSibling.innerHTML == 'Đang mở đăng kí') {
+                if (btn.previousElementSibling.innerHTML == 'Đang mở đăng kí' || btn.previousElementSibling.innerHTML == 'Đang chạy') {
                     btn.style.background = '#0069D9';
-                } else {
+                }
+                else {
                     btn.style.display = 'none';
                 }
             });
@@ -117,7 +118,7 @@
             });
 
             btnDelete.forEach(btn => {
-                if (btn.previousElementSibling.previousElementSibling.innerHTML == 'Đang mở đăng kí') {
+                if (btn.previousElementSibling.previousElementSibling.innerHTML == 'Đang mở đăng kí' || btn.previousElementSibling.previousElementSibling.innerHTML == 'Đang chạy') {
                     btn.style.background = '#FF0000';
                 } else {
                     btn.style.display = 'none';

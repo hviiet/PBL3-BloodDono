@@ -146,6 +146,31 @@
             const eventStartTime = document.getElementById('start');
             const eventEndTime = document.getElementById('end');
             const street = document.querySelector('.street');
+            //validate
+            if (eventName.value == '') {
+                alert('Tên chiến dịch không được để trống');
+                return;
+            }
+            if (eventStartTime.value == '') {
+                alert('Thời gian bắt đầu không được để trống');
+                return;
+            }
+            if (eventEndTime.value == '') {
+                alert('Thời gian kết thúc không được để trống');
+                return;
+            }
+            if (eventQuantity.value == '') {
+                alert('Số lượng không được để trống');
+                return;
+            }
+            if (street.value == '' || ward.value == 'default' || district.value == 'default' || province.value == 'default') {
+                alert('Địa chỉ không được để trống');
+                return;
+            }
+            if (eventStartTime.value > eventEndTime.value) {
+                alert('Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc');
+                return;
+            }
             const eventAddress = {
                 street: street.value,
                 ward: ward.value,
@@ -159,7 +184,6 @@
                 eventEndTime: eventEndTime.value,
                 eventAddress: eventAddress
             };
-            console.log(data);
             axios.post(`http://localhost:3000/event/create-event`, data)
                 .then((response) => {
                     // handle success

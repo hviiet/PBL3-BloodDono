@@ -214,6 +214,31 @@
     const form = document.querySelector('.container');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        //validate
+        if (eventName.value == '') {
+            alert('Tên sự kiện không được để trống');
+            return;
+        }
+        if (eventQuantity.value == '') {
+            alert('Số lượng người tham gia không được để trống');
+            return;
+        }
+        if (eventStartTime.value == '') {
+            alert('Thời gian bắt đầu không được để trống');
+            return;
+        }
+        if (eventEndTime.value == '') {
+            alert('Thời gian kết thúc không được để trống');
+            return;
+        }
+        if (street.value == '' || ward.value == 'default' || district.value == 'default' || province.value == 'default') {
+            alert('Địa chỉ không được để trống');
+            return;
+        }
+        if (new Date(eventStartTime.value) > new Date(eventEndTime.value)) {
+            alert('Thời gian kết thúc phải sau thời gian bắt đầu');
+            return;
+        }
         const data = {
             eventName: eventName.value,
             eventQuantity: eventQuantity.value,
