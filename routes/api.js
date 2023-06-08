@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile, getHospitalSummary, getFeedback } = require('../controllers/userAPI');
+const { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile, getHospitalSummary, getFeedback, getAvatar } = require('../controllers/userAPI');
 const { getEvent, getAllEventOfHospital, getRecentEvent, getAllJoinedDonor } = require('../controllers/eventAPI');
 const { getAllIllness, getIllnessByUsername } = require('../controllers/othersAPI');
 const { getProvince, getDistrict, getWard } = require('../controllers/addressAPI');
@@ -8,6 +8,7 @@ const { searchByBloodTypeAndAddress, searchHospitalByAddress } = require('../con
 //user
 router.route('/user/:username').get(getProfile);
 router.route('/user').get(getAllProfile);
+router.route('/get-avatar/:username').get(getAvatar);
 //hospital
 router.route('/hospital').get(getAllHospitalProfile);
 router.route('/hospital/summary/:username').get(getHospitalSummary);

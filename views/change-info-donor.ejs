@@ -38,7 +38,7 @@
                     <!-- Hình ảnh và tên user -->
                     <div class="user-interface">
                         <img src="/assets/img/help.png" alt="" class="user-avt" />
-                        <div class="user-name">Fujiguro Toji</div>
+                        <div class="user-name">-</div>
                         <div class="edit-tag">
                             <i class="fa-regular fa-pen-to-square"></i> Chỉnh sửa
                         </div>
@@ -314,6 +314,17 @@
             });
         })
         .catch(function (error) {
+            // handle error
+            console.log(error);
+        });
+    //set avatar
+    axios.get(`http://localhost:3000/api//get-avatar/${username}`)
+        .then(res => {
+            const data = res.data.data;
+            document.querySelector('.user-avt').src = data.photo;
+            document.querySelector('.user-name').innerHTML = data.name;
+        })
+        .catch((error) => {
             // handle error
             console.log(error);
         });

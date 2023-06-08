@@ -110,6 +110,21 @@ const getFeedback = asyncHandler(async (req, res) => {
     console.log(data);
     res.status(200).json({ status: 'success', data: data });
 });
+const getAvatar = asyncHandler(async (req, res) => {
+    const user = await getOneUser(req.params.username);
+    const data = {
+        name: user.name,
+        photo: user.photo ?? '/assets/img/help.png'
+    }
+    res.status(200).json({ status: 'success', data: data });
+});
 
-
-module.exports = { getProfile, getAllProfile, getDonationRecord, getAllHospitalProfile, getHospitalSummary, getFeedback }
+module.exports = {
+    getProfile,
+    getAllProfile,
+    getDonationRecord,
+    getAllHospitalProfile,
+    getHospitalSummary,
+    getFeedback,
+    getAvatar
+}

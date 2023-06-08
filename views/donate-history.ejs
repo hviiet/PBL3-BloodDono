@@ -34,7 +34,7 @@
             <div class="panel-header flex">
                 <!-- Thông tin tổng quát người hiến máu -->
                 <div class="name-tilte">
-                    <h2 class="donor-name">Lê Trí Công</h2>
+                    <h2 class="donor-name">-</h2>
                     <p>Lịch sử hiến máu</p>
                 </div>
                 <!-- ---------------------------------------- -->
@@ -55,7 +55,7 @@
                     <p>Chính những người hiến máu như bạn là người thắp sáng cuộc sống của những bệnh nhân đang cần máu
                         cấp cứu điều trị”</p>
                 </div>
-                
+
                 <button class="btn back">Trở về</button>
             </div>
 
@@ -99,6 +99,17 @@
             // handle error
             console.log(error);
         });
+    axios.get(`http://localhost:3000/api/get-avatar/${username}`)
+        .then(res => {
+            const data = res.data.data;
+            document.querySelector('.donor-avatar').src = data.photo;
+            document.querySelector('.donor-name').innerHTML = data.name;
+        })
+        .catch((error) => {
+            // handle error
+            console.log(error);
+        });
+
     const backBtn = document.querySelector('.back');
     backBtn.addEventListener('click', () => {
         window.location.href = `http://localhost:3000/user/${username}}`;
