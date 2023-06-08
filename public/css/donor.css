@@ -82,19 +82,20 @@ li {
 .donor-box .col-3 .user-interface {
     padding: 25px 0;
     text-align: center;
+    position: relative;
 }
 
 .donor-box .col-3 .user-interface .user-avt {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    position: relative;
+    object-fit: cover;
 }
 
 .file-input .btnUpload {
     position: absolute;
-    bottom: 75%;
-    right: 21%;
+    top: 58%;
+    right: 17%;
     width: 32px;
     height: 32px;
     border-radius: 50%;

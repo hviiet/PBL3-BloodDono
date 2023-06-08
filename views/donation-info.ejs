@@ -20,12 +20,9 @@
                     <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
                     <div class="logo-name line">BloodDono</div>
                 </a>
-                <div class="search-bar col-md-4">
-                    <label for="search" class="search-logo"><i class="fa-solid fa-magnifying-glass"></i></label>
-                    <input type="text" name="search" id="search" placeholder="Tìm kiếm">
+                <div class="col-md-4">
                 </div>
                 <div class="notify-logOut col-md-3">
-                    <i class="fa-solid fa-bell"></i>
                     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
                 </div>
             </div>
@@ -38,7 +35,7 @@
             <select name="" id="event-selection">
                 <option value="default" selected disabled hidden>Chọn đợt hiến máu...</option>
             </select>
-            <button id="searchBtn" class="btn btn-primary">Tìm kiếm</button>
+            <button id="searchBtn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
         </div>
         <div class="container-fluid">
             <p>Danh sách người tham gia</p>
@@ -152,20 +149,20 @@
                                 <div class="name">
                                     <div class="label">Tên người hiến</div>
                                     <div class="name-detail">${e.target.getAttribute('data-name')}</div>
-                                </div>                                
-                            </div>
-                            
-                            <div class="birth-blood-type flex">
-                                <div class="date">
-                                    <div class="label">Ngày sinh</div>
-                                    <div class="date-detail">${e.target.getAttribute('data-birth')}</div>
-                                </div>
+                                </div> 
+                                
                                 <div class="blood-type">
                                     <div class="label">Nhóm máu</div>
                                     <div class="blood-type-detail">${e.target.getAttribute('data-blood-type')}</div>
                                 </div>
-                            </div> 
-                            <div class="phone-email flex">
+                            </div>
+                            
+                            <div class="date-phone-email flex">
+                                <div class="date">
+                                    <div class="label">Ngày sinh</div>
+                                    <div class="date-detail">${e.target.getAttribute('data-birth')}</div>
+                                </div>
+
                                 <div class="phone">
                                     <div class="label">Số điện thoại</div>
                                     <div class="phone-detail">${e.target.getAttribute('data-phone-number')}</div>
@@ -178,12 +175,12 @@
                             </div> 
 
                             <div class="status-cardiac-output flex">
-                                <div class="cardiac-output">
+                                <div class="donate-date">
                                     <div class="label">Ngày hiến</div>
                                     <input type="date" name="" id="" class="cardiac-date-detail cardiac-output-detail">
                                 </div>
                                 <div class="cardiac-output">
-                                    <div class="label">Lượng máu hiến</div>
+                                    <div class="label">Lượng máu hiến (ml)</div>
                                     <input type="text" name="" id="" class="cardiac-volume-detail cardiac-output-detail">
                                 </div>
                             </div>

@@ -21,6 +21,19 @@ a {
     display: flex !important;
 }
 
+.btn {
+    border: none !important;
+    padding: 8px 20px !important;
+    color: white !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: background 0.3s !important;
+}
+
+.btn:hover {
+    opacity: 0.8 !important;
+}
+
 
 /* ----------------------------------------------------- */
 
@@ -46,39 +59,13 @@ header .line {
     font-weight: 900;
 }
 
-.search-bar {
-    height: 37px;
-    background-color: white;
-    border: 1px solid #565353;
-    border-radius: 50px;
-    margin: 10px 0px;
-    padding-right: 0px;
-}
-
-.search-bar .search-logo {
-    padding-right: 5px;
-    color: #565353;
-    cursor: pointer;
-}
-
-.search-bar input {
-    border: 0px solid #ccc;
-    line-height: 35px;
-    width: 400px;
-    padding-left: 5px;
-    border-style: hidden;
-}
-
-.search-bar input:focus {
-    outline: none;
-}
-
 .notify-logOut {
-    text-align: center;
+    text-align: right;
     margin-left: 60px;
 }
 
 .notify-logOut .fa-solid {
+    color: black;
     font-size: 25px;
     margin: 10px 0;
     padding: 5px 15px;
@@ -186,7 +173,7 @@ table .phone-number {
 
 table .email {
     width: 20%;
-    text-align: center;
+    text-align: left;
 }
 
 table .status {
@@ -282,10 +269,10 @@ table .status {
 .Modal .date,
 .phone {
     margin-right: 5px;
-    width: 30%;
+    width: 25%;
 }
 
-.Modal .date .date-detail,
+.Modal .date-detail,
 .phone-detail {
     padding: 4px;
     margin-bottom: 5px;
@@ -293,13 +280,11 @@ table .status {
     background-color: rgb(233, 233, 233);
 }
 
-.Modal .address,
-.email {
-    width: 70%;
+.Modal .email {
+    width: 50%;
 }
 
-.Modal .address .address-detail,
-.email-detail {
+.Modal .email-detail {
     padding: 4px;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -311,7 +296,7 @@ table .status {
     margin-top: 20px;
 }
 
-.Modal .status {
+.Modal .donate-date {
     margin-right: 5px;
     width: 40%;
     text-align: left;
@@ -322,7 +307,7 @@ table .status {
     text-align: left;
 }
 
-.Modal .cardiac-output .cardiac-output-detail {
+.Modal .cardiac-output-detail {
     width: 100%;
     padding: 4px;
     margin-bottom: 5px;

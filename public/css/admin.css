@@ -58,6 +58,7 @@ header .line {
 }
 
 .log-in-out .fa-solid {
+    color: black;
     font-size: 25px;
     padding: 10px 15px;
     cursor: pointer;
@@ -241,17 +242,9 @@ header .line {
     background-color: rgb(233, 233, 233);
 }
 
-.Modal .hospital-address .street {
-    width: 170px;
-    padding: 4px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    background-color: rgb(233, 233, 233);
-}
 
 .Modal .hospital-address .ward-district-city {
-    width: 405px;
+    width: 100%;
     padding: 4px;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -259,18 +252,22 @@ header .line {
 }
 
 .Modal .phone-number {
+    width: 40%;
     margin-right: 5px;
 }
 
 .Modal .phone-number .hospital-phone {
-    padding: 4px 80px 4px 4px;
+    padding: 4px;
     margin-bottom: 5px;
     border-radius: 5px;
     background-color: rgb(233, 233, 233);
 }
 
+.Modal .email {
+    width: 60%;
+}
+
 .Modal .email .hospital-email {
-    width: 405px;
     padding: 4px;
     margin-bottom: 5px;
     border-radius: 5px;

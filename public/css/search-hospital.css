@@ -79,6 +79,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .donor-box .col-3 .user-interface .user-name {
@@ -155,7 +156,7 @@ body {
 select {
     margin-right: 8px !important;
     width: 250px;
-    height: 27px;
+    height: 35px;
     border: 1px solid rgba(0, 84, 76, 0.63);
     border-radius: 5px;
 }

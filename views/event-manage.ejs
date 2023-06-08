@@ -20,13 +20,10 @@
                     <img src="/assets/img/logo-pic.png" alt="" class="logo-pic line">
                     <div class="logo-name line">BloodDono</div>
                 </a>
-                <div class="search-bar col-md-4">
-                    <label for="search" class="search-logo"><i class="fa-solid fa-magnifying-glass"></i></label>
-                    <input type="text" name="search" id="search" placeholder="Tìm kiếm">
+                <div class="col-md-4">
                 </div>
                 <div class="notify-logOut col-md-3">
-                    <i class="fa-solid fa-bell"></i>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
                 </div>
             </div>
         </header>
@@ -76,8 +73,8 @@
                         <div class="col-1">${stt}</div>
                         <div class="col-3">${element.eventName}</div>
                         <div class="col-3">${startDate} → ${endDate}</div>
-                        <div class="col-2 status"><a href="http://localhost:3000/event/view/${element.eventID}">${status}</a></div>
-                        <button class="col-1 btn-edit"><a class="btn-edit-link" href="http://localhost:3000/event/update-event/${element.eventID}">Chỉnh sửa</a></button>
+                        <a href="http://localhost:3000/event/view/${element.eventID}" class="col-2 status">${status}</a>
+                        <a class="btn-edit-link" href="http://localhost:3000/event/update-event/${element.eventID}" class="col-1 btn-edit">Chỉnh sửa</a>
                         <button class="col-1 btn-delete" data-eventID="${element.eventID}">Xóa</button>
                         
                     </li>
@@ -85,7 +82,7 @@
                 stt++;
             });
             const Status = document.querySelectorAll('.status');
-            const btnEdit = document.querySelectorAll('.btn-edit');
+            const btnEdit = document.querySelectorAll('.btn-edit-link');
             Status.forEach(status => {
                 if (status.innerHTML == 'Đang chạy') {
                     status.style.background = '#39AB59';
@@ -95,6 +92,15 @@
                     status.style.background = '#F2C94C';
                 }
             });
+
+            btnEdit.forEach(btn => {
+                if (btn.previousElementSibling.innerHTML == 'Đang mở đăng kí') {
+                    btn.style.background = '#0069D9';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+
             const btnDelete = document.querySelectorAll('.btn-delete');
             btnDelete.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -108,6 +114,14 @@
                             console.log(err);
                         })
                 })
+            });
+
+            btnDelete.forEach(btn => {
+                if (btn.previousElementSibling.previousElementSibling.innerHTML == 'Đang mở đăng kí') {
+                    btn.style.background = '#FF0000';
+                } else {
+                    btn.style.display = 'none';
+                }
             });
         })
         .catch(err => {

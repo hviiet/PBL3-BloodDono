@@ -44,6 +44,7 @@ body {
 }
 
 .log-in-out .fa-solid {
+    color: black;
     font-size:25px;
     padding: 10px 15px;
     cursor: pointer;
@@ -77,6 +78,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .donor-box .col-3 .user-interface .user-name {
