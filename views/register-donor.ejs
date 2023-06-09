@@ -82,7 +82,7 @@
                 <select class="customize med-history" id="illness" placeholder="Tiền sử bệnh án">
 
                 </select>
-                <div id="medical"></div>
+                <div id="medical" class="flex-around"></div>
                 <button type="submit">Đăng kí</button>
             </div>
             <!-- -------------------------------------- -->
@@ -192,7 +192,7 @@
         illnessList.addEventListener("change", (event) => {
             const illnessName = event.target.options[event.target.selectedIndex].text
             const illnessID = event.target.value;
-            medical.innerHTML += `<input type="text" title="${illnessName}" class="sick-tag med-history" value="${illnessName}" readonly required/>`;
+            medical.innerHTML += `<div class="sick-tag" title="${illnessName}">${illnessName}</div>`;
             selectedIllnessList.push(illnessID);
         });
         //form submit

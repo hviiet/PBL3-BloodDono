@@ -377,15 +377,21 @@
         });
 
         modalConditionOpen.addEventListener('click', () => {
-            document.querySelector('.age').checked = false;
-            document.querySelector('.weight').checked = false;
+            document.querySelectorAll('.age').forEach((item) => {
+                item.checked = false;
+            });
+            document.querySelectorAll('.weight').forEach((item) => {
+                item.checked = false;
+            });
             document.querySelectorAll('.Communicable-disease').forEach((item) => {
                 item.checked = false;
             });
             document.querySelectorAll('.Chronic-diseases').forEach((item) => {
                 item.checked = false;
             });
-            document.querySelector('.time').checked = false;
+            document.querySelectorAll('.time').forEach((item) => {
+                item.checked = false;
+            });
             document.querySelector('.result').innerHTML = '';
             modalCondition.classList.add('open');
         });

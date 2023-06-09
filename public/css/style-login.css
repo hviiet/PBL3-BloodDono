@@ -287,6 +287,22 @@ a {
     position: relative;
     border-radius: 10px;
     animation: fadeIn ease 0.5s;
+    overflow-y: auto;
+}
+
+
+.Modal .Modal-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.Modal .Modal-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 15px;
+}
+
+.Modal .Modal-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
 }
 
 .Modal .Modal-container .close {
