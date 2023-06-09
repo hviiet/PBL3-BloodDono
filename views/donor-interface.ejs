@@ -167,7 +167,7 @@
                 const illnessData = response.data.data;
                 const medical = document.getElementById('medical');
                 illnessData.forEach(illness => {
-                    medical.innerHTML += `<input type="text" title="${illness.IllnessID}" class="sick-tag med-history" value="${illness.IllnessName}" readonly required/>`
+                    medical.innerHTML += `<input type="text" title="${illness.IllnessName}" class="sick-tag med-history" value="${illness.IllnessName}" readonly required/>`
                 });
             })
     </script>

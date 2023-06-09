@@ -17,7 +17,7 @@ html {
     margin-right: 5px;
 }
 
-li {
+#event-panel li {
     list-style-type: none !important;
 }
 
@@ -218,6 +218,7 @@ a {
     font-weight: 500;
     font-size: 20px;
     border-radius: 50px;
+    cursor: pointer;
     transition: background 0.3s;
 }
 
@@ -282,6 +283,7 @@ a {
     width: 620px;
     max-width: calc(100% - 40px);
     min-height: 342.5px;
+    max-height: 600px;
     position: relative;
     border-radius: 10px;
     animation: fadeIn ease 0.5s;
@@ -294,7 +296,7 @@ a {
     padding: 18px;
     font-size: 25px;
     cursor: pointer;
-    color: rgb(145, 143, 143);
+    color: rgb(221, 220, 220);
     transition: color 0.3s;
 }
 
@@ -344,6 +346,84 @@ a {
 .Modal .Modal-container .btn-send-feedback:hover {
     color: white;
     background-color: rgb(10, 54, 104);
+}
+
+.benefit-Modal-header,.condition-Modal-header {
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    font-weight: 700;
+    color: black;
+}
+
+.benefit-Modal-content,.condition-Modal-content {
+    padding: 20px;
+    font-size: 17px;
+    text-align: justify;
+}
+
+.benefit-Modal-content ul {
+    margin-left: 20px;
+}
+
+.condition-Modal-content li {
+    list-style: none;
+}
+
+.Modal .Modal-condition-container {
+    background-color: white;
+    width: 800px;
+    max-width: calc(100% - 40px);
+    min-height: 342.5px;
+    max-height: 550px;
+    position: relative;
+    border-radius: 10px;
+    animation: fadeIn ease 0.5s;
+    overflow-y: auto;
+}
+
+.Modal .Modal-condition-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.Modal .Modal-condition-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 15px;
+}
+
+.Modal .Modal-condition-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.Modal .Modal-condition-container .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 18px;
+    font-size: 25px;
+    cursor: pointer;
+    color: rgb(221, 220, 220);
+    transition: color 0.3s;
+}
+
+.Modal .Modal-condition-container .close:hover {
+    color: red;
+}
+
+.Modal .Modal-condition-container .result-btn {
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(13, 76, 146);
+    transition: background 0.3s;
+}
+
+.Modal .Modal-condition-container .result-btn:hover {
+    color: #f6f5f7;
+    background-color: rgb(10, 60, 117);
 }
 
 @keyframes fadeIn {

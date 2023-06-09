@@ -86,7 +86,8 @@
                             <p>Một nguồn máu dồi dào đóng vai trò quan trọng trong sức khỏe của xã hội và trong việc ứng
                                 phó
                                 với các thảm họa.</p>
-                            <a href="" class="choice-btn">Tìm hiểu thêm</a>
+                            <!-- <a href="" class="choice-btn">Tìm hiểu thêm</a> -->
+                            <div class="js-open-benefit choice-btn">Tìm hiểu thêm</div>
                         </div>
 
                         <div class="choice-panel">
@@ -94,7 +95,8 @@
                             <img src="/assets/img/blood-request.png" alt="">
                             <p>Ai cũng có thể hiến máu miễn là bạn có sức khỏe, nhưng trước hết bạn phải đáp ứng một số
                                 điều kiện dưới đây.</p>
-                            <a href="" class="choice-btn">Kiểm tra ngay</a>
+                            <!-- <a href="" class="choice-btn">Kiểm tra ngay</a> -->
+                            <div class="js-open-condition choice-btn">Kiểm tra ngay</div>
                         </div>
 
                         <div class="choice-panel">
@@ -190,6 +192,92 @@
             </div>
         </div>
     </div>
+
+    <div class="Modal js-Modal-benefit">
+        <div class="Modal-container">
+            <div class="close js-close-benefit">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h1 class="benefit-Modal-header">Lợi ích của việc hiến máu</h1>
+
+            <div class="benefit-Modal-content">
+                <p>Việc hiến máu nhân đạo là một nghĩa cử cao đẹp và có nhiều lợi ích cho sức khỏe của người hiến và người nhận.
+                    Sau đây là một số lợi ích chính của việc hiến máu nhân đạo:
+                </p>
+                <ul>
+                    <li>Giảm nguy cơ mắc các bệnh về tim mạch mà máu do hấp thụ quá nhiều sắt.</li>
+                    <li>Tái tạo các tế bào máu mới, giúp duy trì sức khỏe và miễn dịch của cơ thể.</li>
+                    <li>Đốt cháy calo và giúp kiểm soát cân nặng, do cơ thể tiêu tốn năng lượng để bù đắp lượng máu đã mất.</li>
+                </ul>
+
+                <p>Ngoài ra, việc hiến máu nhân đạo không chỉ có lợi cho sức khỏe của người hiến và người nhận, mà còn có lợi cho cộng đồng.
+                    Sau đây là một số lợi ích của việc hiến máu nhân đạo cho cộng đồng:
+                </p>
+                <ul>
+                    <li>Giúp duy trì nguồn máu an toàn và đủ cho các bệnh viện, phục vụ công tác khám chữa bệnh,
+                         đặc biệt là trong các trường hợp cấp cứu, tai nạn, thảm họa, thiên tai.</li>
+                    <li>Giúp giảm thiếu tình trạng khan hiếm máu, tránh phải mua bán máu trái phép,
+                         gây nguy cơ lây nhiễm các bệnh truyền nhiễm qua đường máu như HIV, viêm gan B, C…</li>
+                    <li>Giúp tăng cường tinh thần đoàn kết, sẻ chia, nhân ái trong cộng đồng,
+                         góp phần xây dựng một xã hội văn minh và nhân văn.</li>
+                </ul>
+
+                <p>Người hiến máu nhân đạo còn được hưởng các quyền lợi khác về tinh thần, vật chất và chính sách theo quy định của pháp luật.
+                    Tìm hiểu chi tiết 
+                    <a href="https://thuvienphapluat.vn/van-ban/Tai-chinh-nha-nuoc/Thong-tu-05-2017-TT-BYT-chi-phi-xac-dinh-gia-mot-don-vi-mau-toan-phan-che-pham-mau-tieu-chuan-331816.aspx" target="_blank">tại đây.</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="Modal js-Modal-condition">
+        <div class="Modal-condition-container">
+            <div class="close js-close-condition">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h1 class="condition-Modal-header">Điều kiện hiến máu</h1>
+
+            <div class="condition-Modal-content">
+                <h4>Để đảm bảo an toàn cho người hiến máu và người nhận máu, bạn cần trả lời các câu hỏi sau:</h4>
+                <ul>
+                    <li>
+                        <label for="">Bạn có nằm trong khoảng độ tuổi từ 18 đến 60 không?</label> <br>
+                        <input type="radio" name="age" class="age" id="" value="true" checked> Có <br>
+                        <input type="radio" name="age" class="age" id="" value="false"> Không
+                    </li>
+
+                    <li>
+                        <label for="">Cân nặng hiện tại của bạn có lớn hơn 42kg với nữ hoặc 45kg với nam không?</label> <br>
+                        <input type="radio" name="weight" class="weight" id="" value="true" checked> Có <br>
+                        <input type="radio" name="weight" class="weight" id="" value="false"> Không
+                    </li>
+
+                    <li>
+                        <label for="">Bạn đã nhiễm hoặc đã thực hiện hành vi có nguy cơ nhiễm HIV, 
+                            viêm gan B, viêm gan C, và các virus lây qua đường truyền máu chưa?
+                        </label> <br>
+                        <input type="radio" name="Communicable-disease" class="Communicable-disease" id="" value="false"> Đã từng <br>
+                        <input type="radio" name="Communicable-disease" class="Communicable-disease" id="" value="true" checked> Chưa từng
+                    </li>
+
+                    <li>
+                        <label for="">Bạn có mắc các bệnh mãn tính như tim mạch, huyết áp, hô hấp,...không?</label> <br>
+                        <input type="radio" name="Chronic-diseases" class="Chronic-diseases" id="" value="false"> Có <br>
+                        <input type="radio" name="Chronic-diseases" class="Chronic-diseases" id="" value="true" checked> Không
+                    </li>
+
+                    <li>
+                        <label for="">Lần hiến máu gần nhất của bạn có phải cách hiện giờ ít nhất 3 tháng trước không?</label> <br>
+                        <input type="radio" name="time" class="time" id="" value="true" checked> Phải <br>
+                        <input type="radio" name="time" class="time" id="" value="false"> Không phải
+                    </li>
+                </ul>
+                <button class="result-btn">Kết quả</button>
+
+                <div class="result"></div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -262,12 +350,105 @@
         const modalClose = document.querySelector('.js-close');
         const modalOpen = document.querySelector('.js-open');
 
+        const modalBenefit = document.querySelector('.js-Modal-benefit');
+        const modalBenefitClose = document.querySelector('.js-close-benefit');
+        const modalBenefitOpen = document.querySelector('.js-open-benefit');
+
+        const modalCondition = document.querySelector('.js-Modal-condition');
+        const modalConditionClose = document.querySelector('.js-close-condition');
+        const modalConditionOpen = document.querySelector('.js-open-condition');
+
+        modalBenefitOpen.addEventListener('click', () => {
+            modalBenefit.classList.add('open');
+        });
+
+        modalBenefitClose.addEventListener('click', () => {
+            modalBenefit.classList.remove('open');
+        });
+
+        modalConditionOpen.addEventListener('click', () => {
+            document.querySelector('.age').checked = false;
+            document.querySelector('.weight').checked = false;
+            document.querySelectorAll('.Communicable-disease').forEach((item) => {
+                item.checked = false;
+            });
+            document.querySelectorAll('.Chronic-diseases').forEach((item) => {
+                item.checked = false;
+            });
+            document.querySelector('.time').checked = false;
+            document.querySelector('.result').innerHTML = '';
+            modalCondition.classList.add('open');
+        }); 
+
         modalOpen.addEventListener('click', () => {
             modal.classList.add('open');
         });
 
         modalClose.addEventListener('click', () => {
             modal.classList.remove('open');
+        });
+
+        modalConditionClose.addEventListener('click', () => {
+            modalCondition.classList.remove('open');
+        });
+    </script>
+
+    <script>
+        const age = document.querySelectorAll('.age');
+        const weight = document.querySelectorAll('.weight');
+        const CommunicableDisease = document.querySelectorAll('.Communicable-disease');
+        const ChronicDiseases = document.querySelectorAll('.Chronic-diseases');
+        const time = document.querySelectorAll('.time');
+        const result = document.querySelector('.result');
+        const resultBtn = document.querySelector('.result-btn');
+
+        resultBtn.addEventListener('click', () => {
+            let count = 0;
+            age.forEach((item) => {
+                if(item.checked) {
+                    if(item.value == 'true') {
+                        count++;
+                    }
+                }
+            });
+
+            weight.forEach((item) => {
+                if(item.checked) {
+                    if(item.value == 'true') {
+                        count++;
+                    }
+                }
+            });
+
+            CommunicableDisease.forEach((item) => {
+                if(item.checked) {
+                    if(item.value == 'true') {
+                        count++;
+                    }
+                }
+            });
+
+            ChronicDiseases.forEach((item) => {
+                if(item.checked) {
+                    if(item.value == 'true') {
+                        count++;
+                    }
+                }
+            });
+
+            time.forEach((item) => {
+                if(item.checked) {
+                    if(item.value == 'true') {
+                        count++;
+                    }
+                }
+            });
+
+            if(count == 5) {
+                result.innerHTML = 'Chúc mừng, bạn đủ điều kiện hiến máu!';
+            } else {
+                result.innerHTML = 'Rất tiếc, bạn không đủ điều kiện hiến máu! Để biết điều kiện hiến máu, vui lòng xem <a href="https://vienhuyethoc.vn/mot-so-tieu-chuan-doi-voi-nguoi-tham-gia-hien-mau/" target="_blank">tại đây</a>';
+            }
         });
     </script>
 </body>

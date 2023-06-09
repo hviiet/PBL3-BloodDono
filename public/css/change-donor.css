@@ -183,11 +183,14 @@ select {
 	margin: 10px 10px 10px 0;
 	padding: 5px;
 	width: 30%;
+    height: fit-content;
     text-align: center;
+    cursor: pointer;
 }
 
 .flex-around {
 	display: flex;
-	justify-content: space-around;
+	justify-content: start;
+    align-items: center;
 	flex-wrap: wrap;
 }
