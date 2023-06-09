@@ -11,7 +11,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     const { name, gender, birth, height, weight, bloodType, address, phoneNumber, photo, email, selectedIllnessList } = req.body;
     let updateData = {};
     updateData.DonorName = name;
-    updateData.Gender = gender;
+    updateData.DonorGender = gender;
     updateData.DonorBirth = birth;
     updateData.DonorHeight = height;
     updateData.DonorWeight = weight;

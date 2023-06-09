@@ -171,8 +171,16 @@
                 alert('Tên không được quá 255 ký tự');
                 return;
             }
+            if (/^[^0-9!"#$%&()*+,-./:;<=>?@^_`[{|}~]*$/.test(name) == false) {
+                alert('Tên chỉ chứa chữ cái');
+                return;
+            }
             if (email.length > 255) {
                 alert('Email không được quá 255 ký tự');
+                return;
+            }
+            if (/^[A-Za-z][\w$.]+@[\w]+\.\w+$/.test(email) == false) {
+                alert('Email không hợp lệ');
                 return;
             }
             //check phone number is only 10 or 11 digits

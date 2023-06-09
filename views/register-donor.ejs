@@ -251,8 +251,16 @@
                 alert('Tên không được quá 255 ký tự');
                 return;
             }
+            if (/^[^0-9!"#$%&()*+,-./:;<=>?@^_`[{|}~]*$/.test(name) == false) {
+                alert('Tên chỉ chứa chữ cái');
+                return;
+            }
             if (email.length > 255) {
                 alert('Email không được quá 255 ký tự');
+                return;
+            }
+            if (/^[A-Za-z][\w$.]+@[\w]+\.\w+$/.test(email) == false) {
+                alert('Email không hợp lệ');
                 return;
             }
             //check gender selected
@@ -280,11 +288,11 @@
                 return;
             }
             //check height and weight
-            if (height < 0 || height > 300) {
+            if (height < 100 || height > 300) {
                 alert('Chiều cao không hợp lệ');
                 return;
             }
-            if (weight < 0 || weight > 300) {
+            if (weight < 20 || weight > 300) {
                 alert('Cân nặng không hợp lệ');
                 return;
             }
@@ -301,7 +309,7 @@
             //check age is >= 18 
             const today = new Date();
             const birthDate = new Date(birth);
-            const age = today.getFullYear() - birthDate.getFullYear();
+            let age = today.getFullYear() - birthDate.getFullYear();
             const month = today.getMonth() - birthDate.getMonth();
             if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
@@ -314,8 +322,6 @@
                 alert('Bạn đã lớn hơn 60 tuổi, đã vượt quá tuổi quy định để hiến máu');
                 return;
             }
-
-
             const address = {
                 street,
                 ward,
