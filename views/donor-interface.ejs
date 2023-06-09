@@ -181,7 +181,6 @@
             axios.post(`http://localhost:3000/user/${userName}/upload-image`, formData)
                 .then((response) => {
                     img.src = response.data.imageLink;
-                    console.log(response.data.imageLink);
                 })
                 .catch((error) => {
                     console.error(error);

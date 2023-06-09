@@ -34,7 +34,8 @@
 
                 <input type="email" class="customize mail" placeholder="Email" required />
                 <input type="tel" class="customize phone-number" placeholder="Số điện thoại" required />
-                <input type="text" class="customize date-of-birth" name="" id="" placeholder="Ngày sinh" onfocus="(this.type='date')"  required>
+                <input type="text" class="customize date-of-birth" name="" id="" placeholder="Ngày sinh"
+                    onfocus="(this.type='date')" required>
                 <input type="text" class="customize donor-street" placeholder="Số nhà/Tên đường" />
                 <!-- Địa chỉ -->
                 <div class="inline" id="Address">
@@ -52,8 +53,8 @@
 
                 <!-- Cân nặng, chiều cao -->
                 <div class="inline" id="Weight-Height">
-                    <input type="text" class="customize weight" placeholder="Cân nặng (kg)" required />
-                    <input type="text" class="customize height" placeholder="Chiều cao (cm)" required />
+                    <input type="number" class="customize weight" placeholder="Cân nặng (kg)" required />
+                    <input type="number" class="customize height" placeholder="Chiều cao (cm)" required />
                 </div>
                 <!-- ----------------- -->
 
@@ -89,10 +90,10 @@
             <!-- Phần thông tin tài khoản -->
             <div class="form-container account-info small-form">
                 <h1>Thông tin tài khoản</h1>
-                <input type="text" class="customize username" placeholder="Tên đăng nhập" required />
-                <input type="password" class="customize password" placeholder="Mật khẩu" required />
+                <input type="text" class="customize username" placeholder="Tên đăng nhập" />
+                <input type="password" class="customize password" placeholder="Mật khẩu" />
                 <!-- sửa -->
-                <input type="password" class="customize confirm-password" placeholder="Xác nhận mật khẩu" required />
+                <input type="password" class="customize confirm-password" placeholder="Xác nhận mật khẩu" />
             </div>
             <!-- -------------------------------------- -->
         </form>
@@ -204,6 +205,7 @@
             const role = 1;
             const name = document.querySelector('.name').value;
             const male = document.getElementById('male');
+            const female = document.getElementById('female');
             let gender = 0;
             if (male.checked)
                 gender = 1;
@@ -217,6 +219,103 @@
             const district = parseInt(document.querySelector('.donor-district').value);
             const ward = parseInt(document.querySelector('.donor-ward').value);
             const street = document.querySelector('.donor-street').value;
+            //validate
+            if (username == '') {
+                alert('Vui lòng nhập tên đăng nhập');
+                return;
+            }
+            //check username length not > 255
+            if (username.length > 255) {
+                alert('Tên đăng nhập không được quá 255 ký tự');
+                return;
+            }
+            if (password == '') {
+                alert('Vui lòng nhập mật khẩu');
+                return;
+            }
+            //check password length not > 30
+            if (password.length > 30) {
+                alert('Mật khẩu không được quá 30 ký tự');
+                return;
+            }
+            if (confirm_password == '') {
+                alert('Vui lòng nhập lại mật khẩu');
+                return;
+            }
+            if (password != confirm_password) {
+                alert('Mật khẩu không khớp');
+                return;
+            }
+            //check name, email length not > 255
+            if (name.length > 255) {
+                alert('Tên không được quá 255 ký tự');
+                return;
+            }
+            if (email.length > 255) {
+                alert('Email không được quá 255 ký tự');
+                return;
+            }
+            //check gender selected
+            if (!male.checked && !female.checked) {
+                alert('Vui lòng chọn giới tính');
+                return;
+            }
+            //check phone number is only 10 or 11 digits
+            if (/^\d+$/.test(phoneNumber) == false) {
+                alert('Số điện thoại chỉ chứa số');
+                return;
+            }
+            if (!(phoneNumber.length == 10 || phoneNumber.length == 11)) {
+                alert('Số điện thoại phải có 10 hoặc 11 số');
+                return;
+            }
+            //check phone number is start with 0
+            if (phoneNumber[0] != '0') {
+                alert('Số điện thoại phải bắt đầu bằng số 0');
+                return;
+            }
+            //check height and weight contain letters
+            if (/^\d+$/.test(document.querySelector('.height').value) == false || /^\d+$/.test(document.querySelector('.weight').value) == false) {
+                alert('Chiều cao và cân nặng phải là số');
+                return;
+            }
+            //check height and weight
+            if (height < 0 || height > 300) {
+                alert('Chiều cao không hợp lệ');
+                return;
+            }
+            if (weight < 0 || weight > 300) {
+                alert('Cân nặng không hợp lệ');
+                return;
+            }
+            //check street length not > 255
+            if (street.length > 255) {
+                alert('Tên đường không được quá 255 ký tự');
+                return;
+            }
+            //check address
+            if (!province || !district || !ward) {
+                alert('Vui lòng chọn đầy đủ địa chỉ');
+                return;
+            }
+            //check age is >= 18 
+            const today = new Date();
+            const birthDate = new Date(birth);
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const month = today.getMonth() - birthDate.getMonth();
+            if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            if (age < 18) {
+                alert('Bạn chưa đủ 18 tuổi, vui lòng đăng kí khi đã đủ tuổi');
+                return;
+            }
+            if (age > 60) {
+                alert('Bạn đã lớn hơn 60 tuổi, đã vượt quá tuổi quy định để hiến máu');
+                return;
+            }
+
+
             const address = {
                 street,
                 ward,
@@ -238,7 +337,6 @@
                 email,
                 selectedIllnessList
             }
-
             axios.post('/register', data)
                 .then((response) => {
                     // handle success
@@ -247,8 +345,7 @@
                 })
                 .catch((error) => {
                     // handle error
-                    console.log(error);
-                    alert('Đăng kí thất bại');
+                    alert(error.response.data.message);
                 });
         });
     </script>

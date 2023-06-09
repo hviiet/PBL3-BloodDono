@@ -35,7 +35,8 @@
             <select name="" id="event-selection">
                 <option value="default" selected disabled hidden>Chọn đợt hiến máu...</option>
             </select>
-            <button id="searchBtn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
+            <button id="searchBtn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Tìm
+                kiếm</button>
         </div>
         <div class="container-fluid">
             <p>Danh sách người tham gia</p>
@@ -101,7 +102,6 @@
             .then(function (response) {
                 // handle success
                 const data = response.data.data;
-                console.log(data);
                 const listDonorTable = document.getElementById('listDonorTable');
                 if (data.length === 0) return listDonorTable.innerHTML = '<h3 class="text-center">Không có dữ liệu</h3>';
                 let index = 1;
@@ -135,7 +135,6 @@
                 itemList.forEach(item => {
                     item.addEventListener('click', (e) => {
                         e.preventDefault();
-                        console.log(e.target);
                         const detail = document.querySelector('.detail');
                         const selectElement = document.getElementById('event-selection');
                         const selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -201,7 +200,6 @@
                                 e.preventDefault();
                                 const cardiacDateDetail = document.querySelector('.cardiac-date-detail').value;
                                 const cardiacVolumeDetail = document.querySelector('.cardiac-volume-detail').value;
-                                console.log(donorID);
                                 if (cardiacDateDetail === '' || cardiacVolumeDetail === '') return alert('Vui lòng nhập đầy đủ thông tin');
                                 const data = {
                                     eventID: eventID,
@@ -211,7 +209,6 @@
                                 axios.post(`http://localhost:3000/event/update-donation-info/${donorID}`, data)
                                     .then(function (response) {
                                         // handle success
-                                        console.log(response);
                                         alert('Cập nhật thành công');
                                         window.location.reload();
                                     })

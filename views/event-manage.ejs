@@ -51,7 +51,6 @@
     axios.get(`http://localhost:3000/api/allEvent/${username}`)
         .then(res => {
             const data = res.data.data;
-            console.log(data);
             let stt = 1;
             data.forEach(element => {
                 const [startDate, startTime] = element.eventStartTime.split('T');

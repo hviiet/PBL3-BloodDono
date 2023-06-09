@@ -93,7 +93,6 @@
 <script>
     axios.get('/api/hospital')
         .then(res => {
-            console.log(res.data.data);
             const data = res.data.data;
             const waitingList = document.querySelector('.waiting-list');
             let numericalOrder = 0;
@@ -177,7 +176,6 @@
                         const username = e.target.getAttribute('data-username');
                         axios.post(`http://localhost:3000/user/${username}/delete-user`)
                             .then(res => {
-                                console.log(res);
                                 alert(res.data.message);
                                 window.location.reload();
                             })
@@ -189,7 +187,6 @@
                         const username = e.target.getAttribute('data-username');
                         axios.post(`http://localhost:3000/user/${username}/approve-hospital`)
                             .then(res => {
-                                console.log(res);
                                 alert(res.data.message);
                                 window.location.reload();
                             })

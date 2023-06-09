@@ -62,7 +62,7 @@
                         <select class="customize search-district" id="district" name="district">
                             <option value="default" selected>Quận/huyện</option>
                         </select>
-                        
+
                         <select class="customize search-ward" id="ward" name="ward">
                             <option value="default" selected hidden>Phường/xã</option>
                         </select>
@@ -177,7 +177,6 @@
                 .then((response) => {
                     // handle success
                     const data = response.data.result;
-                    console.log(data);
                     donorList.innerHTML = '';
                     data.forEach(element => {
                         //calc age

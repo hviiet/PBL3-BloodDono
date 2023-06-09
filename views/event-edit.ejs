@@ -51,14 +51,14 @@
             <!-- Số lượng -->
             <div class="row d-flex justify-content-center">
                 <div class="col-2">Số lượng</div>
-                <input type="text" name="" id="quantity" class="col-5 padding-0">
+                <input type="number" name="" id="quantity" class="col-5 padding-0" required>
             </div>
             <!-- ---------------------- -->
 
             <div class="row d-flex justify-content-center" id="Address">
                 <div class="col-2">Địa điểm</div>
                 <div class="col-5 padding-0">
-                    <input type="text" class="street" placeholder="Số nhà/Tên đường" />
+                    <input type="text" class="street" placeholder="Số nhà/Tên đường" required />
                     <div class="row padding-0 combobox">
                         <select class="ward" name="ward" required>
                             <option value="default" selected disabled hidden>Chọn xã</option>
@@ -219,6 +219,11 @@
             alert('Tên sự kiện không được để trống');
             return;
         }
+        //check event name not > 255
+        if (eventName.value.length > 255) {
+            alert('Tên sự kiện không được quá 255 ký tự');
+            return;
+        }
         if (eventQuantity.value == '') {
             alert('Số lượng người tham gia không được để trống');
             return;
@@ -231,10 +236,16 @@
             alert('Thời gian kết thúc không được để trống');
             return;
         }
+        //street not > 255
+        if (street.value.length > 255) {
+            alert('Tên đường không được quá 255 ký tự');
+            return;
+        }
         if (street.value == '' || ward.value == 'default' || district.value == 'default' || province.value == 'default') {
             alert('Địa chỉ không được để trống');
             return;
         }
+        //check start time > now
         if (new Date(eventStartTime.value) > new Date(eventEndTime.value)) {
             alert('Thời gian kết thúc phải sau thời gian bắt đầu');
             return;
@@ -260,6 +271,7 @@
             .catch((error) => {
                 // handle error
                 console.log(error);
+                alert('Chỉnh sửa thất bại');
             });
     })
 </script>
