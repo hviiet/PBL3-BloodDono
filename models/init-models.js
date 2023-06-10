@@ -1,7 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
 var _Account_Information = require("./Account_Information");
 var _Address = require("./Address");
-var _Affected_Blood_Type = require("./Affected_Blood_Type");
 var _District_Information = require("./District_Information");
 var _Donation_Records = require("./Donation_Records");
 var _Donor_Information = require("./Donor_Information");
@@ -19,7 +18,6 @@ var _sysdiagrams = require("./sysdiagrams");
 function initModels(sequelize) {
   var Account_Information = _Account_Information(sequelize, DataTypes);
   var Address = _Address(sequelize, DataTypes);
-  var Affected_Blood_Type = _Affected_Blood_Type(sequelize, DataTypes);
   var District_Information = _District_Information(sequelize, DataTypes);
   var Donation_Records = _Donation_Records(sequelize, DataTypes);
   var Donor_Information = _Donor_Information(sequelize, DataTypes);
@@ -54,8 +52,6 @@ function initModels(sequelize) {
   Donor_Information.hasMany(Joined_Donor, { as: "Joined_Donors", foreignKey: "DonorID"});
   Medical_History.belongsTo(Donor_Information, { as: "Donor", foreignKey: "DonorID"});
   Donor_Information.hasMany(Medical_History, { as: "Medical_Histories", foreignKey: "DonorID"});
-  Affected_Blood_Type.belongsTo(Event_Information, { as: "Event", foreignKey: "EventID"});
-  Event_Information.hasMany(Affected_Blood_Type, { as: "Affected_Blood_Types", foreignKey: "EventID"});
   Joined_Donor.belongsTo(Event_Information, { as: "Event", foreignKey: "EventID"});
   Event_Information.hasMany(Joined_Donor, { as: "Joined_Donors", foreignKey: "EventID"});
   Event_Information.belongsTo(Hospital_Information, { as: "Hospital", foreignKey: "HospitalID"});
@@ -72,7 +68,6 @@ function initModels(sequelize) {
   return {
     Account_Information,
     Address,
-    Affected_Blood_Type,
     District_Information,
     Donation_Records,
     Donor_Information,

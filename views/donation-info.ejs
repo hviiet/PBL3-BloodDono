@@ -180,7 +180,14 @@
                                 </div>
                                 <div class="cardiac-output">
                                     <div class="label">Lượng máu hiến (ml)</div>
-                                    <input type="text" name="" id="" class="cardiac-volume-detail cardiac-output-detail">
+                                    <select id="" class="cardiac-volume-detail cardiac-output-detail" name="" required>
+                                        <option value="0" selected disabled hidden>Chọn lượng máu</option>
+                                        <option value="250">250</option>
+                                        <option value="350">350</option>
+                                        <option value="450">450</option>
+                                        <option value="500">500</option>
+                                        <option value="550">550</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -199,8 +206,8 @@
                             saveBtn.addEventListener('click', (e) => {
                                 e.preventDefault();
                                 const cardiacDateDetail = document.querySelector('.cardiac-date-detail').value;
-                                const cardiacVolumeDetail = document.querySelector('.cardiac-volume-detail').value;
-                                if (cardiacDateDetail === '' || cardiacVolumeDetail === '') return alert('Vui lòng nhập đầy đủ thông tin');
+                                const cardiacVolumeDetail = parseInt(document.querySelector('.cardiac-volume-detail').value);
+                                if (cardiacDateDetail === '' || cardiacVolumeDetail === 0) return alert('Vui lòng nhập đầy đủ thông tin');
                                 const data = {
                                     eventID: eventID,
                                     donationDate: cardiacDateDetail,

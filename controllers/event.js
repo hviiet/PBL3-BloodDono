@@ -63,12 +63,16 @@ const registerEvent = asyncHandler(async (req, res) => {
 });
 const deleteEvent = asyncHandler(async (req, res) => {
     const eventID = req.params.eventID;
-    console.log(eventID);
     const event = await db.Event_Information.findOne({ where: { EventID: eventID } });
     if (!event) {
         res.status(400).json({ message: 'Event not found' });
         return;
     }
+    //delete joined donor
+    await db.Joined_Donor.destroy({ where: { EventID: eventID } });
+    //delete donation record
+    await db.Donation_Records.destroy({ where: { EventID: eventID } });
+    //delete event
     await db.Event_Information.destroy({ where: { EventID: eventID } });
     res.status(200).json({ message: 'Delete event successfully' });
 });
