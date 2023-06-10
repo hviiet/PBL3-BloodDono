@@ -62,12 +62,6 @@ const getHospitalSummary = asyncHandler(async (req, res) => {
         donorSum: donorSum,
         donatedSum: donatedSum
     }
-    // const query = `SELECT Event_Information.EventID, EventName, EventStartTime, Count(*) AS Joined_Number
-    //                FROM Event_Information INNER JOIN Joined_Donor ON (Event_Information.EventID = Joined_Donor.EventID)
-    //                WHERE Event_Information.HospitalID = '${hospitalID}'
-    //                GROUP BY EventID, EventName, EventStartTime
-    //                ORDER BY EventStartTime DESC
-    //                LIMIT 30;`;
     const query = `SELECT Event_Information.EventID, EventName, EventStartTime, 
 	               IF (
                    EXISTS (SELECT EventID
@@ -85,7 +79,7 @@ const getHospitalSummary = asyncHandler(async (req, res) => {
         eventID: [],
         data: [],
     };
-    for (let i = 0; i < eventList.length; i++) {
+    for (let i = eventList.length - 1; i >= 0; i--) {
         graphData.labels.push(eventList[i].EventName);
         graphData.eventID.push(eventList[i].EventID);
         graphData.data.push(eventList[i].Joined_Number);
@@ -107,7 +101,6 @@ const getFeedback = asyncHandler(async (req, res) => {
             feedbackText: feedback[i].FeedbackText
         });
     }
-    console.log(data);
     res.status(200).json({ status: 'success', data: data });
 });
 const getAvatar = asyncHandler(async (req, res) => {

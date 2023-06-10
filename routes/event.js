@@ -30,7 +30,7 @@ router.route("/donation-info/:username").get([cookieJwtAuth, doctorCheck], (req,
         username: req.user.username,
     });
 });
-router.route("/delete-event/:eventID").post(deleteEvent);
+router.route("/delete-event/:eventID").post([cookieJwtAuth, doctorCheck], deleteEvent);
 router
     .route("/update-event/:eventID")
     .post([cookieJwtAuth, doctorCheck], updateEvent)

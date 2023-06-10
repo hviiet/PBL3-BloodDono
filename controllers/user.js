@@ -68,8 +68,6 @@ const uploadImageForProfile = asyncHandler(async (req, res) => {
     deleteLocalImage(pathToImage);
     //update image link to database
     const donorID = await getDonorIDByUserName(req.params.username);
-    console.log(donorID);
-    console.log(imageLink);
     await db.Donor_Information.update({ DonorPhoto: imageLink }, { where: { DonorID: donorID } });
     res.status(200).json({ imageLink: imageLink });
 });

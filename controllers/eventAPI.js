@@ -3,19 +3,22 @@ const asyncHandler = require('express-async-handler');
 const { getOneEvent, getFullAddress, getHospitalIDByUserName } = require('../utils/util');
 
 const getEvent = asyncHandler(async (req, res) => {
-    const _eventID = req.params.eventID;
-    const _result = await getOneEvent(_eventID);
-    if (!_result)
-        res.status(404).json({ status: 'fail', message: 'Event not found' });
+    const eventID = req.params.eventID;
+    const result = await getOneEvent(eventID);
+    if (result.status == 'fail') {
+        res.status(404).json({ status: 'fail', message: 'Không tìm thấy sự kiện' });
+        return;
+    }
     //get number of people join event
     const JoinedDonor = db.Joined_Donor;
     const numberOfDonor = await JoinedDonor.count({
         where: {
-            EventID: _eventID
+            EventID: eventID
         }
     });
-    _result.data.numberOfDonor = numberOfDonor;
-    res.status(200).json(_result);
+    console.log(numberOfDonor);
+    result.data.numberOfDonor = numberOfDonor;
+    res.status(200).json(result);
 });
 const getAllEventOfHospital = asyncHandler(async (req, res) => {
     const hospitalID = await getHospitalIDByUserName(req.params.username);

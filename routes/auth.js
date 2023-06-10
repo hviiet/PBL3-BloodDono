@@ -3,7 +3,6 @@ const router = express.Router();
 const { login, register, logout } = require('../controllers/auth');
 
 router.route('/login').post(login).get((req, res) => {
-    // res.sendFile(path.join(__dirname, '..','views','login.html'));
     res.render('login');
 });
 router.route('/register').post(register)

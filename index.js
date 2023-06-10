@@ -35,6 +35,9 @@ app.use('/api', require('./routes/api'))
 app.use('/404', (req, res) => {
     res.status(404).render('error404');
 });
+app.use(function (req, res) {
+    res.status(404).render('error404');
+});
 
 
 

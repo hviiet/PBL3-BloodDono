@@ -86,7 +86,7 @@ async function getOneEvent(eventID) {
         where: { EventID: eventID }
     });
     if (event == null) {
-        return { status: 'fail', message: 'Event not found' };
+        return { status: 'fail' };
     }
     const addressData = await getFullAddress(event.EventDonationPoint);
     const HospitalInfo = db.Hospital_Information;
@@ -163,15 +163,20 @@ async function getFullAddress(addressID) {
         }
         return data;
     }
-    const ward = await db.Ward_Information.findOne({ where: { Wards_id: address.AddressWard } });
-    const district = await db.District_Information.findOne({ where: { District_id: address.AddressDistrict } });
-    const province = await db.Province_Information.findOne({ where: { Province_id: address.AddressProvince } });
+    const query = `
+    SELECT Ward_Information.Name as wardName,  District_Information.name as districtName, Province_Information.name as provinceName
+    FROM Ward_Information INNER JOIN 
+        (District_Information INNER JOIN Province_Information ON District_Information.Province_id = Province_Information.Province_id)
+    ON District_Information.District_id = Ward_Information.District_id
+    WHERE Wards_id = ${address.AddressWard} and District_Information.District_id = ${address.AddressDistrict} and Province_Information.Province_id = ${address.AddressProvince};
+    `;
+    const result = await db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT });
     data = {
         status: 'success',
         street: address.AddressStreet,
-        ward: ward.Name,
-        district: district.Name,
-        province: province.Name
+        ward: result[0].wardName,
+        district: result[0].districtName,
+        province: result[0].provinceName
     }
     return data;
 }
@@ -203,6 +208,14 @@ async function getHospitalIDByUserName(username) {
     }
     return hospital.HospitalID;
 }
+async function checkEventExist(eventID) {
+    const event = await db.Event_Information.findOne({ where: { EventID: eventID } });
+    if (!event) {
+        return { status: 'fail' };
+    }
+    return { status: 'success' };
+}
+
 module.exports = {
     getOneUser,
     getOneEvent,
@@ -213,5 +226,6 @@ module.exports = {
     getDistrictByProvinceID,
     getWardByDistrictID,
     getDonorIDByUserName,
-    getHospitalIDByUserName
+    getHospitalIDByUserName,
+    checkEventExist
 }

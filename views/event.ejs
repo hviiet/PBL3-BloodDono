@@ -25,7 +25,7 @@
     </header>
 
     <section class="container">
-        <h1 class="row campaign-name">Hiến máu nhân đạo</h1>
+        <h1 class="row campaign-name">----</h1>
         <p class="row" style="font-size: 20px;">Thời gian đăng kí còn lại</p>
 
         <div class="row remain-time">
@@ -89,6 +89,8 @@
             .catch((error) => {
                 // handle error
                 console.log(error);
+                alert(error.response.data.message);
+                window.location.href = '/404';
             });
         //make the clock countdown 
         setInterval(() => {
