@@ -36,7 +36,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     HospitalIsVerified: {
       type: DataTypes.BOOLEAN,
-      allowNull: true
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     sequelize,
