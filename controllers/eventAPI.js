@@ -16,7 +16,6 @@ const getEvent = asyncHandler(async (req, res) => {
             EventID: eventID
         }
     });
-    console.log(numberOfDonor);
     result.data.numberOfDonor = numberOfDonor;
     res.status(200).json(result);
 });

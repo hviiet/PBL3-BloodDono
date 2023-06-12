@@ -306,8 +306,8 @@
                 // handle success
                 const data = response.data.data;
                 const lastestEvents = document.querySelector('.lastest-events');
-                const [date, time] = data[0].eventStartTime.split('T');
                 data.forEach(element => {
+                    const [date, time] = element.eventStartTime.split('T');
                     lastestEvents.innerHTML += `<li class="event">
                     <a class="event-content" href="http://localhost:3000/event/view/${element.eventID}">
                         <h2 class="event-name">${element.eventName}</h2>

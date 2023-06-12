@@ -79,10 +79,6 @@ const deleteEvent = asyncHandler(async (req, res) => {
 const updateDonationInfo = asyncHandler(async (req, res) => {
     const donorID = req.params.donorID;
     const { eventID, donationDate, donationVolume } = req.body;
-    console.log(donorID);
-    console.log(eventID);
-    console.log(donationDate);
-    console.log(donationVolume);
     await db.Joined_Donor.update({ IsDonated: true }, { where: { EventID: eventID, DonorID: donorID } });
     const isExits = await db.Donation_Records.findOne({ where: { DonorID: donorID, EventID: eventID } });
     if (isExits != null) {
@@ -103,8 +99,6 @@ const updateDonationInfo = asyncHandler(async (req, res) => {
             DonationVolume: donationVolume
         });
     }
-
-    console.log('update donation info');
     res.status(200).json({ message: 'Update donation info successfully' });
 });
 
